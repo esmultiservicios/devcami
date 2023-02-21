@@ -21,7 +21,7 @@
         <form class="form-signin" id="loginform">
            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Iniciar Sesión</h1>
 			
-           <p><center><img src="<?php echo SERVERURL; ?>img/logo.png" style="max-width: 100%; max-height: 100%;"></center></p>	
+           <p><center><img src="<?php echo SERVERURL; ?>img/logo.png" style="max-width: 40%; max-height: 40%;"></center></p>	
 						
             <div class="input-group mb-3">
                <div class="input-group-prepend">
@@ -53,7 +53,11 @@
 	        </div>				 
             
             <button class="btn btn-success btn-block" type="submit" id="enviar"><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</button>
+            
             <a style="text-decoration:none;" href="#" id="forgot_pswd">¿Olvido su contraseña?</a>
+            <!-- <a style="text-decoration:none;" href="#" id="register-form-link">Registrate</a> -->	             
+            
+            
             <hr>
             <!-- <p>Don't have an account!</p>  -->
             <button class="btn btn-primary btn-block" type="button" id="btn-signup" style="display: none;"><i class="fas fa-user-plus"></i> Registrate</button>
@@ -61,7 +65,7 @@
 
         <form class="form-reset" id="forgot_form">
 			<h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Restablecer Contraseña</h1>
-			<p><center><img src="<?php echo SERVERURL; ?>img/logo.png" style="max-width: 100%; max-height: 100%;"></center></p>	
+			<p><center><img src="<?php echo SERVERURL; ?>img/logo.png" style="max-width: 40%; max-height: 40%;"></center></p>	
 			
             <div class="input-group mb-3">
                <div class="input-group-prepend">
@@ -135,7 +139,7 @@
         </form>
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">
-		   <center><img src="<?php echo SERVERURL; ?>img/logo_clinicare_footer.png" width="30%" height="30%"></center>© 2017 -  <?php echo date("Y");?> Copyright: 
+		   <!--<center><img src="<?php echo SERVERURL; ?>img/logo_clinicare_footer.png" width="30%" height="30%"></center>© 2017 -  <?php echo date("Y");?> Copyright: -->
            <center>
 		      <p class="navbar-text"> Todos los derechos reservados 
 			  </p>
