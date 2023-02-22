@@ -64,9 +64,9 @@
 			</div>
 		  </li>
 		  <li class="nav-item dropdown active">
-			<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-user-nurse fa-lg"></i>&nbsp;Confirmación</a>
+			<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-user-nurse fa-lg"></i>&nbsp;Preclínica</a>
 			<div class="dropdown-menu" aria-labelledby="dropdown02">
-			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/preclinica.php">Confirmación</a>
+			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/preclinica.php">Preclínica</a>
 			</div>
 		  </li>	
 		  <li class="nav-item dropdown active">
@@ -82,7 +82,7 @@
 			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reporte_ausencias.php">Reporte de Ausencias</a>			  
 			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reporte_facturacion.php">Reporte de Facturación</a>
 			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reporte_pagos.php">Reporte de Pagos</a>		  
-			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reportes_enfermeria.php">Reporte de Confirmación</a>
+			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reportes_enfermeria.php">Reporte de Preclínica</a>
 			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reportes_sms.php">Reporte SMS</a>
 			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reportes_transito.php">Reporte Tránsito</a>		  
 			</div>
@@ -104,9 +104,9 @@
 			</div>
 		  </li>
 		  <li class="nav-item dropdown active">
-			<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-user-nurse fa-lg"></i>&nbsp;Confirmación</a>
+			<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-user-nurse fa-lg"></i>&nbsp;Preclínica</a>
 			<div class="dropdown-menu" aria-labelledby="dropdown02">
-			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/preclinica.php">Confirmación</a>
+			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/preclinica.php">Preclínica</a>
 			</div>
 		  </li>			  
 		<?php
@@ -130,9 +130,9 @@
 			</div>
 		  </li>
 		  <li class="nav-item dropdown active">
-			<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-user-nurse fa-lg"></i>&nbsp;Confirmación</a>
+			<a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-user-nurse fa-lg"></i>&nbsp;Preclínica</a>
 			<div class="dropdown-menu" aria-labelledby="dropdown02">
-			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/preclinica.php">Confirmación</a>
+			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/preclinica.php">Preclínica</a>
 			</div>
 		  </li>	 
 		  <li class="nav-item dropdown active">
@@ -159,7 +159,7 @@
 			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reporte_referidos.php">Reporte Referidos</a>
 			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reporte_facturacion.php">Reporte de Facturación</a>
 			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reporte_pagos.php">Reporte de Pagos</a>	  
-			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reportes_enfermeria.php">Reporte de Confirmación</a>
+			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reportes_enfermeria.php">Reporte de Preclínica</a>
 			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reportes_sms.php">Reporte SMS</a>
 			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/reportes_transito.php">Reporte Tránsito</a>
 			  <a class="dropdown-item" href="<?php echo SERVERURL; ?>vistas/historial_accesos.php">Historial de Accesos</a>		  
