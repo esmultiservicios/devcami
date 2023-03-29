@@ -604,6 +604,8 @@ $(document).ready(function(){
 	setInterval('getTotalProductos()',2000);
 	
 	listar_secuencia_fiscales_dashboard();
+
+	$(window).scrollTop(0);
 });
 
 //DATOS MAIN
