@@ -60,68 +60,74 @@ $mysqli->close();//CERRAR CONEXIÓN
 			<li class="breadcrumb-item active" id="acciones_factura"><span id="label_acciones_factura"></span></li>
 		</ol>
 	</nav>
+	
+	<div id="main_facturacion">
+		<div class="card mb-4" id="main_facturacion">
+			<div class="card-body">
+				<form class="form-inline" id="form_main">
+					<div class="form-group mx-sm-3 mb-1">
+						<div class="input-group">				
+							<div class="input-group-append">				
+								<span class="input-group-text"><div class="sb-nav-link-icon"></div>Profesional</span>
+							</div>
+							<select id="profesional" name="profesional" class="form-control" data-toggle="tooltip" data-placement="top" title="Profesional">   				   		 
+							</select>		 
+						</div>
+					</div>	
+					<div class="form-group mx-sm-3 mb-1">
+						<div class="input-group">				
+							<div class="input-group-append">				
+								<span class="input-group-text"><div class="sb-nav-link-icon"></div>Estado</span>
+							</div>
+							<select id="estado" name="estado" class="form-control" style="width:125px;" data-toggle="tooltip" data-placement="top" title="Estado">   				   		 
+							</select>		 
+						</div>	
+					</div>	
+					<div class="form-group mx-sm-3 mb-1">
+						<div class="input-group">				
+							<div class="input-group-append">				
+								<span class="input-group-text"><div class="sb-nav-link-icon"></div>Fecha Inicial</span>
+							</div>
+							<input type="date" required="required" id="fecha_b" name="fecha_b" style="width:160px;" data-toggle="tooltip" data-placement="top" title="Fecha Inicial" value="<?php echo date ("Y-m-d");?>" class="form-control"/>	 
+						</div>
+					</div>												
+					<div class="form-group mx-sm-3 mb-1">
+						<div class="input-group">				
+							<div class="input-group-append">				
+								<span class="input-group-text"><div class="sb-nav-link-icon"></div>Fecha Final</span>
+							</div>
+							<input type="date" required="required" id="fecha_f" name="fecha_f" style="width:160px;" value="<?php echo date ("Y-m-d");?>" data-toggle="tooltip" data-placement="top" title="Fecha Final" class="form-control"/> 
+						</div>
+					</div>	
+					<div class="form-group mx-sm-3 mb-1">
+						<input type="text" placeholder="Buscar por: Expediente, Nombre o Identidad" data-toggle="tooltip" data-placement="top" title="Buscar por: Expediente, Nombre, Apellido o Identidad" id="bs_regis" autofocus class="form-control" size="40"/>
+					</div> 
+					<div class="form-group mx-sm-3 mb-1">
+						<button class="btn btn-primary ml-1" type="submit" id="factura"><div class="sb-nav-link-icon" data-toggle="tooltip" data-placement="top" title="Crear Factura"></div><i class="fas fa-file-invoice fa-lg"></i> Crear Factura</button>
+						<button class="btn btn-primary ml-1" type="submit" id="cierre"><div class="sb-nav-link-icon" data-toggle="tooltip" data-placement="top" title="Cierre de Caja"></div><i class="fas fa-user-plus fa-lg"></i> Cierre de Caja</button>
+					</div>  
+				</form>          
+			</div>
+		</div>	
 
-	<div class="container-fluid" id="main_facturacion">
-		<form class="form-inline" id="form_main">
-		  <div class="form-group mr-1">
-			<div class="input-group">				
-				<div class="input-group-append">				
-					<span class="input-group-text"><div class="sb-nav-link-icon"></div>Profesional</span>
-				</div>
-				<select id="profesional" name="profesional" class="form-control" data-toggle="tooltip" data-placement="top" title="Profesional">   				   		 
-				</select>		 
+		<div class="card mb-4">
+			<div class="card-header">
+				<i class="fas fa-file-invoice mr-1"></i>
+				Facturación
 			</div>
-		  </div>
-		  <div class="form-group mr-1">
-			<div class="input-group">				
-				<div class="input-group-append">				
-					<span class="input-group-text"><div class="sb-nav-link-icon"></div>Estado</span>
-				</div>
-				<select id="estado" name="estado" class="form-control" style="width:125px;" data-toggle="tooltip" data-placement="top" title="Estado">   				   		 
-				</select>		 
-			</div>	
-		  </div>
-		  <div class="form-group mr-1">
-			<div class="input-group">				
-				<div class="input-group-append">				
-					<span class="input-group-text"><div class="sb-nav-link-icon"></div>Fecha Inicial</span>
-				</div>
-				<input type="date" required="required" id="fecha_b" name="fecha_b" style="width:160px;" data-toggle="tooltip" data-placement="top" title="Fecha Inicial" value="<?php echo date ("Y-m-d");?>" class="form-control"/>	 
-			</div>
-		  </div>
-		  <div class="form-group mr-1">
-			<div class="input-group">				
-				<div class="input-group-append">				
-					<span class="input-group-text"><div class="sb-nav-link-icon"></div>Fecha Final</span>
-				</div>
-				<input type="date" required="required" id="fecha_f" name="fecha_f" style="width:160px;" value="<?php echo date ("Y-m-d");?>" data-toggle="tooltip" data-placement="top" title="Fecha Final" class="form-control"/> 
-			</div>
-		  </div>
-		  <div class="form-group mr-1">
-			 <input type="text" placeholder="Buscar por: Expediente, Nombre o Identidad" data-toggle="tooltip" data-placement="top" title="Buscar por: Expediente, Nombre, Apellido o Identidad" id="bs_regis" autofocus class="form-control" size="40"/>
-		  </div>
-		  <div class="form-group">
-			<div class="dropdown show" data-toggle="tooltip" data-placement="top" title="Agregar Registro">
-			  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				 <i class="fas fa-file-invoice fa-lg"></i> Crear
-			  </a>
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-				<a class="dropdown-item" href="#" id="factura">Factura</a>
-				<a class="dropdown-item" href="#" id="cierre">Cierre de Caja</a>		
+			<div class="card-body"> 
+			  <div class="form-group">
+				<div class="col-sm-12">
+				  <div class="registros overflow-auto" id="agrega-registros"></div>
+				</div>		   
 			  </div>
-			</div>		  
-		  </div>			  
-		</form>	
-		  <hr/>   
-		  <div class="form-group">
-		    <div class="col-sm-12">
-			  <div class="registros overflow-auto" id="agrega-registros"></div>
-		    </div>		   
-		  </div>
-		  <nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center"" id="pagination"></ul>
-		  </nav>		
+			  <nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center"" id="pagination"></ul>
+			  </nav>
+			</div>
+		</div>	
     </div>	
+</div>	
 
     <?php include("templates/factura.php"); ?>
 

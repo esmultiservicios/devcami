@@ -57,134 +57,150 @@ $mysqli->close();//CERRAR CONEXIÓN
 		<li class="breadcrumb-item"><a class="breadcrumb-link" href="inicio.php">Dashboard</a></li>
 	</ol>
 
-	<!--INICIO CARDS-->	
-	<div class="row">
-		<div class="col-md-3 col-xl-3">
-			<a href="pacientes.php" data-toggle="tooltip" data-placement="top" title="Los usuarios temporales son todos aquellos que no se han presentado a su cita presencial en el Hospital">
-				<div class="stati card bg-c-blue order-card">
-					<div class="card-block">
-						<h6 class="m-b-20">Total Usuarios</h6>
-						<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_temporales"></span></h2>
-						<p class="m-b-0">Temporales <span class="f-right"></span></p>
-					</div>
-				</div>
-			</a>
+    <div class="card mb-4">
+		<div class="card-header">
+			<i class="fas fa-columns mr-1"></i>
+			Cards
 		</div>
-		
-		<div class="col-md-3 col-xl-3">
-			<a href="pacientes.php" data-toggle="tooltip" data-placement="top" title="Muestra los usuarios activos del Hospital">
-				<div class="stati card bg-c-green order-card">
-					<div class="card-block">
-						<h6 class="m-b-20">Total Usuarios</h6>
-						<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_activos"></span></h2>
-						<p class="m-b-0">Activos<span class="f-right"></span></p>
-					</div>
+		<div class="card-body"> 
+			<!--INICIO CARDS-->	
+			<div class="row">
+				<div class="col-md-12 col-xl-3">
+					<a href="pacientes.php" data-toggle="tooltip" data-placement="top" title="Los usuarios temporales son todos aquellos que no se han presentado a su cita presencial en el Hospital">
+						<div class="stati card bg-c-blue order-card">
+							<div class="card-block">
+								<h6 class="m-b-20">Total Usuarios</h6>
+								<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_temporales"></span></h2>
+								<p class="m-b-0">Temporales <span class="f-right"></span></p>
+							</div>
+						</div>
+					</a>
 				</div>
-			</a>
-		</div>
-		
-		<div class="col-md-3 col-xl-3">
-			<a href="reportes_atenciones_medicas.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de Atenciones">
-				<div class="stati card bg-c-yellow order-card">
-					<div class="card-block">
-						<h6 class="m-b-20">Total Atenciones</h6>
-						<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_atenciones"></span></h2>
-						<p class="m-b-0"><?php echo nombremes(date("m")).", ".date("Y"); ?> <span class="f-right"></span></p>
-					</div>
+				
+				<div class="col-md-12 col-xl-3">
+					<a href="pacientes.php" data-toggle="tooltip" data-placement="top" title="Muestra los usuarios activos del Hospital">
+						<div class="stati card bg-c-green order-card">
+							<div class="card-block">
+								<h6 class="m-b-20">Total Usuarios</h6>
+								<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_activos"></span></h2>
+								<p class="m-b-0">Activos<span class="f-right"></span></p>
+							</div>
+						</div>
+					</a>
 				</div>
-			</a>
-		</div>
-        
-        <div class="col-md-3 col-xl-3">
-			<a href="reporte_ausencias.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de Asencias">
-				<div class="stati card bg-c-pink order-card">
-					<div class="card-block">
-						<h6 class="m-b-20">Total Usuarios</h6>
-						<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_ausencias"></span></h2>
-						<p class="m-b-0">Ausencias<span class="f-right"></span></p>
-					</div>
+				
+				<div class="col-md-12 col-xl-3">
+					<a href="reportes_atenciones_medicas.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de Atenciones">
+						<div class="stati card bg-c-yellow order-card">
+							<div class="card-block">
+								<h6 class="m-b-20">Total Atenciones</h6>
+								<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_atenciones"></span></h2>
+								<p class="m-b-0"><?php echo nombremes(date("m")).", ".date("Y"); ?> <span class="f-right"></span></p>
+							</div>
+						</div>
+					</a>
 				</div>
-			</a>
-        </div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-3 col-xl-3">
-			<a href="facturacion.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de facturas de pendientes por facturar">
-				<div class="stati card bg-c-yellow order-card">
-					<div class="card-block">
-						<h6 class="m-b-20">Facturas Pendientes</h6>
-						<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_facturas_pendientes"></span></h2>
-						<p class="m-b-0"><?php echo nombremes(date("m")).", ".date("Y"); ?> <span class="f-right"></span></p>
-					</div>
+				
+				<div class="col-md-12 col-xl-3">
+					<a href="reporte_ausencias.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de Asencias">
+						<div class="stati card bg-c-pink order-card">
+							<div class="card-block">
+								<h6 class="m-b-20">Total Usuarios</h6>
+								<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_ausencias"></span></h2>
+								<p class="m-b-0">Ausencias<span class="f-right"></span></p>
+							</div>
+						</div>
+					</a>
 				</div>
-			</a>
-		</div>
-		
-		<div class="col-md-3 col-xl-3">
-			<a href="atencion_medica.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de atenciones pendientes de todos los servicios en el mes actual, esto es para las atenciones pendientes de los profesionales">
-				<div class="stati card bg-c-pink order-card">
-					<div class="card-block">
-						<h6 class="m-b-20">Atenciones Pendientes</h6>
-						<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_prendiente_atenciones"></span></h2>
-						<p class="m-b-0"><?php echo nombremes(date("m")).", ".date("Y"); ?> <span class="f-right"></span></p>
-					</div>
-				</div>
-			</a>
-		</div>
-		
-		<div class="col-md-3 col-xl-3">
-			<a href="preclinica.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de atenciones pendientes de todos los servicios en el mes actual, esto es para las atenciones pendientes en el área de preclínica">
-				<div class="stati card bg-c-blue order-card">
-					<div class="card-block">
-						<h6 class="m-b-20">Pendientes Preclínica</h6>
-						<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_pendiente_preclinica"></span></h2>
-						<p class="m-b-0"><?php echo nombremes(date("m")).", ".date("Y"); ?><span class="f-right"></span></p>
-					</div>
-				</div>
-			</a>
-		</div>
-		
-		<div class="col-md-3 col-xl-3">
-			<a href="productos.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de productos y/o servicios">
-				<div class="stati card bg-c-green order-card">
-					<div class="card-block">
-						<h6 class="m-b-20">Total Productos</h6>
-						<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_productos"></span></h2>
-						<p class="m-b-0"><?php echo nombremes(date("m")).", ".date("Y"); ?> <span class="f-right"></span></p>
-					</div>
-				</div>
-			</a>
-		</div>	
-	</div>	
-	<!--FIN CARDS-->
-
-	<!--INICIO GRAFICOS-->
-	<div class="row">
-		<div class="col-xl-6">
-			<div class="stati card mb-3" data-toggle="tooltip" data-placement="top" title="Grafica de atenciones correspondientes al año anterior">
-				<div class="card-header">
-					<i class="fas fa-chart-bar mr-1"></i>
-					Reporte de Atenciones Año: <?php echo date("Y",strtotime(date('Y-m-d')."- 1 year")); ?>
-				</div>
-				<canvas id="graphBarAtencionesAnoAnterior" width="100%"></canvas>
 			</div>
-		</div>
 			
-		<div class="col-xl-6">
-			<div class="stati card mb-4" data-toggle="tooltip" data-placement="top" title="Grafica de atenciones correspondientes al año actual">
-				<div class="card-header">
-					<i class="fas fa-chart-bar mr-1"></i>
-					Reporte de Atenciones Año: <?php echo date("Y"); ?>
+			<div class="row">
+				<div class="col-md-12 col-xl-3">
+					<a href="facturacion.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de facturas de pendientes por facturar">
+						<div class="stati card bg-c-yellow order-card">
+							<div class="card-block">
+								<h6 class="m-b-20">Facturas Pendientes</h6>
+								<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_facturas_pendientes"></span></h2>
+								<p class="m-b-0"><?php echo nombremes(date("m")).", ".date("Y"); ?> <span class="f-right"></span></p>
+							</div>
+						</div>
+					</a>
 				</div>
-				<div class="card-body"><canvas id="graphBarAtencionesAnoActual" width="100%"></canvas></div>
-			</div>
+				
+				<div class="col-md-12 col-xl-3">
+					<a href="atencion_medica.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de atenciones pendientes de todos los servicios en el mes actual, esto es para las atenciones pendientes de los profesionales">
+						<div class="stati card bg-c-pink order-card">
+							<div class="card-block">
+								<h6 class="m-b-20">Atenciones Pendientes</h6>
+								<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_prendiente_atenciones"></span></h2>
+								<p class="m-b-0"><?php echo nombremes(date("m")).", ".date("Y"); ?> <span class="f-right"></span></p>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+				<div class="col-md-12 col-xl-3">
+					<a href="preclinica.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de atenciones pendientes de todos los servicios en el mes actual, esto es para las atenciones pendientes en el área de preclínica">
+						<div class="stati card bg-c-blue order-card">
+							<div class="card-block">
+								<h6 class="m-b-20">Pendientes Preclínica</h6>
+								<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_pendiente_preclinica"></span></h2>
+								<p class="m-b-0"><?php echo nombremes(date("m")).", ".date("Y"); ?><span class="f-right"></span></p>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+				<div class="col-md-12 col-xl-3">
+					<a href="productos.php" data-toggle="tooltip" data-placement="top" title="Muestra el total de productos y/o servicios">
+						<div class="stati card bg-c-green order-card">
+							<div class="card-block">
+								<h6 class="m-b-20">Total Productos</h6>
+								<h2 class="text-right"><i class="fas fa-users f-left"></i><span id="main_productos"></span></h2>
+								<p class="m-b-0"><?php echo nombremes(date("m")).", ".date("Y"); ?> <span class="f-right"></span></p>
+							</div>
+						</div>
+					</a>
+				</div>	
+			</div>	
+			<!--FIN CARDS-->             
+		</div>
+	</div>
+
+    <div class="card mb-4">
+		<div class="card-header">
+			<i class="fab fa-sellsy mr-1"></i>
+			Gráficos
+		</div>
+		<div class="card-body"> 
+			<!--INICIO GRAFICOS-->
+			<div class="row">
+				<div class="col-md-12 col-xl-6">
+					<div class="stati card mb-3" data-toggle="tooltip" data-placement="top" title="Grafica de atenciones correspondientes al año anterior">
+						<div class="card-header">
+							<i class="fas fa-chart-bar mr-1"></i>
+							Reporte de Atenciones Año: <?php echo date("Y",strtotime(date('Y-m-d')."- 1 year")); ?>
+						</div>
+						<canvas id="graphBarAtencionesAnoAnterior" width="100%"></canvas>
+					</div>
+				</div>
+					
+				<div class="col-md-12 col-xl-6">
+					<div class="stati card mb-4" data-toggle="tooltip" data-placement="top" title="Grafica de atenciones correspondientes al año actual">
+						<div class="card-header">
+							<i class="fas fa-chart-bar mr-1"></i>
+							Reporte de Atenciones Año: <?php echo date("Y"); ?>
+						</div>
+						<div class="card-body"><canvas id="graphBarAtencionesAnoActual" width="100%"></canvas></div>
+					</div>
+				</div>
+			</div>	
+			<!--FIN GRAFICOS-->	              
 		</div>
 	</div>	
-	<!--FIN GRAFICOS-->	
 	
 	<div class="row">
-		<div class="col-xl-12">
+		<div class="col-md-12 col-xl-12">
 			<a href="<?php echo SERVERURL; ?>vistas/secuencia_facturacion.php" style="color: #3366BB;">
 				<div class="card-header">
 					<i class="fas fa-sliders-h mr-1"></i>

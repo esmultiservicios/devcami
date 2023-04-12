@@ -73,29 +73,29 @@ $mysqli->close();//CERRAR CONEXIÓN
 				</div>
 				<div class="form-row" id="grupo_expediente">
 					<div class="col-md-6 mb-3">
-					  <label for="expedoente">Expediente</label>
-				     <input type="number" name="expediente" class="form-control" id="expediente" placeholder="Expediente o Identidad">
+					  <label for="expediente">Expediente</label>
+				     <input type="number" name="expediente" class="form-control" id="expediente" placeholder="Expediente o Identidad" >
 					</div>
 					<div class="col-md-6 mb-3">
 					  <label for="edad">Edad</label>
-					  <input type="text" class="form-control" name="edad" id="edad" maxlength="100" readonly="readonly"/>
+					  <input type="text" class="form-control" name="edad" id="edad" maxlength="100" readonly="readonly" />
 					</div>				
 				</div>				
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
 					  <label for="nombre">Nombre <span class="priority">*<span/></label>
-					  <input type="text" required id="name" name="name" placeholder="Nombre" class="form-control"/>
+					  <input type="text" required id="name" name="name" placeholder="Nombre" class="form-control" />
 					</div>
 					<div class="col-md-4 mb-3">
 					  <label for="apellido">Apellido <span class="priority">*<span/></label>
-					  <input type="text" required id="lastname" name="lastname" placeholder="Apellido" class="form-control"/>
+					  <input type="text" required id="lastname" name="lastname" placeholder="Apellido" class="form-control" />
 					</div>
 					<div class="col-md-4 mb-3" style="display: none;">
 					  <label for="fecha">Fecha <span class="priority">*<span/></label>
-					  <input type="date" required id="fecha" name="fecha" value="<?php echo date ("Y-m-d");?>" class="form-control"/>
+					  <input type="date" required id="fecha" name="fecha" value="<?php echo date ("Y-m-d");?>" class="form-control" />
 					</div>	
 					<div class="col-md-4 mb-3">
-					  <label for="identidad">Identidad  o RTN <span class="priority">*<span/></label>
+					  <label for="identidad">Identidad o RTN <span class="priority">*<span/></label>
 					  <input type="number" required id="identidad" name="identidad" value="0" class="form-control" required data-toggle="tooltip" data-placement="top" title="Si deja la identidad en Cero, el sistema generará un numero de identidad correlativo">
 					</div>										
 				</div>	
@@ -105,10 +105,11 @@ $mysqli->close();//CERRAR CONEXIÓN
 						<input type="date" id="fecha_nac" name="fecha_nac" value="<?php echo date ("Y-m-d");?>" class="form-control"/>
 					</div>	
 					<div class="col-md-3 mb-3">
-					  <label for="sexo">Sexo <span class="priority">*<span/></label>
-					  <select class="form-control" id="sexo" name="sexo" required data-toggle="tooltip" data-placement="top" title="Sexo">	
-						 <option value="">Seleccione</option>
-					  </select>
+					   <label for="sexo">Sexo <span class="priority">*<span/></label>
+						<div class="input-group mb-3">
+							<select class="selectpicker" id="sexo" name="sexo" required data-live-search="true" title="Genero">			  
+							</select>
+						</div>
 					</div>
 					<div class="col-md-3 mb-3">
 					  <label for="telefono">Teléfono 1 <span class="priority">*<span/></label>
@@ -121,38 +122,26 @@ $mysqli->close();//CERRAR CONEXIÓN
 				</div>					
 				
 				<div class="form-row">						
-					<div class="col-md-4 mb-3">
-					  <label for="expedoente">País <span class="priority">*<span/></label>
-					  <div class="input-group mb-3">
-						  <select id="pais_id" name="pais_id" class="form-control" data-toggle="tooltip" data-placement="top" title="Departamentos">
-							<option value="">Seleccione</option>
-						  </select>
-						  <div class="input-group-append" id="buscar_pais_pacientes">				
-							<a data-toggle="modal" href="#" class="btn btn-outline-success"><div class="sb-nav-link-icon"></div><i class="fas fa-search fa-lg"></i></a>
-						  </div>
-					   </div>						  
+					<div class="col-md-3 mb-3">
+						<label for="pais_id">País <span class="priority">*<span/></label>
+						<div class="input-group mb-3">
+							<select class="selectpicker" id="pais_id" name="pais_id" required data-live-search="true" title="País">			  
+							</select>
+						</div>					  
 					</div>					
-					<div class="col-md-4 mb-3">
-					  <label for="expedoente">Departamentos <span class="priority">*<span/></label>
-					  <div class="input-group mb-3">
-						  <select id="departamento_id" name="departamento_id" class="form-control" data-toggle="tooltip" data-placement="top" title="Departamentos">
-							<option value="">Seleccione</option>
-						  </select>
-						  <div class="input-group-append" id="buscar_departamento_pacientes">				
-							<a data-toggle="modal" href="#" class="btn btn-outline-success"><div class="sb-nav-link-icon"></div><i class="fas fa-search fa-lg"></i></a>
-						  </div>
-					   </div>						  
+					<div class="col-md-3 mb-3">
+					    <label for="departamento_id">Departamentos <span class="priority">*<span/></label>
+						<div class="input-group mb-3">
+							<select class="selectpicker" id="departamento_id" name="departamento_id" required data-live-search="true" title="Departamentos">			  
+							</select>
+						</div>					  
 					</div>
 					<div class="col-md-4 mb-3">
-					  <label for="expedoente">Municipios <span class="priority">*<span/></label>
-					  <div class="input-group mb-3">
-						  <select id="municipio_id" name="municipio_id" class="form-control" data-toggle="tooltip" data-placement="top" title="Municipios">
-							<option value="">Seleccione</option>
-						  </select>
-						  <div class="input-group-append" id="buscar_municipio_pacientes">				
-							<a data-toggle="modal" href="#" class="btn btn-outline-success"><div class="sb-nav-link-icon"></div><i class="fas fa-search fa-lg"></i></a>
-						  </div>
-					   </div>						  
+					    <label for="municipio_id">Municipios <span class="priority">*<span/></label>
+						<div class="input-group mb-3">
+							<select class="selectpicker" id="municipio_id" name="municipio_id" required data-live-search="true" title="Municipios">			  
+							</select>
+						</div>											 
 					</div>						
 				</div>
 					
@@ -171,22 +160,24 @@ $mysqli->close();//CERRAR CONEXIÓN
 				</div>	
 				<div class="form-row">
 					<div class="col-md-8 mb-3">
-					  <label for="sexo">Responsable </label>
+					  <label for="responsable">Responsable </label>
 					  <input type="text" id="responsable" name="responsable" class="form-control" placeholder="Responsable" maxlength="70" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
 					</div>
 					<div class="col-md-4 mb-3">
-					  <label for="telefono">Parentesco </label>
-					  <select class="form-control" id="responsable_id" name="responsable_id" data-toggle="tooltip" data-placement="top" title="Parentesco">	
-						 <option value="">Seleccione</option>
-					  </select>
+					    <label for="responsable_id">Parentesco </label>
+						<div class="input-group mb-3">
+							<select class="selectpicker" id="responsable_id" name="responsable_id" required data-live-search="true" title="Parentesco">			  
+							</select>
+						</div>	
 					</div>					
 				</div>	
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
-					  <label for="sexo">Referido por:  </label>
-					  <select class="form-control" id="referido_id" name="referido_id" data-toggle="tooltip" data-placement="top" title="Parentesco">	
-						 <option value="">Seleccione</option>
-					  </select>
+					   <label for="referido_id">Referido por:  </label>
+						<div class="input-group mb-3">
+							<select class="selectpicker" id="referido_id" name="referido_id" required data-live-search="true" title="Referido por">			  
+							</select>
+						</div>
 					</div>				
 				</div>					
 				
@@ -281,9 +272,11 @@ $mysqli->close();//CERRAR CONEXIÓN
 					  <input type="number" name="identidad_manual" class="form-control" id="identidad_manual" maxlength="100" value = "0" readonly />
 					</div>
 					<div class="col-md-4 mb-3">
-					  <label for="telefono">Sexo</label>
-					  <select required name="sexo_manual" id="sexo_manual" class="form-control" readonly data-toggle="tooltip" data-placement="top" title="Género">
-					  </select> 
+					    <label for="telefono">Sexo</label>
+						<div class="input-group mb-3">
+							<select class="selectpicker" id="sexo_manual" name="sexo_manual" readonly data-live-search="true" title="Genero">			  
+							</select>
+						</div>
 					</div>					
 				</div>					
 				 <div class="form-check-inline">
@@ -354,50 +347,49 @@ $mysqli->close();//CERRAR CONEXIÓN
 		<li class="breadcrumb-item"><a class="breadcrumb-link" href="<?php echo SERVERURL; ?>vistas/inicio.php">Dashboard</a></li>
 		<li class="breadcrumb-item active" id="acciones_factura"><span id="label_acciones_factura"></span>Pacientes</li>
 	</ol>
-	
+
 	<div id="main_facturacion">
-    <form class="form-inline" id="form_main">
-	  <div class="form-group mr-1" id="formulario_stado">
-		<div class="input-group">				
-			<div class="input-group-append">				
-				<span class="input-group-text"><div class="sb-nav-link-icon"></div>Estado</span>
+		<div class="card mb-4">
+			<div class="card-body">
+				<form class="form-inline" id="form_main">
+					<div class="form-group mx-sm-3 mb-1">
+						<div class="input-group-append">
+							<span class="input-group-text"><div class="sb-nav-link-icon"></div>Estado</span>
+							<select id="estado" name="estado" class="selectpicker" title="Estado" data-live-search="true">
+							</select>
+						</div>	 
+					</div>	
+					<div class="form-group mx-sm-3 mb-1">
+						<input type="text" placeholder="Buscar por: Expediente, Nombre, Apellido o Identidad" data-toggle="tooltip" data-placement="top" title="Buscar por: Expediente, Nombre, Apellido o Identidad" id="bs_regis" autofocus class="form-control" size="50"/>
+					</div>	
+					<div class="form-group mx-sm-3 mb-1">
+						<button class="btn btn-primary ml-1" type="submit" id="nuevo-registro"><div class="sb-nav-link-icon" data-toggle="tooltip" data-placement="top" title="Registrar Pacientes"></div><i class="fas fa-user-plus fa-lg"></i> Registrar Pacientes</button>
+						<button class="btn btn-primary ml-1" type="submit" id="profesion"><div class="sb-nav-link-icon" data-toggle="tooltip" data-placement="top" title="Registrar Profesión"></div><i class="fas fa-download fa-lg"></i> Registrar Profesión</button>
+						<button class="btn btn-success ml-1" type="submit" id="reporte"><div class="sb-nav-link-icon" data-toggle="tooltip" data-placement="top" title="Exportar"></div><i class="fas fa-download fa-lg"></i> Exportar Pacientes</button>
+					</div>			
+				</form>          
 			</div>
-			<select id="estado" name="estado" class="form-control" data-toggle="tooltip" data-placement="top" title="Atención">   				   		 
-			  <option value="">Seleccione</option>	         
-			</select>	 
-		</div>	  	   
-      </div>
-      <div class="form-group mr-1">
-         <input type="text" placeholder="Buscar por: Expediente, Nombre, Apellido o Identidad" data-toggle="tooltip" data-placement="top" title="Buscar por: Expediente, Nombre, Apellido o Identidad" id="bs_regis" autofocus class="form-control" size="50"/>
-      </div>  
-	  <div class="form-group">
-		<div class="dropdown show" data-toggle="tooltip" data-placement="top" title="Agregar Registro">
-		  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			 <i class="fas fa-user-plus fa-lg"></i> Crear
-		  </a>
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-			<a class="dropdown-item" href="#" id="nuevo-registro">Pacientes</a>
-			<a class="dropdown-item" href="#" id="profesion">Profesión</a>		
-		  </div>
-		</div>		  
-	  </div>	  
-      <div class="form-group">
-	    <button class="btn btn-success ml-1" type="submit" id="reporte"><div class="sb-nav-link-icon" data-toggle="tooltip" data-placement="top" title="Exportar"></div><i class="fas fa-download fa-lg"></i> Exportar</button>
-      </div>
-      <div class="form-group">
-	    <button class="btn btn-danger ml-1" type="submit" id="limpiar"><div class="sb-nav-link-icon" data-toggle="tooltip" data-placement="top" title="Limpiar"></div><i class="fas fa-broom fa-lg"></i> Limpiar</button>
-      </div>	  
-    </form>	
-	<hr/>   
-    <div class="form-group">
-	  <div class="col-sm-12">
-		<div class="registros overflow-auto" id="agrega-registros"></div>
-	   </div>		   
+		</div>	
+		
+		<div class="card mb-4">
+			<div class="card-header">
+				<i class="fas fa-user mr-1"></i>
+				Pacientes
+			</div>
+			<div class="card-body"> 
+				<div class="form-group">
+				  <div class="col-sm-12">
+					<div class="registros overflow-auto" id="agrega-registros"></div>
+				   </div>		   
+				</div>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center" id="pagination"></ul>
+				</nav>                
+			</div>
+		</div>
 	</div>
-	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-center" id="pagination"></ul>
-	</nav>
-	</div>
+
+</div>
 	<?php include("templates/factura.php"); ?>
 	<?php include("templates/footer.php"); ?>	
 </div>

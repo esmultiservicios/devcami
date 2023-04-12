@@ -22,11 +22,12 @@ $result = $mysqli->query($consulta);
 			  
 
 if($result->num_rows>0){
-    echo "<optgroup label='Profesional'>";	
 	while($consulta2 = $result->fetch_assoc()){
 		echo '<option value="'.$consulta2['colaborador_id'].'">'.$consulta2['colaborador'].'</option>';
 	}
 	echo "</optgroup>";	
+}else{
+	echo '<option value="">No hay registros</option>';
 }
 
 $result->free();//LIMPIAR RESULTADO

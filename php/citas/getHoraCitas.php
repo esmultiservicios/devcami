@@ -1,6 +1,5 @@
 <?php
-echo "<optgroup label='Medicos'>
-      <option value=''>Hora Nueva</option>
+echo "
 	  <option value='08:00'>08:00</option>
 	  <option value='08:40'>08:40</option>
 	  <option value='09:20'>09:20</option>
@@ -25,7 +24,6 @@ echo "<optgroup label='Medicos'>
       <option value='22:00'>22:00</option>
 	  <option value='22:40'>22:40</option>
       <option value='23:20'>23:20</option>			
-   </optgroup>";
 ?>
 
 

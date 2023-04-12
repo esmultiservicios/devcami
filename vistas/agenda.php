@@ -186,81 +186,82 @@ if($colaborador_id != "" || $colaborador_id != null){
 		<li class="breadcrumb-item active" id="acciones_factura"><span id="label_acciones_factura"></span>Agenda</li>
 	</ol>
 
-    <form class="form-inline" id="form_agenda_main">
-      <div class="form-group mr-1">
-		<div class="input-group">				
-			<div class="input-group-append">				
-				<span class="input-group-text"><div class="sb-nav-link-icon"></div>Estado</span>
-			</div>
-		    <select id="atencion" name="atencion" class="form-control" data-toggle="tooltip" data-placement="top" title="Atención"> 
-		    </select> 
+	<div class="card mb-4">
+        <div class="card-body">
+			<form class="form-inline" id="form_agenda_main">
+				<div class="form-group mx-sm-3 mb-1">
+					<div class="input-group-append">
+						<span class="input-group-text"><div class="sb-nav-link-icon"></div>Atención</span>
+						<select id="atencion" name="atencion" class="selectpicker" title="Atención" data-live-search="true">
+						</select>
+					</div>							
+				</div>
+				<div class="form-group mx-sm-3 mb-1">
+					<div class="input-group-append">
+						<span class="input-group-text"><div class="sb-nav-link-icon"></div>Consultorio</span>
+						<select id="servicio" name="servicio" class="selectpicker" title="Consultorio" data-live-search="true">
+						</select>
+					</div>											
+				</div>				
+				<div class="form-group mx-sm-3 mb-1">
+					<div class="input-group-append">
+						<span class="input-group-text"><div class="sb-nav-link-icon"></div>Profesional</span>
+						<select id="medico_general" name="medico_general" class="selectpicker" title="Profesional" data-live-search="true">
+						</select>
+					</div>				
+				</div>												
+				<div class="form-group mx-sm-3 mb-1">
+					<div class="input-group-append">				
+						<span class="input-group-text"><div class="sb-nav-link-icon"></div>Inicio</span>
+					</div>
+				   <input type="date" required="required" id="fecha" name="fecha" style="width:160px;" value="<?php echo date ("Y-m-d");?>" data-toggle="tooltip" data-placement="top" title="Fecha Inicial" class="form-control"/>  
+				</div>	
+				<div class="form-group mx-sm-3 mb-1">
+					<div class="input-group-append">				
+						<span class="input-group-text"><div class="sb-nav-link-icon"></div>Fin</span>
+					</div>
+					<input type="date" required="required" id="fechaf" name="fechaf" style="width:160px;" value="<?php echo date ("Y-m-d");?>" data-toggle="tooltip" data-placement="top" title="Fecha Inicial" class="form-control"/> 
+				</div>  	
+				<div class="form-group mx-sm-3 mb-1">
+					<input type="text" placeholder="Buscar Registros" id="bs-regis" data-toggle="tooltip" data-placement="top" title="Buscar por: Expediente, Nombre o Identidad" autofocus class="form-control" size="25"/>
+				</div>  
+				<div class="dropdown show" data-toggle="tooltip" data-placement="top" title="Exportar">
+				  <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					 <i class="fas fa-download fa-lg"></i> Exportar
+				  </a>
+				  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<a class="dropdown-item" href="#" id="send_sms">Enviar SMS</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#" id="reporte">Reporte</a>
+					<a class="dropdown-item" href="#" id="Reporte_Agenda">Reporte Agenda</a>	
+					<a class="dropdown-item" href="#" id="agenda_usuarios">Agenda</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#" id="limpiar">Limpiar</a>			
+				  </div>
+				</div>					
+			</form>          
+        </div>
+    </div>
+	
+    <div class="card mb-4">
+		<div class="card-header">
+			<i class="fas fa-book mr-1"></i>
+			Agenda
 		</div>
-      </div>	
-	  <div class="form-group mr-1">
-		<div class="input-group">				
-			<div class="input-group-append">				
-				<span class="input-group-text"><div class="sb-nav-link-icon"></div>Consultorio</span>
-			</div>
-		   <select id="servicio" name="servicio" class="form-control" style="width:160px;" data-toggle="tooltip" data-placement="top" title="Consultorio"> 				   
-		   </select> 
-		</div>	 	   
-      </div>
-	  <div class="form-group mr-1">
-		<div class="input-group">				
-			<div class="input-group-append">				
-				<span class="input-group-text"><div class="sb-nav-link-icon"></div>Profesional</span>
-			</div>
-		   <select id="medico_general" name="medico_general" style="width:160px;" class="form-control" data-toggle="tooltip" data-placement="top" title="Profesional"> 
-		   </select>  
-		</div>  
-      </div>	
-	  <div class="form-group mr-1">
-		<div class="input-group">				
-			<div class="input-group-append">				
-				<span class="input-group-text"><div class="sb-nav-link-icon"></div>Inicio</span>
-			</div>
-		   <input type="date" required="required" id="fecha" name="fecha" style="width:160px;" value="<?php echo date ("Y-m-d");?>" data-toggle="tooltip" data-placement="top" title="Fecha Inicial" class="form-control"/>  
-		</div>  
-      </div>	
-	  <div class="form-group mr-1">
-		<div class="input-group">				
-			<div class="input-group-append">				
-				<span class="input-group-text"><div class="sb-nav-link-icon"></div>Fin</span>
-			</div>
-			<input type="date" required="required" id="fechaf" name="fechaf" style="width:160px;" value="<?php echo date ("Y-m-d");?>" data-toggle="tooltip" data-placement="top" title="Fecha Inicial" class="form-control"/>  
+		<div class="card-body"> 
+			<div class="form-group">
+			  <div class="col-md-12 mb-3 overflow-auto">
+				 <div class="registros" id="agrega-registros"></div>
+			  </div>		   
+			</div>	
+			<center>
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center" id="pagination"></ul>
+				</nav>
+			</center>            
 		</div>
-      </div>		  
-      <div class="form-group mr-1">
-         <input type="text" placeholder="Buscar Registros" id="bs-regis" data-toggle="tooltip" data-placement="top" title="Buscar por: Expediente, Nombre o Identidad" autofocus class="form-control" size="25"/>
-      </div>	  
-	  <div class="form-group">
-		<div class="dropdown show" data-toggle="tooltip" data-placement="top" title="Exportar">
-		  <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			 <i class="fas fa-download fa-lg"></i> Exportar
-		  </a>
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-			<a class="dropdown-item" href="#" id="send_sms">Enviar SMS</a>
-			<div class="dropdown-divider"></div>
-			<a class="dropdown-item" href="#" id="reporte">Reporte</a>
-			<a class="dropdown-item" href="#" id="Reporte_Agenda">Reporte Agenda</a>	
-			<a class="dropdown-item" href="#" id="agenda_usuarios">Agenda</a>
-			<div class="dropdown-divider"></div>
-			<a class="dropdown-item" href="#" id="limpiar">Limpiar</a>			
-		  </div>
-		</div>		  
-	  </div>	 	   
-    </form>	
-	<hr/> 
-	<div class="form-group">
-	  <div class="col-md-12 mb-3 overflow-auto">
-		 <div class="registros" id="agrega-registros"></div>
-	  </div>		   
-	</div>	
-    <center>
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center" id="pagination"></ul>
-		</nav>
-    </center>
+	</div>
+	
 	<?php include("templates/footer.php"); ?>
 </div>	  
 

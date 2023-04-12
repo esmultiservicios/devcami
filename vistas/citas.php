@@ -41,8 +41,9 @@ $año=date("Y", strtotime($fecha));
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Citas :: <?php echo SERVEREMPRESA;?></title>
-<link href="<?php echo SERVERURL; ?>/css/estilo-paginacion.css" rel="stylesheet">	
+    <link href="<?php echo SERVERURL; ?>/css/estilo-paginacion.css" rel="stylesheet">	
     <link href="<?php echo SERVERURL; ?>bootstrap/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous"/>
+	<link href="<?php echo SERVERURL; ?>bootstrap/css/bootstrap-select.min.css" rel="stylesheet" crossorigin="anonymous"/>
     <link href="<?php echo SERVERURL; ?>bootstrap/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous"/>
     <link href="<?php echo SERVERURL; ?>fontawesome/css/all.css" rel="stylesheet">	
     <link href="<?php echo SERVERURL; ?>css/style.css" rel="stylesheet"/>   
@@ -60,63 +61,64 @@ $año=date("Y", strtotime($fecha));
 <!-- Page Content -->
 <div class="container-fluid">
 <br><br><br>
-		<ol class="breadcrumb mt-2 mb-4">
-			<li class="breadcrumb-item"><a class="breadcrumb-link" href="inicio.php">Dashboard</a></li>
-			<li class="breadcrumb-item active" id="acciones_factura"><span id="label_acciones_factura"></span>Citas</li>
-		</ol>	
-		<form class="form-inline" id="botones_citas">
-		  <div class="form-group mr-1">
-			<div class="input-group">				
-				<div class="input-group-append">				
-					<span class="input-group-text"><div class="sb-nav-link-icon"></div>Consultorio</span>
-				</div>
-				<select id="servicio" name="servicio" class="form-control" data-toggle="tooltip" data-placement="top" title="Consultorio">
-				</select> 
-			</div>
-		  </div>
-		  <div class="form-group mr-1">
-			<div class="input-group">				
-				<div class="input-group-append">				
-					<span class="input-group-text"><div class="sb-nav-link-icon"></div>Profesional</span>
-				</div>
-				<select id="medico_general" name="medico_general" class="form-control" data-toggle="tooltip" data-placement="top" data-toggle="tooltip" data-placement="top" title="Profesional">
-				</select>
-			</div>			  
-		  </div>	  
-		  <div class="form-group mr-1">	
-			<button class="btn btn-primary" type="submit" id="refresh"><div class="sb-nav-link-icon"></div><i class="fas fa-sync-alt"></i> Actualizar</button>	  
-		  </div>  
-		  <div class="form-group mr-1">
-			<div class="dropdown show">
-			  <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				 Ausencias
-			  </a>
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-				<a class="dropdown-item" id="ausencias" name="ausencias" href="#">Ausencias</a>
-			  </div>
-			</div>		  
-		  </div> 
-		  <div class="form-group mr-1">
-			<button class="btn btn-success" type="submit" id="search"><div class="sb-nav-link-icon"></div><i class="fas fa-search"></i> Buscar</button>
-		  </div> 		  
-		  <div class="form-group mr-1">
-			<div class="dropdown show">
-			  <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				 <i class="fas fa-search"></i> Historial
-			  </a>
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-				<a class="dropdown-item" id="historial" name="historial" href="#">Historial de Citas</a>
-				<a class="dropdown-item" id="historial_nopresento" name="historial_nopresento" href="#">Historial Ausencias</a>
-				<a class="dropdown-item" id="historial_reprogramaciones" name="historial_reprogramaciones" href="#">Reprogramaciones</a>			
-			  </div>
-			</div>		  
-		  </div> 	   
-		</form>
+	<ol class="breadcrumb mt-2 mb-4">
+		<li class="breadcrumb-item"><a class="breadcrumb-link" href="inicio.php">Dashboard</a></li>
+		<li class="breadcrumb-item active" id="acciones_factura"><span id="label_acciones_factura"></span>Citas</li>
+	</ol>	
 		
-		<div class="col-sm-12">
-			<div id="calendar" class="col-centered" style="position: relative; z-index:0;"></div>
+	<div class="card mb-4">
+        <div class="card-body">
+			<form class="form-inline" id="botones_citas">
+				<div class="form-group mx-sm-3 mb-1">
+					<div class="input-group">				
+						<div class="input-group-append">				
+							<span class="input-group-text"><div class="sb-nav-link-icon"></div>Consultorio</span>
+						</div>
+						<select id="servicio" name="servicio" class="selectpicker" title="Consultorio" data-live-search="true">
+						</select>
+					</div>
+				</div>	
+				<div class="form-group mx-sm-3 mb-1">
+					<div class="input-group">				
+						<div class="input-group-append">				
+							<span class="input-group-text"><div class="sb-nav-link-icon"></div>Profesional</span>
+						</div>
+						<select id="medico_general" name="medico_general" class="selectpicker" title="Consultorio" data-live-search="true">
+						</select>
+					</div>
+				</div>													
+			    <div class="form-group mx-sm-3 mb-1 ml-1">	
+					<button class="btn btn-info ml-1" type="submit" id="ausencias"><div class="sb-nav-link-icon"></div><i class="fas fa-user-clock"></i> Ausencias</button>	  
+					<button class="btn btn-primary ml-1" type="submit" id="refresh"><div class="sb-nav-link-icon"></div><i class="fas fa-sync-alt"></i> Actualizar</button>	  
+					<button class="btn btn-success ml-1" type="submit" id="search"><div class="sb-nav-link-icon"></div><i class="fas fa-search"></i> Buscar</button>
+					<div class="dropdown show ml-1">
+					  <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						 <i class="fas fa-search"></i> Historial
+					  </a>
+					  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" id="historial" name="historial" href="#">Historial de Citas</a>
+						<a class="dropdown-item" id="historial_nopresento" name="historial_nopresento" href="#">Historial Ausencias</a>
+						<a class="dropdown-item" id="historial_reprogramaciones" name="historial_reprogramaciones" href="#">Reprogramaciones</a>			
+					  </div>
+					</div>						
+			    </div>  				  
+			</form>          
+        </div>
+    </div>
+		
+    <div class="card mb-4">
+		<div class="card-header">
+			<i class="fas fa-calendar-alt mr-1"></i>
+			Calendario
 		</div>
-		<?php include("templates/footer.php"); ?>
+		<div class="card-body"> 
+			<div class="col-sm-12">
+				<div id="calendar" class="col-centered" style="position: relative; z-index:0;"></div>
+			</div>		
+		</div>
+	</div>	
+
+	<?php include("templates/footer.php"); ?>
 </div>
 <!-- /.container -->
 
@@ -124,6 +126,7 @@ $año=date("Y", strtotime($fecha));
 <script src="<?php echo SERVERURL; ?>js/query/jquery.js" crossorigin="anonymous"></script>
 <script src="<?php echo SERVERURL; ?>bootstrap/js/popper.min.js" crossorigin="anonymous"></script>
 <script src="<?php echo SERVERURL; ?>bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="<?php echo SERVERURL; ?>bootstrap/js/bootstrap-select.min.js" crossorigin="anonymous"></script>
 <script src="<?php echo SERVERURL; ?>js/main.js" crossorigin="anonymous"></script>
 <script src="<?php echo SERVERURL; ?>sweetalert/sweetalert.min.js" crossorigin="anonymous"></script>
 

@@ -2,6 +2,9 @@
 session_start(); 
 include "../php/funtions.php";
 
+//CONEXION A DB
+$mysqli = connect_mysqli();
+
 if( isset($_SESSION['colaborador_id']) == false ){
    header('Location: login.php'); 
 }    
@@ -22,7 +25,26 @@ $comentario = mb_convert_case("Ingreso al Modulo de Colaboradores", MB_CASE_TITL
 
 if($colaborador_id != "" || $colaborador_id != null){
    historial_acceso($comentario, $nombre_host, $colaborador_id);  
-}    
+}  
+
+//OBTENER NOMBRE DE EMPRESA
+$usuario = $_SESSION['colaborador_id'];
+
+$query_empresa = "SELECT e.nombre AS 'nombre'
+	FROM users AS u
+	INNER JOIN empresa AS e
+	ON u.empresa_id = e.empresa_id
+	WHERE u.colaborador_id = '$usuario'";
+$result = $mysqli->query($query_empresa) or die($mysqli->error);
+$consulta_registro = $result->fetch_assoc();
+
+$empresa = '';
+
+if($result->num_rows>0){
+  $empresa = $consulta_registro['nombre'];
+}
+
+$mysqli->close();//CERRAR CONEXIÓN     
  ?>
 
 <!DOCTYPE html>
@@ -34,7 +56,7 @@ if($colaborador_id != "" || $colaborador_id != null){
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Colaboradores :: <?php echo SERVEREMPRESA;?></title>
+    <title>Colaboradores :: <?php echo $empresa; ?></title>
 	<?php include("script_css.php"); ?>   		
 </head>
 <body>
@@ -254,6 +276,62 @@ if($colaborador_id != "" || $colaborador_id != null){
       </div>
     </div>
 </div>	
+
+<div class="modal fade" id="asignar_servicio_colaborador">
+	<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Asignar Servicio a Colaborador</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+        </div><div class="container"></div>
+        <div class="modal-body">		
+			<form class="FormularioAjax" id="formulario_asignacion_servicios_colaboradores" action="" method="POST" data-form="" autocomplete="off" enctype="multipart/form-data">			
+				<div class="form-row">
+					<div class="col-md-12 mb-3">
+					  <input type="hidden" id="id-registro" name="id-registro" class="form-control"/>
+					</div>				
+				</div>
+				<div class="form-row" id="grupo_expediente">
+					<div class="col-md-4 mb-3">
+						<label for="nombre">Puesto <span class="priority">*<span/></label>
+					   <select id="puesto_id" name="puesto_id" class="form-control" data-toggle="tooltip" data-placement="top" title="Seleccione">
+							<option value="">Seleccione</option>
+                       </select>
+					</div>	
+					<div class="col-md-4 mb-3">
+					   <label for="nombre">Colaborador <span class="priority">*<span/></label>
+					   <select id="colaborador_id" name="colaborador_id" class="form-control" data-toggle="tooltip" data-placement="top" title="Seleccione">
+							<option value="">Seleccione</option>
+                       </select>	
+					</div>	
+					<div class="col-md-4 mb-3">
+					   <label for="nombre">Servicio <span class="priority">*<span/></label>
+					   <select id="servicio_id" name="servicio_id" class="form-control" data-toggle="tooltip" data-placement="top" title="Seleccione">	
+							<option value="">Seleccione</option>
+                       </select>
+					</div>			
+				</div>						
+				<div class="form-row">
+					<div class="col-md-12 mb-3">
+					  <div class="registros" id="agrega-registros_asignacion_servicio_colaborador"></div>		   
+					</div>
+					<div class="col-md-12 mb-3">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination" id="pagination_asignacion_servicios"></ul>
+						</nav>
+					</div>				
+				</div>									  
+			</form>
+        </div>
+		<div class="modal-footer">
+			<button class="btn btn-primary ml-2" type="submit" id="reg_asignacion" form="formulario_asignacion_servicios_colaboradores"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>
+			<button class="btn btn-danger ml-2" type="submit" id="clean_datos" form="formulario_asignacion_servicios_colaboradores"><div class="sb-nav-link-icon"></div><i class="fas fa-broom fa-lg"></i> Limpiar</button>			
+		</div>		
+      </div>
+    </div>
+</div>	
    <?php include("modals/modals.php");?>
 <!--FIN MODAL-->  	
 
@@ -290,7 +368,10 @@ if($colaborador_id != "" || $colaborador_id != null){
       </div>
       <div class="form-group">
 	    <button class="btn btn-warning ml-1" type="submit" id="nuevo-registro-servicios" data-toggle="tooltip" data-placement="top" title="Nuevo Servicio"><div class="sb-nav-link-icon"></div><i class="fab fa-servicestack fa-lg"></i> Servicios</button>
-      </div>	
+      </div>
+      <div class="form-group">
+	    <button class="btn btn-secondary ml-1" type="submit" id="asignar_servicios" data-toggle="tooltip" data-placement="top" title="Nuevo Servicio"><div class="sb-nav-link-icon"></div><i class="fab fa-servicestack fa-lg"></i> Asignar Servicios</button>
+      </div>	  	
       <div class="form-group">
 	     <button class="btn btn-danger ml-1" type="submit" id="nuevo-registro-colaborador-servicios" data-toggle="tooltip" data-placement="top" title="Asignar Jornada a Colaborador"><div class="sb-nav-link-icon"></div><i class="fas fa-people-carry fa-lg"></i> Jornada</button>		 
       </div> 

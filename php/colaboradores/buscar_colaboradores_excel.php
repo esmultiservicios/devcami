@@ -16,7 +16,7 @@ FROM users AS u
 INNER JOIN empresa AS e
 ON u.empresa_id = e.empresa_id
 WHERE u.colaborador_id = '$usuario'";
-$result_empresa = $mysqli->query($query_empresa) or die($mysqli->error);;
+$result_empresa = $mysqli->query($query_empresa) or die($mysqli->error);
 
 $empresa_nombre = '';
 
@@ -259,6 +259,12 @@ if($result->num_rows>0){
  }	
 //*************Guardar como excel 2003*********************************
 $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel); //Escribir archivo
+
+$objPHPExcel->removeSheetByIndex(
+    $objPHPExcel->getIndex(
+        $objPHPExcel->getSheetByName('Worksheet')
+    )
+);
  
 // Establecer formado de Excel 2003
 header("Content-Type: application/vnd.ms-excel");

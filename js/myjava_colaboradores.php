@@ -1,9 +1,9 @@
 <script>
-$(document).ready(pagination(1));puesto();empresa();servicio();pagination_jornada_colaboradores(1);pagination_servicio(1);pagination_puestos(1);puestoServcioColaborador();getJornadaColaborador();getEstatus();puesto();getJornadaColaborador();servicio();	
+$(document).ready(pagination(1));puesto();empresa();servicio();pagination_jornada_colaboradores(1);pagination_servicio(1);pagination_puestos(1);puestoServcioColaborador();getJornadaColaborador();getEstatus();puesto();getJornadaColaborador();servicio();	getServicioAsignacion();paginationAsignacionServiciosColaboradores(1);
   $(function(){
 	  $('#nuevo-registro-colaboradores').on('click',function(e){
 		e.preventDefault();
-		if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 5 || getUsuarioSistema() == 6){
+		if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){
 		  $('#formulario_colaboradores')[0].reset();
      	  $('#pro').val('Registro');
 		  $('#edi').hide();
@@ -34,7 +34,7 @@ $(document).ready(pagination(1));puesto();empresa();servicio();pagination_jornad
                       		  
 	  $('#nuevo-registro-puestos').on('click',function(e){
 		e.preventDefault();
-		if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 5 || getUsuarioSistema() == 6){
+		if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){
 		  $('#formulario_puestos')[0].reset();
      	  $('#formulario_puestos #pro').val('Registro');
 		  $('#formulario_puestos #edi').hide();
@@ -61,7 +61,7 @@ $(document).ready(pagination(1));puesto();empresa();servicio();pagination_jornad
 
 	  $('#nuevo-registro-servicios').on('click',function(e){
 		e.preventDefault();
-		if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 5 || getUsuarioSistema() == 6){
+		if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){
 		  $('#formulario_servicios')[0].reset();
      	  $('#formulario_servicios #pro').val('Registro');
 		  $('#formulario_servicios #edi').hide();
@@ -86,9 +86,38 @@ $(document).ready(pagination(1));puesto();empresa();servicio();pagination_jornad
           }		  
 	   });		   
 	
+	   $('#asignar_servicios').on('click',function(e){
+		e.preventDefault();
+		if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){
+		  $('#formulario_asignacion_servicios_colaboradores')[0].reset();
+     	  $('#formulario_asignacion_servicios_colaboradores #pro').val('Registro');
+		  $('#formulario_asignacion_servicios_colaboradores #edi').hide();
+		  $('#formulario_asignacion_servicios_colaboradores #reg_asignacion').show();
+		  pagination_servicio(1);
+		  getServicioAsignacion();
+
+		  $('#formulario_asignacion_servicios_colaboradores').attr({ 'data-form': 'save' }); 
+		  $('#formulario_asignacion_servicios_colaboradores').attr({ 'action': '<?php echo SERVERURL; ?>php/colaboradores/agregarAsignacionServicio.php' });
+
+		  $('#asignar_servicio_colaborador').modal({
+			show:true,
+			keyboard: false,
+			backdrop:'static'
+		  });
+		  }else{
+			swal({
+				title: "Acceso Denegado", 
+				text: "No tiene permisos para ejecutar esta acción",
+				type: "error", 
+				confirmButtonClass: 'btn-danger'
+			});				 
+          }		  
+	   });		   
+
+
 	  $('#nuevo-registro-colaborador-servicios').on('click',function(e){
 		e.preventDefault();
-		if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 5 || getUsuarioSistema() == 6){		  
+		if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){		  
 		  $('#formulario_servicios_colaboradores')[0].reset();
      	  $('#formulario_servicios_colaboradores #pro').val('Registro');
 		  $('#formulario_servicios_colaboradores #edi').hide();
@@ -176,7 +205,7 @@ $(document).ready(function() {
 }); 
 
 function modal_eliminar(id){
-  if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 5 || getUsuarioSistema() == 6){
+  if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){
 	swal({
 	  title: "¿Estas seguro?",
 	  text: "¿Desea eliminar este colaborador: " + getColaboradorNombre(id) + "?",
@@ -189,6 +218,31 @@ function modal_eliminar(id){
 	},
 	function(){
 		eliminarRegistro(id);
+	});	
+  }else{
+	swal({
+		title: "Acceso Denegado", 
+		text: "No tiene permisos para ejecutar esta acción",
+		type: "error", 
+		confirmButtonClass: 'btn-danger'
+	});					 
+  }	
+}
+
+function modal_eliminarAsignacionColaborador(servicios_colaboradores_id, colaborador_id){
+  if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){
+	swal({
+	  title: "¿Estas seguro?",
+	  text: "¿Desea eliminar este servicio para el colaborador: " + getColaboradorNombre(colaborador_id) + "?",
+	  type: "warning",
+	  showCancelButton: true,
+	  confirmButtonClass: "btn-warning",
+	  confirmButtonText: "¡Sí, eliminar el registro!",
+	  cancelButtonText: "Cancelar",
+	  closeOnConfirm: false
+	},
+	function(){
+		eliminarRegistroAsignacionColaborador(servicios_colaboradores_id, colaborador_id);
 	});	
   }else{
 	swal({
@@ -216,7 +270,7 @@ function getColaboradorNombre(id){
 }
 
 function modal_eliminarPuesto(id){
-  if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 5 || getUsuarioSistema() == 6){
+  if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){
 	swal({
 	  title: "¿Estas seguro?",
 	  text: "¿Desea eliminar este puesto",
@@ -241,7 +295,7 @@ function modal_eliminarPuesto(id){
 }
 
 function modal_eliminarServicio(id){
-  if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 5 || getUsuarioSistema() == 6){
+  if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){
 	swal({
 	  title: "¿Estas seguro?",
 	  text: "¿Desea eliminar este servicio",
@@ -266,7 +320,7 @@ function modal_eliminarServicio(id){
 }
 
 function modal_eliminarJornadaColaboradores(id){	
-  if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 5 || getUsuarioSistema() == 6){
+  if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){
 	swal({
 	  title: "¿Estas seguro?",
 	  text: "¿Desea eliminar esta jornada para el profesional: " + getColaboradorNombre(id) + "?",
@@ -456,14 +510,36 @@ function eliminarRegistro(id){
 					type: "error", 
 					confirmButtonClass: 'btn-danger'
 				});	
-			}			
+			}		
+		}
+	});
+	return false;
+}
+
+function eliminarRegistroAsignacionColaborador(servicios_colaboradores_id, colaborador_id){
+	var url = '<?php echo SERVERURL; ?>php/colaboradores/eliminarAsignacionServicio.php';
+
+	$.ajax({
+		type:'POST',
+		url:url,
+		data:'servicios_colaboradores_id='+servicios_colaboradores_id+'&colaborador_id='+colaborador_id,
+		success: function(registro){
+		    paginationAsignacionServiciosColaboradores(1);
+			$('#bs-regis').val("");		
+			swal({
+				title: "Success", 
+				text: "Registro eliminado correctamente",
+				type: "success",
+				timer: 3000, //timeOut for auto-close
+			});				
+			return false;			
 		}
 	});
 	return false;
 }
 
 function editarRegistro(id){
-if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 5 || getUsuarioSistema() == 6){	
+if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){	
 	$('#formulario_colaboradores')[0].reset();		
 	var url = '<?php echo SERVERURL; ?>php/colaboradores/editar.php';
 		$.ajax({
@@ -482,7 +558,7 @@ if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() 
                 $('#formulario_colaboradores #puesto').val(datos[3]);	
                 $('#formulario_colaboradores #identidad').val(datos[4]);
                 $('#formulario_colaboradores #estatus').val(datos[5]);
-								
+	
 				$('#formulario_colaboradores').attr({ 'data-form': 'update' }); 
 				$('#formulario_colaboradores').attr({ 'action': '<?php echo SERVERURL; ?>php/colaboradores/agregar_edicion.php' });				
 
@@ -506,7 +582,7 @@ if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() 
 }
 
 function reporteEXCEL(){
-if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 5 || getUsuarioSistema() == 6){	
+if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2){	
     var dato = $('#bs-regis').val();
 	var url = '<?php echo SERVERURL; ?>php/colaboradores/buscar_colaboradores_excel.php?dato='+dato;
     window.open(url);
@@ -562,6 +638,36 @@ function pagination_jornada_colaboradores(partida){
 			var array = eval(data);
 			$('#agrega-registros_servicio_colaborador').html(array[0]);
 			$('#pagination_jornada_colaboradores').html(array[1]);
+		}
+	});
+	return false;
+}
+
+function paginationAsignacionServiciosColaboradores(partida){
+	var url = '<?php echo SERVERURL; ?>php/colaboradores/paginationAsignacionServicios.php';
+	var puesto_id = "";	
+	var colaborador_id = "";		
+	
+    if (puesto_id == null || colaborador_id == ""){
+		puesto_id = "";
+	}else{
+		puesto_id = $('#formulario_asignacion_servicios_colaboradores #registrar_servicios_colaboradores #puesto_id').val();
+	}
+
+	if (colaborador_id == null || colaborador_id == ""){
+		colaborador_id = "";
+	}else{
+		colaborador_id = $('#formulario_asignacion_servicios_colaboradores #registrar_servicios_colaboradores #colaborador_id').val();
+	}
+		
+	$.ajax({
+		type:'POST',
+		url:url,
+		data:'partida='+partida+'&puesto_id='+puesto_id+'&colaborador_id='+colaborador_id,
+		success:function(data){
+			var array = eval(data);
+			$('#agrega-registros_asignacion_servicio_colaborador').html(array[0]);
+			$('#pagination_asignacion_servicios').html(array[1]);
 		}
 	});
 	return false;
@@ -650,11 +756,33 @@ function puestoServcioColaborador(){
 		url:url,			
 		success: function(data){
 			$('#formulario_servicios_colaboradores #puesto_id').html("");
-			$('#formulario_servicios_colaboradores #puesto_id').html(data);			
+			$('#formulario_servicios_colaboradores #puesto_id').html(data);	
+
+			$('#formulario_asignacion_servicios_colaboradores #puesto_id').html("");
+			$('#formulario_asignacion_servicios_colaboradores #puesto_id').html(data);						
 		}
 	});
 	return false;	
 }
+
+$(document).ready(function() {
+	$('#formulario_asignacion_servicios_colaboradores #puesto_id').on('change', function(){
+		var url = '../php/colaboradores/getColaboradorAsignacion.php';
+       		
+		var puesto_id = $('#formulario_asignacion_servicios_colaboradores #puesto_id').val();
+		
+	    $.ajax({
+		   type:'POST',
+		   url:url,
+		   data:'puesto_id='+puesto_id,
+		   success:function(data){
+		      $('#formulario_asignacion_servicios_colaboradores #colaborador_id').html("");
+			  $('#formulario_asignacion_servicios_colaboradores #colaborador_id').html(data);		  
+		  }
+	  });
+	  return false;			 				
+    });					
+});
 
 function getJornadaColaborador(){
 	var url = '<?php echo SERVERURL; ?>php/colaboradores/getJornadaColaborador.php';
@@ -664,6 +792,19 @@ function getJornadaColaborador(){
 		success: function(data){
 			$('#formulario_servicios_colaboradores #jornada_id').html("");
 			$('#formulario_servicios_colaboradores #jornada_id').html(data);			
+		}
+	});
+	return false;	
+}
+
+function getServicioAsignacion(){
+	var url = '<?php echo SERVERURL; ?>php/colaboradores/getServicio.php';
+	$.ajax({
+		type:'POST',
+		url:url,			
+		success: function(data){
+			$('#formulario_asignacion_servicios_colaboradores #servicio_id').html("");
+			$('#formulario_asignacion_servicios_colaboradores #servicio_id').html(data);			
 		}
 	});
 	return false;	

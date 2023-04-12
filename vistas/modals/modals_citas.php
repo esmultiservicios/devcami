@@ -103,9 +103,11 @@
 					  <input type="date" name="fecha_citaedit" class="form-control" id="fecha_citaedit" data-toggle="tooltip" data-placement="top" title="Año-Mes-Dia   Hora:Minutos:Segundos">
 					</div>
 					<div class="col-md-4 mb-3">
-					  <label for="apellido_proveedores">Hora</label>
-					  <select id="hora_nueva" name="hora_nueva" class="form-control" required="required">
-					  </select>
+					  <label for="hora_nueva">Hora</label>
+					  <div class="input-group mb-3">
+							<select class="selectpicker" id="hora_nueva" name="hora_nueva" required data-live-search="true" title="Hora">			  
+							</select>
+					  </div>
 					</div>
 					<div class="col-md-4 mb-3">
 					  <label for="rtn_proveedores">Fecha Cita Inicio</label>
@@ -136,13 +138,11 @@
 				</div>
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
-					  <label for="apellido_proveedores">Profesional</label>
+					  <label for="colaborador">Profesional</label>
 					  <div class="input-group mb-3">
-							  <select id="colaborador" name="colaborador" class="form-control" data-toggle="tooltip" data-placement="top" title="Profesional" required ></select>
-							  <div class="input-group-append" id="buscar_profesional">				
-								<a data-toggle="modal" href="#" class="btn btn-outline-success" id="servicio_boton"><div class="sb-nav-link-icon"></div><i class="fas fa-search fa-lg"></i></a>
-							  </div>
-						   </div>						  
+							<select class="selectpicker" id="colaborador" name="colaborador" required data-live-search="true" title="Profesional">			  
+							</select>
+						</div>						  
 					</div>
 					<div class="col-md-8 mb-3">
 					  <label for="rtn_proveedores">Observación</label>

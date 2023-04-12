@@ -192,6 +192,7 @@ function getStatus(){
         success: function(data){	
 		    $('#form_main #estado').html("");
 			$('#form_main #estado').html(data);
+			$('#form_main #estado').selectpicker('refresh');
 		}			
      });		
 }
@@ -206,6 +207,7 @@ function getReferido(){
         success: function(data){	
 		    $('#formulario_pacientes #referido_id').html("");
 			$('#formulario_pacientes #referido_id').html(data);
+			$('#formulario_pacientes #referido_id').selectpicker('refresh');
 		}			
      });		
 }
@@ -349,22 +351,26 @@ function editarRegistro(pacientes_id){
 					$('#formulario_pacientes #lastname').val(datos[1]);	
 					$('#formulario_pacientes #telefono1').val(datos[2]);	
 					$('#formulario_pacientes #telefono2').val(datos[3]);
-					$('#formulario_pacientes #sexo').val(datos[4]);					
+					$('#formulario_pacientes #sexo').val(datos[4]);	
+					$('#formulario_pacientes #sexo').selectpicker('refresh');				
 					$('#formulario_pacientes #correo').val(datos[5]);
 					$('#formulario_pacientes #edad').val(datos[6]);	
 					$('#formulario_pacientes #expediente').val(datos[7]);
 					$('#formulario_pacientes #direccion').val(datos[8]);					
 					$('#formulario_pacientes #fecha_nac').val(datos[9]);
 					$('#formulario_pacientes #departamento_id').val(datos[10]);
+					$('#formulario_pacientes #departamento_id').selectpicker('refresh');
 					getMunicipioEditar(datos[10], datos[11]);
 					$('#formulario_pacientes #pais_id').val(datos[12]);
+					$('#formulario_pacientes #pais_id').selectpicker('refresh');
 					$('#formulario_pacientes #responsable').val(datos[13]);
 					$('#formulario_pacientes #responsable_id').val(datos[14]);
+					$('#formulario_pacientes #responsable_id').selectpicker('refresh');
 					$('#formulario_pacientes #referido_id').val(datos[15]);
 					$('#formulario_pacientes #identidad').val(datos[16]);
 					$("#formulario_pacientes #identidad").attr('readonly', true);
 					$("#formulario_pacientes #fecha").attr('readonly', true);
-					$("#formulario_pacientes #expediente").attr('readonly', true);
+					$("#formulario_pacientes #expediente").attr('disabled', true);
 					$('#formulario_pacientes #validate').removeClass('bien_email');
 					$('#formulario_pacientes #validate').removeClass('error_email');
 					$("#formulario_pacientes #correo").css("border-color", "none");
@@ -807,9 +813,11 @@ function getSexo(){
         success: function(data){	
 		    $('#formulario_pacientes #sexo').html("");
 			$('#formulario_pacientes #sexo').html(data);
+			$('#formulario_pacientes #sexo').selectpicker('refresh');
 
 		    $('#formulario_agregar_expediente_manual #sexo_manual').html("");
-			$('#formulario_agregar_expediente_manual #sexo_manual').html(data);		
+			$('#formulario_agregar_expediente_manual #sexo_manual').html(data);
+			$('#formulario_agregar_expediente_manual #sexo_manual').selectpicker('refresh');			
 		}			
      });		
 }
@@ -1007,6 +1015,7 @@ function getResponsable(){
         success: function(data){	
 		    $('#formulario_pacientes #responsable_id').html("");
 			$('#formulario_pacientes #responsable_id').html(data);
+			$('#formulario_pacientes #responsable_id').selectpicker('refresh');
 		}			
      });		
 }
@@ -1021,6 +1030,7 @@ function getDepartamentos(){
         success: function(data){	
 		    $('#formulario_pacientes #departamento_id').html("");
 			$('#formulario_pacientes #departamento_id').html(data);
+			$('#formulario_pacientes #departamento_id').selectpicker('refresh');
 		}			
      });		
 }
@@ -1036,7 +1046,8 @@ function getMunicipio(){
 	   data:'departamento_id='+departamento_id,
 	   success:function(data){
 		  $('#formulario_pacientes #municipio_id').html("");
-		  $('#formulario_pacientes #municipio_id').html(data);  
+		  $('#formulario_pacientes #municipio_id').html(data); 
+		  $('#formulario_pacientes #municipio_id').selectpicker('refresh');		  
 	  }
   });	
 }
@@ -1053,7 +1064,8 @@ $(document).ready(function() {
 		   data:'departamento_id='+departamento_id,
 		   success:function(data){
 		      $('#formulario_pacientes #municipio_id').html("");
-			  $('#formulario_pacientes #municipio_id').html(data);		  
+			  $('#formulario_pacientes #municipio_id').html(data);	
+			  $('#formulario_pacientes #municipio_id').selectpicker('refresh');				  
 		  }
 	  });
 	  return false;			 				
@@ -1070,7 +1082,9 @@ function getMunicipioEditar(departamento_id, municipio_id){
 	   success:function(data){
 	      $('#formulario_pacientes #municipio_id').html("");
 		  $('#formulario_pacientes #municipio_id').html(data);
-		  $('#formulario_pacientes #municipio_id').val(municipio_id);		  
+		  $('#formulario_pacientes #municipio_id').selectpicker('refresh');	
+		  $('#formulario_pacientes #municipio_id').val(municipio_id);		
+		  $('#formulario_pacientes #municipio_id').selectpicker('refresh');			  
 	  }
 	});
 	return false;		
@@ -1086,6 +1100,10 @@ function getPais(){
         success: function(data){	
 		    $('#formulario_pacientes #pais_id').html("");
 			$('#formulario_pacientes #pais_id').html(data);
+			$('#formulario_pacientes #pais_id').selectpicker('refresh');	
+			
+			$('#formulario_pacientes #pais_id').val(1);
+			$('#formulario_pacientes #pais_id').selectpicker('refresh');				
 		}			
      });		
 }

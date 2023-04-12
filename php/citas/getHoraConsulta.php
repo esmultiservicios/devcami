@@ -1,6 +1,5 @@
 <?php
 echo '
-	 <option value="">Hora Nueva</option>
 	 <option value="08:00">08:00</option>
 	 <option value="09:00">09:00</option>
 	 <option value="10:00">10:00</option>

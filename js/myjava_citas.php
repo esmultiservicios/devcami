@@ -1471,7 +1471,8 @@ $(document).ready(function() {
 			async: true,
             data:'puesto_id='+puesto_id,
             success: function(data){
-				$('#medico_ausencia').html(data);				
+				$('#medico_ausencia').html(data);
+				$('#medico_ausencia').selectpicker('refresh');				
             }
          });
 		 
@@ -1632,110 +1633,6 @@ function eliminarRegistro(id){
  } 
 }
 
-function clean_sobrecupo(){
-   getJornada();
-   getServiciosobrecupo();
-   $('#formulario_sobrecupo #sobrecupo_unidad').html("");			  	   
-   $('#formulario_sobrecupo #sobrecupo_medico').html("");			  
-   $('#formulario_sobrecupo #pro_ausencias').val('Registro');   
-}
-
-function getJornada(){
-    var url = '<?php echo SERVERURL; ?>php/citas/getJornada.php';
-		
-	$.ajax({
-	    type:'POST',
-		url:url,
-		async: true,
-		success:function(data){		
-		   $('#formulario_sobrecupo #jornada').html("");
-		   $('#formulario_sobrecupo #jornada').html(data);
-		}
-	});
-	return false;		
-}
-
-function getServiciosobrecupo(){
-    var url = '<?php echo SERVERURL; ?>php/citas/servicios.php';
-		
-	$.ajax({
-	    type:'POST',
-		url:url,
-		async: true,
-		success:function(data){					 			 
-		 	  $('#formulario_sobrecupo #sobrecupo_servicio').html("");	
-			  $('#formulario_sobrecupo #sobrecupo_servicio').html(data);			  	  		  		  			  
-		 }
-	});
-	return false;		
-}
-
-$(document).ready(function() {
-	  $('#formulario_sobrecupo #sobrecupo_servicio').on('change', function(){
-		var servicio_id = $('#formulario_sobrecupo #sobrecupo_servicio').val();
-        var url = '<?php echo SERVERURL; ?>php/citas/getUnidad.php';	        
-		
-		$.ajax({
-            type: "POST",
-            url: url,
-			async: true,
-            data:'servicio='+servicio_id,
-            success: function(data){
-				$('#formulario_sobrecupo #sobrecupo_unidad').html(data);					
-            }
-         });
-		 
-      });					
-});
-
-/*VERIFICAR LA EXISTENCIA DEL USUARIO (PACIENTE)*/
-$(document).ready(function(e) {
-    $('#formulario_sobrecupo #sobrecupo_expediente').on('blur', function(){
-	 if($('#formulario_sobrecupo #sobrecupo_expediente').val()!=""){
-		var url = '<?php echo SERVERURL; ?>php/citas/buscar_expediente_consulta.php';
-        var expediente = $('#formulario_sobrecupo #sobrecupo_expediente').val();
-	    $.ajax({
-		   type:'POST',
-		   url:url,
-		   data:'expediente='+expediente,
-		   success:function(data){
-			  var array = eval(data);
-			  if (array[0] == "Error"){
-					swal({
-						title: "Error", 
-						text: "Registro no encontrado",
-						type: "error", 
-						confirmButtonClass: 'btn-danger'
-					});
-					$('#formulario_sobrecupo #paciente').val("");
-					clean_sobrecupo();
-					$("#formulario_sobrecupo #sobrecupo_agregar").attr('disabled', true);
-					return false;
-			  }else if (array[0] == "Familiar"){
-					swal({
-						title: "Error", 
-						text: "Registro no encontrado o puede  ser un familiar, por favor corregir",
-						type: "error", 
-						confirmButtonClass: 'btn-danger'
-					});		  
-					$('#paciente').val("");
-					clean_sobrecupo();
-					$("#formulario_sobrecupo #sobrecupo_agregar").attr('disabled', true);
-					return false;				  
-			  }else{
-			     $('#formulario_sobrecupo #sobrecupo_nombre').val(array[0]);		  
-				 clean_sobrecupo();
-			  }		  			  
-		  }
-	  });
-	  return false;		
-	 }else{
-		$('#formulario_sobrecupo')[0].reset();	
-        $("#formulario_sobrecupo #sobrecupo_agregar").attr('disabled', true);		
-	 }
-	});
-});
-
 function getAgenda_id(expediente, fecha_cita, colaborador_id, servicio_id){
 	var url = '<?php echo SERVERURL; ?>php/citas/getAgenda.php';
 	var agenda;
@@ -1751,38 +1648,6 @@ function getAgenda_id(expediente, fecha_cita, colaborador_id, servicio_id){
 	return agenda;
 }
 
-//VERIFICAR LA FECHA DE AUSENCIA DEL PROFESIONAL
-$(document).ready(function(e) {
-  $('#formulario_sobrecupo #sobrecupo_fecha_cita').on('change', function(){
-     if(getFechaAusenciasSobreCupo($('#formulario_sobrecupo #sobrecupo_fecha_cita').val()) == 1){
-		swal({
-			title: "Error", 
-			text: "El médico se encuentra asuente no se puede agendar una cita",
-			type: "error", 
-			confirmButtonClass: 'btn-danger'
-		});	
-		$("#formulario_sobrecupo #sobrecupo_agregar").attr('disabled', true);	
-     }else{
-		$("#formulario_sobrecupo #sobrecupo_agregar").attr('disabled', false);	
-	 }
-  });
-});
-
-function getFechaAusenciasSobreCupo(fecha){
-    var url = '<?php echo SERVERURL; ?>php/citas/getFechaAusencias.php';
-	var colaborador_id = $('#formulario_sobrecupo #sobrecupo_medico').val();
-	var valor = "";
-	$.ajax({
-	    type:'POST',
-		url:url,
-		data:'fecha='+fecha+'&colaborador_id='+colaborador_id,
-		async: false,
-		success:function(data){	
-          valor = data;			  		  		  			  
-		}
-	});
-	return valor;
-}
 
 function getComentarioAusencia(fecha){
     var url = '<?php echo SERVERURL; ?>php/citas/getComentarioAusencias.php';
@@ -1850,6 +1715,7 @@ function getHoraConsulta(){
         success: function(data){	
 		    $('#form-editevent #hora_nueva').html("");
 			$('#form-editevent #hora_nueva').html(data);
+			$('#form-editevent #hora_nueva').selectpicker('refresh');	
 		}			
      });	
 }
@@ -1954,7 +1820,8 @@ function getServicio(){
         url: url,
         success: function(data){	
 		    $('#botones_citas #servicio').html("");
-			$('#botones_citas #servicio').html(data);				
+			$('#botones_citas #servicio').html(data);
+			$('#botones_citas #servicio').selectpicker('refresh');	
 		}			
      });	
 }	
@@ -1968,12 +1835,15 @@ function getProfesionales(){
         success: function(data){	
 		    $('#botones_citas #medico_general').html("");
 			$('#botones_citas #medico_general').html(data);
+			$('#botones_citas #medico_general').selectpicker('refresh');
 
 		    $('#form-editevent #colaborador').html("");
 			$('#form-editevent #colaborador').html(data);
+			$('#form-editevent #colaborador').selectpicker('refresh');
 
 		    $('#formulario_ausencias #medico_ausencia').html("");
-			$('#formulario_ausencias #medico_ausencia').html(data);				
+			$('#formulario_ausencias #medico_ausencia').html(data);	
+			$('#formulario_ausencias #medico_ausencia').selectpicker('refresh');			
 		}			
      });	
 }	
