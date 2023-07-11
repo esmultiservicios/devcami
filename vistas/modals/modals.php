@@ -8,29 +8,29 @@
 			  <span aria-hidden="true">&times;</span>
 			</button>
         </div>
-        <div class="modal-body">		
-			<form class="FormularioAjax" id="formularioCierreCaja" data-async data-target="#rating-modal" action="" method="POST" data-form="" autocomplete="off" enctype="multipart/form-data">			
+        <div class="modal-body">
+			<form class="FormularioAjax" id="formularioCierreCaja" data-async data-target="#rating-modal" action="" method="POST" data-form="" autocomplete="off" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
 						<div class="input-group mb-3">
 							<input type="text" required readonly id="pro" name="pro" class="form-control"/>
-							<div class="input-group-append">				
+							<div class="input-group-append">
 								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fa fa-plus-square"></i></span>
 							</div>
-						</div>	 
-					</div>							
-				</div>	
+						</div>
+					</div>
+				</div>
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
 					  <label>Fecha <span class="priority">*<span/></label>
-					  <input type="date" required id="fechaCierreCaja" name="fechaCierreCaja" value="<?php echo date ("Y-m-d");?>" class="form-control" />					  
-					</div>									
-				</div>					
+					  <input type="date" required id="fechaCierreCaja" name="fechaCierreCaja" value="<?php echo date ("Y-m-d");?>" class="form-control" />
+					</div>
+				</div>
 			</form>
-        </div>		
+        </div>
 		<div class="modal-footer">
-			<button class="btn btn-primary ml-2" type="submit" id="generarCierreCaja" form="formularioCierreCaja"><div class="sb-nav-link-icon"></div><i class="fas fa-cash-register fa-lg"></i> Generar</button>		
-		</div>			
+			<button class="btn btn-primary ml-2" type="submit" id="generarCierreCaja" form="formularioCierreCaja"><div class="sb-nav-link-icon"></div><i class="fas fa-cash-register fa-lg"></i> Generar</button>
+		</div>
       </div>
     </div>
 </div>
@@ -46,55 +46,76 @@
 			  <span aria-hidden="true">&times;</span>
 			</button>
         </div>
-        <div class="modal-body">		
-			<form class="FormularioAjax" id="formularioMovimientos" data-async data-target="#rating-modal" action="" method="POST" data-form="" autocomplete="off" enctype="multipart/form-data">			
+        <div class="modal-body">
+			<form class="FormularioAjax" id="formularioMovimientos" data-async data-target="#rating-modal" action="" method="POST" data-form="" autocomplete="off" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
-					     <input type="hidden" id="muestras_id" name="muestras_id" class="form-control"/>		
+					    <input type="hidden" id="movimientos_id " name="movimientos_id " class="form-control"/>
 						<div class="input-group mb-3">
 							<input type="text" required readonly id="pro" name="pro" class="form-control"/>
-							<div class="input-group-append">				
+							<div class="input-group-append">
 								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fa fa-plus-square"></i></span>
 							</div>
-						</div>	 
-					</div>							
+						</div>
+					</div>
 				</div>
 				<div class="form-row">
-					<div class="col-md-6 mb-3">
-					  <label>Categoría <span class="priority">*<span/></label>
-					  <select id="movimiento_categoria" name="movimiento_categoria" class="form-control" data-toggle="tooltip" data-placement="top" title="Categoría Productos" required>
-							<option value="">Seleccione</option>
-					  </select>					  
+					<div class="col-md-3 mb-3">
+						<label for="categoria">Categoría<span class="priority">*<span/></label>
+						<div class="input-group mb-3">
+							<select class="selectpicker" id="movimiento_categoria" name="movimiento_categoria" required data-live-search="true" title="Categoría" data-size="10">
+							</select>
+						</div>
 					</div>
-					<div class="col-md-6 mb-3">
-					  <label>Productos <span class="priority">*<span/></label>
-					  <div class="input-group mb-3">
-						  <select id="movimiento_producto" name="movimiento_producto" class="form-control" data-toggle="tooltip" data-placement="top" title="Productos" required>
-								<option value="">Seleccione</option>
-						  </select>
-						  <div class="input-group-append" id="buscar_productos">				
-							<a data-toggle="modal" href="#" class="btn btn-outline-success" id="servicio_boton"><div class="sb-nav-link-icon"></div><i class="fas fa-search fa-lg"></i></a>
-						  </div>
-					   </div>					  
-					</div>										
-				</div>	
-				<div class="form-row">
-					<div class="col-md-6 mb-3">
-					  <label>Tipo de Operación <span class="priority">*<span/></label>
-					  <select id="movimiento_operacion" name="movimiento_operacion" class="form-control" data-toggle="tooltip" data-placement="top" title="Tipo Operación" required>
-						 <option value="">Seleccione</option>
-					  </select>					  
+					<div class="col-md-3 mb-3">
+						<label for="categoria">Productos<span class="priority">*<span/></label>
+						<div class="input-group mb-3">
+							<select class="selectpicker" id="movimiento_producto" name="movimiento_producto" required data-live-search="true" title="Productos" data-size="10">
+							</select>
+						</div>
 					</div>
-					<div class="col-md-6 mb-3">
-					  <label>Cantidad <span class="priority">*<span/></label>
-					  <input type="number" required id="movimiento_cantidad" name="movimiento_cantidad" class="form-control" required>				  
-					</div>										
-				</div>			
-			</form>
-        </div>		
+					<div class="col-md-3 mb-3">
+						<label for="categoria">Tipo Operación<span class="priority">*<span/></label>
+						<div class="input-group mb-3">
+							<select class="selectpicker" id="movimiento_operacion" name="movimiento_operacion" required data-live-search="true" title="Tipo Operación" data-size="10">
+							</select>
+						</div>
+					</div>
+					<div class="col-md-3 mb-3">
+						  <label>Cantidad <span class="priority">*<span/></label>
+						  <input type="number" required id="movimiento_cantidad" name="movimiento_cantidad" class="form-control" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col-md-12 mb-3">
+								<div class="card">
+								<div class="card-header text-white bg-info mb-3" align="center">
+									Comentario
+								</div>
+								<div class="card-body">
+									<div class="form-row">
+										<div class="col-md-12 mb-3">
+											<div class="input-group">
+											<textarea id="comentario" name="comentario" placeholder="Comentario" class="form-control" maxlength="1000" rows="7"></textarea>
+											<div class="input-group-prepend">
+												<span class="input-group-text">
+													<i class="btn btn-outline-success fas fa-microphone-alt" id="search_comentario_movimientos_start"></i>
+													<i class="btn btn-outline-success fas fa-microphone-slash" id="search_comentario_movimientos_stop"></i>
+												</span>
+											</div>
+											</div>
+											<p id="charNum_comentario">1000 Caracteres</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
 		<div class="modal-footer">
-			<button class="btn btn-primary ml-2" type="submit" id="modal_movimientos" form="formularioMovimientos"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>		
-		</div>			
+			<button class="btn btn-primary ml-2" type="submit" id="modal_movimientos" form="formularioMovimientos"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>
+		</div>
       </div>
     </div>
 </div>
@@ -105,81 +126,86 @@
 	<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Registrar Usuarios</h4>
+          <h4 class="modal-title">Registro de Usuarios</h4>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			  <span aria-hidden="true">&times;</span>
 			</button>
         </div>
-        <div class="modal-body">		
-			<form class="FormularioAjax" id="formulario" data-async data-target="#rating-modal" action="" method="POST" data-form="" autocomplete="off" enctype="multipart/form-data">			
+        <div class="modal-body">
+			<form class="FormularioAjax" id="formulario" data-async data-target="#rating-modal" action="" method="POST" data-form="" autocomplete="off" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
-					    <input type="hidden" id="id-registro" name="id-registro" class="form-control"/>		
+					   <input type="hidden" id="id-registro" name="id-registro" class="form-control"/>
 						<div class="input-group mb-3">
 							<input type="text" required readonly id="pro" name="pro" class="form-control"/>
-							<div class="input-group-append">				
+							<div class="input-group-append">
 								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fa fa-plus-square"></i></span>
 							</div>
-						</div>	 
-					</div>							
-				</div>
-				<div class="form-row" id="grupo_expediente">
-					<div class="col-md-8 mb-3">
-					  <label>Colaborador <span class="priority">*<span/></label>
-					  <div class="input-group mb-3">
-						<select id="colaborador" name="colaborador" class="form-control" data-toggle="tooltip" data-placement="top" title="Consultorio" required></select>
-						<div class="input-group-append" id="buscar_colaboradores">				
-						  <a data-toggle="modal" href="#" class="btn btn-outline-success"><div class="sb-nav-link-icon"></div><i class="fas fa-search fa-lg"></i></a>
-					    </div>
-					  </div>					  
+						</div>
 					</div>
-					<div class="col-md-4 mb-3">
-					  <label for="edad">Estado <span class="priority">*<span/></label>
-					  <select id="estatus" name="estatus" class="form-control" data-toggle="tooltip" data-placement="top" title="Estatus" required>		   
-						 <option value="">Seleccione</option>
-						 <option value="1">Activo</option>
-						 <option value="2">Inactivo</option>						 
-					  </select>
-					</div>				
-				</div>				
+				</div>
+				<div class="form-row">
+					<div class="col-md-3 mb-3">
+						<div class="picture-container">
+							<div class="picture">
+								<img src="../img/avatar.jpg" class="picture-src" id="wizardPicturePreview" title="">
+								<input type="file" id="wizard-picture" class="">
+							</div>
+							 <h6 class="">Seleccionar Imagen</h6>
+
+  						</div>
+  					</div>
+            <div class="col-md-3 mb-3">
+              <label for="colaborador">Colaborador <span class="priority">*<span/></label>
+              <div class="input-group mb-3">
+                <select class="selectpicker" id="colaborador" name="colaborador" required data-live-search="true" title="Colaborador">
+                </select>
+              </div>
+  				 </div>
+           <div class="col-md-3 mb-3">
+               <label for="estatus">Estatus <span class="priority">*<span/></label>
+             <div class="input-group mb-3">
+               <select class="selectpicker" id="estatus" name="estatus" required data-live-search="true" title="Estatus">
+               </select>
+             </div>
+          </div>
+				</div>
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
-					  <label for="nombre">Nickname <span class="priority">*<span/></label>
+					  <label>Nickname <span class="priority">*<span/></label>
 					  <input type="text" required name="username" id="username" maxlength="100" class="form-control"/>
 					</div>
-					<div class="col-md-8 mb-3">
-					  <label for="apellido">Email <span class="priority">*<span/></label>
+          <div class="col-md-8 mb-3">
+					  <label for="email">Email</label>
 					  <div class="input-group mb-3">
-						  <input type="email" required name="email" id="email" maxlength="100" class="form-control" required />
-						  <div class="input-group-append" id="buscar_pacientes_atenciones">
-							<div class="input-group-append">				
+						   <input type="text" name="email" id="email" class="form-control" placeholder="Email" required>
+							<div class="input-group-append">
 								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fas fa-at fa-lg"></i></span>
 							</div>
-						  </div>
-					   </div>					  
-					</div>					
-				</div>	
+					   </div>
+					</div>
+				</div>
 				<div class="form-row">
-					<div class="col-md-6 mb-3">
-					  <label for="fecha">Empresa <span class="priority">*<span/></label>
-					  <div class="input-group mb-3">
-						<select id="empresa" name="empresa" class="form-control" data-toggle="tooltip" data-placement="top" title="Empresa" required></select>
-						<div class="input-group-append" id="buscar_empresa">				
-						  <a data-toggle="modal" href="#" class="btn btn-outline-success"><div class="sb-nav-link-icon"></div><i class="fas fa-search fa-lg"></i></a>
-					    </div>
-					  </div>					  
-					</div>				
-					<div class="col-md-6 mb-3">
-					  <label for="sexo">Tipo <span class="priority">*<span/></label>
-					  <select class="form-control" id="tipo" name="tipo" required>			  
-					  </select>
-					</div>					
-				</div>				
+          <div class="col-md-6 mb-3">
+              <label for="empresa">Empresa <span class="priority">*<span/></label>
+            <div class="input-group mb-3">
+              <select class="selectpicker" id="empresa" name="empresa" required data-live-search="true" title="Empresa">
+              </select>
+            </div>
+         </div>
+         <div class="col-md-3 mb-3">
+             <label for="tipo">Tipo <span class="priority">*<span/></label>
+           <div class="input-group mb-3">
+             <select class="selectpicker" id="tipo" name="tipo" required data-live-search="true" title="Tipo">
+             </select>
+           </div>
+        </div>
+				</div>
 			</form>
-        </div>		
+        </div>
 		<div class="modal-footer">
-			<button class="btn btn-primary ml-2" form="formulario" type="submit" id="reg_usuarios"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>			
-		</div>			
+			<button class="btn btn-primary ml-2" form="formulario" type="submit" id="reg_usuarios"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>
+		</div>
       </div>
     </div>
 </div>
@@ -188,77 +214,65 @@
 	<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Registrar Usuarios</h4>
+          <h4 class="modal-title">Registro de Usuarios</h4>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			  <span aria-hidden="true">&times;</span>
 			</button>
         </div>
-        <div class="modal-body">		
-			<form class="FormularioAjax" id="formulario_editar" data-async data-target="#rating-modal" action="" method="POST" data-form="" autocomplete="off" enctype="multipart/form-data">			
+        <div class="modal-body">
+			<form class="FormularioAjax" id="formulario_editar" data-async data-target="#rating-modal" action="" method="POST" data-form="" autocomplete="off" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
-					    <input type="hidden" id="id-registro1" name="id-registro1" class="form-control"/>		
+					   <input type="hidden" id="id-registro1" name="id-registro1" class="form-control"/>
 						<div class="input-group mb-3">
 							<input type="text" required readonly id="pro" name="pro" class="form-control"/>
-							<div class="input-group-append">				
+							<div class="input-group-append">
 								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fa fa-plus-square"></i></span>
 							</div>
-						</div>	 
-					</div>							
+						</div>
+					</div>
 				</div>
 				<div class="form-row" id="grupo_expediente">
-					<div class="col-md-8 mb-3">
-					  <label>Colaborador</label>
-					  <div class="input-group mb-3">
-						<select id="colaborador1" name="colaborador1" class="form-control" data-toggle="tooltip" data-placement="top" title="Consultorio"></select>
-						<div class="input-group-append" id="buscar_colaborador_editar">				
-						  <a data-toggle="modal" href="#" class="btn btn-outline-success" id="buscar_colaboradores_editar"><div class="sb-nav-link-icon"></div><i class="fas fa-search fa-lg"></i></a>
-					    </div>
-					  </div>					  
+          <div class="col-md-3 mb-3">
+					    <label for="colaborador1">Colaborador <span class="priority">*<span/></label>
+						<div class="input-group mb-3">
+							<select class="selectpicker" id="colaborador1" name="colaborador1" required data-live-search="true" title="Colaborador">
+							</select>
+						</div>
 					</div>
-					<div class="col-md-4 mb-3">
-					  <label for="edad">Estado <span class="priority">*<span/></label>
-					  <select id="estatus1" name="estatus1" class="form-control" data-toggle="tooltip" data-placement="top" title="Estatus" required>		   
-						 <option value="">Seleccione</option>
-						 <option value="1">Activo</option>
-						 <option value="2">Inactivo</option>						 
-					  </select>
-					</div>				
-				</div>				
+          <div class="col-md-3 mb-3">
+              <label for="estatus1">Estatus <span class="priority">*<span/></label>
+            <div class="input-group mb-3">
+              <select class="selectpicker" id="estatus1" name="estatus1" required data-live-search="true" title="Estatus">
+              </select>
+            </div>
+         </div>
+         <div class="col-md-6 mb-3">
+           <label>Email <span class="priority">*<span/></label>
+           <input type="email" required name="email1" id="email1" maxlength="100" class="form-control"/>
+         </div>
+				</div>
 				<div class="form-row">
-					<div class="col-md-12 mb-3">
-					  <label for="apellido">Email <span class="priority">*<span/></label>
-					  <div class="input-group mb-3">
-						  <input type="email" required name="email1" id="email1" maxlength="100" class="form-control" required />
-						  <div class="input-group-append" id="buscar_pacientes_atenciones">
-							<div class="input-group-append">				
-								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fas fa-at fa-lg"></i></span>
-							</div>
-						  </div>
-					   </div>
-					</div>					
-				</div>	
-				<div class="form-row">
-					<div class="col-md-6 mb-3">
-					  <label for="fecha">Empresa <span class="priority">*<span/></label>
-					  <div class="input-group mb-3">
-						<select id="empresa1" name="empresa1" class="form-control" data-toggle="tooltip" data-placement="top" title="Empresa" required></select>
-						<div class="input-group-append" id="buscar_empresa_editar">				
-						  <a data-toggle="modal" href="#" class="btn btn-outline-success" id="servicio_boton"><div class="sb-nav-link-icon"></div><i class="fas fa-search fa-lg"></i></a>
-					    </div>
-					  </div>					  
-					</div>	
-					<div class="col-md-6 mb-3">
-					  <label for="sexo">Tipo <span class="priority">*<span/></label>
-					  <select class="form-control" id="tipo1" name="tipo1" required>			  
-					  </select>
-					</div>						
-				</div>					
+          <div class="col-md-6 mb-3">
+              <label for="empresa1">Empresa <span class="priority">*<span/></label>
+              <div class="input-group mb-3">
+                <select class="selectpicker" id="empresa1" name="empresa1" required data-live-search="true" title="Empresa">
+                </select>
+              </div>
+           </div>
+           <div class="col-md-3 mb-3">
+               <label for="tipo1">Tipo <span class="priority">*<span/></label>
+             <div class="input-group mb-3">
+               <select class="selectpicker" id="tipo1" name="tipo1" required data-live-search="true" title="Tipo">
+               </select>
+             </div>
+          </div>
+				</div>
 			</form>
-        </div>		
+        </div>
 		<div class="modal-footer">
-			<button class="btn btn-primary ml-2" form="formulario_editar" type="submit" id="editar_usuarios"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>			
-		</div>			
+			<button class="btn btn-primary ml-2" form="formulario_editar" type="submit" id="editar_usuarios"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>
+		</div>
       </div>
     </div>
 </div>
@@ -273,18 +287,18 @@
 			  <span aria-hidden="true">&times;</span>
 			</button>
         </div>
-        <div class="modal-body">		
-			<form class="FormularioAjax" id="formulario_agregar_preclinica" data-async data-target="#rating-modal" action="" method="POST" data-form="" autocomplete="off" enctype="multipart/form-data">			
+        <div class="modal-body">
+			<form class="FormularioAjax" id="formulario_agregar_preclinica" data-async data-target="#rating-modal" action="" method="POST" data-form="" autocomplete="off" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
-					    <input type="hidden" required="required" readonly id="id-registro" name="id-registro" readonly="readonly"/>		
+					    <input type="hidden" required="required" readonly id="id-registro" name="id-registro" readonly="readonly"/>
 						<div class="input-group mb-3">
 							<input type="text" required readonly id="pro" name="pro" class="form-control"/>
-							<div class="input-group-append">				
+							<div class="input-group-append">
 								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fa fa-plus-square"></i></span>
 							</div>
-						</div>	 
-					</div>							
+						</div>
+					</div>
 				</div>
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
@@ -294,22 +308,22 @@
 					<div class="col-md-4 mb-3">
 					  <label for="edad">Fecha <span class="priority">*<span/></label>
 					  <input type="date" required readonly id="fecha" name="fecha" value="<?php echo date ("Y-m-d");?>" class="form-control"/>
-					</div>	
+					</div>
 					<div class="col-md-4 mb-3">
 					  <label for="edad">Identidad </label>
 					  <input type="text" readonly id="identidad" name="identidad" class="form-control"/>
-					</div>						
-				</div>				
+					</div>
+				</div>
 				<div class="form-row">
 					<div class="col-md-6 mb-3">
 					  <label for="nombre">Nombre</label>
 					  <input type="text" required readonly id="nombre" name="nombre" class="form-control"/>
-					</div>	
+					</div>
 					<div class="col-md-6 mb-3">
 					  <label for="nombre">Profesional</label>
 					  <input type="text" readonly id="profesional_consulta" name="profesional_consulta" class="form-control"/>
-					</div>						
-				</div>						
+					</div>
+				</div>
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
 					  <label for="edad">Presión Arterial (PA)</label>
@@ -318,11 +332,11 @@
 					<div class="col-md-4 mb-3">
 					  <label for="edad">Frecuencia Respiratoria (FR)</label>
 					  <input type="number" id="fr" name="fr" class="form-control" placeholder="Frecuencia Respiratoria"/>
-					</div>	
+					</div>
 					<div class="col-md-4 mb-3">
 					  <label for="edad">Frecuencia Cardiaca </label>
 					  <input type="number" id="fc" name="fc" class="form-control" step="0.01" placeholder="Frecuencia Cardiaca"/>
-					</div>						
+					</div>
 				</div>
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
@@ -332,18 +346,18 @@
 					<div class="col-md-4 mb-3">
 					  <label for="edad">Peso</label>
 					  <input type="text" id="peso" name="peso" class="form-control" placeholder="Peso"/>
-					</div>	
+					</div>
 					<div class="col-md-4 mb-3">
 					  <label for="edad">Talla</label>
 					  <input type="text" id="talla" name="talla" class="form-control" placeholder="Talla"/>
-					</div>						
-				</div>	
+					</div>
+				</div>
 				<div class="form-row" id="grupo">
 					<div class="col-md-6 mb-3">
 						<label>Consultorio</label>
 						<div class="input-group mb-3">
 						  <select id="servicio" name="servicio" class="form-control" data-toggle="tooltip" data-placement="top" title="Consultorio"></select>
-						  <div class="input-group-append" id="buscar_servicios_preclinica">				
+						  <div class="input-group-append" id="buscar_servicios_preclinica">
 							<a data-toggle="modal" href="#" class="btn btn-outline-success" id="servicio_boton"><div class="sb-nav-link-icon"></div><i class="fas fa-search fa-lg"></i></a>
 						  </div>
 						</div>
@@ -352,24 +366,24 @@
 						<label>Profesional</label>
 						<div class="input-group mb-3">
 						  <select id="medico" name="medico" class="form-control" data-toggle="tooltip" data-placement="top" title="Profesional"></select>
-						  <div class="input-group-append" id="buscar_profesionales_preclinica">				
+						  <div class="input-group-append" id="buscar_profesionales_preclinica">
 							<a data-toggle="modal" href="#" class="btn btn-outline-success" id="servicio_boton"><div class="sb-nav-link-icon"></div><i class="fas fa-search fa-lg"></i></a>
 						  </div>
 						</div>
-					</div>								
-				</div>	
+					</div>
+				</div>
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
 						<label>Observaciones</label>
 						<input type="text" id="observaciones" name="observaciones" class="form-control" placeholder="Observaciones"/>
-					</div>							
-				</div>					
+					</div>
+				</div>
 			</form>
-        </div>		
+        </div>
 		<div class="modal-footer">
-			<button class="btn btn-primary ml-2" form="formulario_agregar_preclinica" type="submit" id="reg_preclinica"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>	
-			<button class="btn btn-primary ml-2" form="formulario_agregar_preclinica" type="submit" id="edit_preclinica"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>				
-		</div>			
+			<button class="btn btn-primary ml-2" form="formulario_agregar_preclinica" type="submit" id="reg_preclinica"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>
+			<button class="btn btn-primary ml-2" form="formulario_agregar_preclinica" type="submit" id="edit_preclinica"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>
+		</div>
       </div>
     </div>
 </div>
@@ -386,18 +400,18 @@
         </button>
       </div>
       <div class="modal-body">
-			<form id="formulario_busqueda_departamentos">		
+			<form id="formulario_busqueda_departamentos">
 				<div class="table-responsive">
 					<table id="dataTableDepartamentos" class="table table-striped table-condensed table-hover" style="width:100%">
 						<thead align="center">
 							<tr>
 								<th>Seleecionar</th>
-								<th>Departamento</th>					
+								<th>Departamento</th>
 							</tr>
 						</thead>
-					</table>  
-				</div>			
-			  </div>															  
+					</table>
+				</div>
+			  </div>
 			</form>
       </div>
     </div>
@@ -416,18 +430,18 @@
         </button>
       </div>
       <div class="modal-body">
-			<form id="formulario_busqueda_pais">		
+			<form id="formulario_busqueda_pais">
 				<div class="table-responsive">
 					<table id="dataTablePais" class="table table-striped table-condensed table-hover" style="width:100%">
 						<thead align="center">
 							<tr>
 								<th>Seleecionar</th>
-								<th>País</th>					
+								<th>País</th>
 							</tr>
 						</thead>
-					</table>  
-				</div>			
-			  </div>															  
+					</table>
+				</div>
+			  </div>
 			</form>
       </div>
     </div>
@@ -446,19 +460,19 @@
         </button>
       </div>
       <div class="modal-body">
-			<form id="formulario_busqueda_municipios">		
+			<form id="formulario_busqueda_municipios">
 				<div class="table-responsive">
 					<table id="dataTableMunicipios" class="table table-striped table-condensed table-hover" style="width:100%">
 						<thead align="center">
 							<tr>
 								<th>Seleecionar</th>
 								<th>Departamento</th>
-								<th>Municipio</th>								
+								<th>Municipio</th>
 							</tr>
 						</thead>
-					</table>  
-				</div>			
-			  </div>															  
+					</table>
+				</div>
+			  </div>
 			</form>
       </div>
     </div>
@@ -477,18 +491,18 @@
         </button>
       </div>
       <div class="modal-body">
-			<form id="formulario_busqueda_servicios">		
+			<form id="formulario_busqueda_servicios">
 				<div class="table-responsive">
 					<table id="dataTableServicios" class="table table-striped table-condensed table-hover" style="width:100%">
 						<thead align="center">
 							<tr>
 								<th>Seleecionar</th>
-								<th>Consultorio</th>					
+								<th>Consultorio</th>
 							</tr>
 						</thead>
-					</table>  
-				</div>			
-			  </div>															  
+					</table>
+				</div>
+			  </div>
 			</form>
       </div>
     </div>
@@ -507,18 +521,18 @@
         </button>
       </div>
       <div class="modal-body">
-			<form id="formulario_busqueda_profesion">		
+			<form id="formulario_busqueda_profesion">
 				<div class="table-responsive">
 					<table id="dataTableProfesiones" class="table table-striped table-condensed table-hover" style="width:100%">
 						<thead align="center">
 							<tr>
 								<th>Seleecionar</th>
-								<th>Profesión</th>					
+								<th>Profesión</th>
 							</tr>
 						</thead>
-					</table>  
-				</div>			
-			  </div>															  
+					</table>
+				</div>
+			  </div>
 			</form>
       </div>
     </div>
@@ -537,18 +551,18 @@
         </button>
       </div>
       <div class="modal-body">
-			<form id="formulario_busqueda_religion">		
+			<form id="formulario_busqueda_religion">
 				<div class="table-responsive">
 					<table id="dataTableReligion" class="table table-striped table-condensed table-hover" style="width:100%">
 						<thead align="center">
 							<tr>
 								<th>Seleecionar</th>
-								<th>Religión</th>					
+								<th>Religión</th>
 							</tr>
 						</thead>
-					</table>  
-				</div>			
-			  </div>															  
+					</table>
+				</div>
+			  </div>
 			</form>
       </div>
     </div>
@@ -567,7 +581,7 @@
         </button>
       </div>
       <div class="modal-body">
-			<form id="formulario_busqueda_pacientes">		
+			<form id="formulario_busqueda_pacientes">
 				<div class="table-responsive">
 					<table id="dataTablePacientes" class="table table-striped table-condensed table-hover" style="width:100%">
 						<thead align="center">
@@ -576,12 +590,12 @@
 								<th>Paciente</th>
 								<th>Identidad</th>
 								<th>Expediente</th>
-								<th>Correo</th>						
+								<th>Correo</th>
 							</tr>
 						</thead>
-					</table>  
-				</div>			
-			  </div>															  
+					</table>
+				</div>
+			  </div>
 			</form>
       </div>
     </div>
@@ -600,7 +614,7 @@
         </button>
       </div>
       <div class="modal-body">
-			<form id="formulario_busqueda_coloboradores">		
+			<form id="formulario_busqueda_coloboradores">
 				<div class="table-responsive">
 					<table id="dataTableColaboradores" class="table table-striped table-condensed table-hover" style="width:100%">
 						<thead align="center">
@@ -608,12 +622,12 @@
 								<th>Seleecionar</th>
 								<th>Colaborador</th>
 								<th>Identidad</th>
-								<th>Puesto</th>					
+								<th>Puesto</th>
 							</tr>
 						</thead>
-					</table>  
-				</div>			
-			  </div>															  
+					</table>
+				</div>
+			  </div>
 			</form>
       </div>
     </div>
@@ -632,7 +646,7 @@
         </button>
       </div>
       <div class="modal-body">
-			<form id="formulario_busqueda_empresa">		
+			<form id="formulario_busqueda_empresa">
 				<div class="table-responsive">
 					<table id="dataTableEmpresa" class="table table-striped table-condensed table-hover" style="width:100%">
 						<thead align="center">
@@ -640,12 +654,12 @@
 								<th>Seleecionar</th>
 								<th>Empresa</th>
 								<th>RTN</th>
-								<th>Dirección</th>					
+								<th>Dirección</th>
 							</tr>
 						</thead>
-					</table>  
-				</div>			
-			  </div>															  
+					</table>
+				</div>
+			  </div>
 			</form>
       </div>
     </div>
@@ -666,7 +680,7 @@
       <div class="modal-body">
 			<form id="formulario_busqueda_productos_facturas">
 			<input type="hidden" id="row" name="row" class="form-control"/>
-			<input type="hidden" id="col" name="col" class="form-control"/>			
+			<input type="hidden" id="col" name="col" class="form-control"/>
 				<div class="table-responsive">
 					<table id="dataTableProductosFacturas" class="table table-striped table-condensed table-hover" style="width:100%">
 						<thead align="center">
@@ -674,15 +688,15 @@
 								<th>Seleecionar</th>
 								<th>Producto</th>
 								<th>Descripción</th>
-								<th>Concentración</th>	
-								<th>Medida</th>						
+								<th>Concentración</th>
+								<th>Medida</th>
 								<th>Cantidad</th>
-								<th>Precio Venta</th>						
+								<th>Precio Venta</th>
 							</tr>
 						</thead>
-					</table>  
-				</div>			
-			  </div>															  
+					</table>
+				</div>
+			  </div>
 			</form>
       </div>
     </div>
@@ -700,18 +714,18 @@
 			  <span aria-hidden="true">&times;</span>
 			</button>
         </div><div class="container"></div>
-        <div class="modal-body">		
-			<form class="form-horizontal FormularioAjax" id="formulario_productos" action="" method="POST" data-form="" enctype="multipart/form-data">				
+        <div class="modal-body">
+			<form class="form-horizontal FormularioAjax" id="formulario_productos" action="" method="POST" data-form="" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
-					    <input type="hidden" required="required" id="productos_id" name="productos_id"/>		
+					    <input type="hidden" required="required" id="productos_id" name="productos_id"/>
 						<div class="input-group mb-3">
 							<input type="text" required readonly id="pro" name="pro" class="form-control"/>
-							<div class="input-group-append">				
+							<div class="input-group-append">
 								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fa fa-plus-square"></i></span>
 							</div>
-						</div>	 
-					</div>							
+						</div>
+					</div>
 				</div>
 				<div class="form-row">
 					<div class="col-md-6 mb-3">
@@ -720,25 +734,25 @@
 					</div>
 					<div class="col-md-3 mb-3">
 					  <label>Categoría <span class="priority">*<span/></label>
-					  <select id="categoria" name="categoria" class="form-control" data-toggle="tooltip" data-placement="top" title="Categoría" required>   				   
-					  </select> 
-					</div>	
+					  <select id="categoria" name="categoria" class="form-control" data-toggle="tooltip" data-placement="top" title="Categoría" required>
+					  </select>
+					</div>
 					<div class="col-md-3 mb-3">
 					  <label>Concentración <span class="priority">*<span/></label>
 				      <input type="number" required class="form-control" name="concentracion" id="concentracion" placeholder="Concentracion" maxlength="3" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
-					</div>					
-				</div>				
-				<div class="form-row">				
+					</div>
+				</div>
+				<div class="form-row">
 					<div class="col-md-3 mb-3">
 					  <label>Medida <span class="priority">*<span/></label>
-					  <select id="medida" name="medida" class="form-control" data-toggle="tooltip" data-placement="top" title="Medida" required>   				   
+					  <select id="medida" name="medida" class="form-control" data-toggle="tooltip" data-placement="top" title="Medida" required>
 					  </select>
 					</div>
 					<div class="col-md-3 mb-3">
 						<label>Almacén <span class="priority">*<span/></label>
-						<select id="almacen" name="almacen" class="form-control" data-toggle="tooltip" data-placement="top" title="Almacén" required>   				   
-						</select> 
-					</div>				
+						<select id="almacen" name="almacen" class="form-control" data-toggle="tooltip" data-placement="top" title="Almacén" required>
+						</select>
+					</div>
 					<div class="col-md-3 mb-3">
 					  <label>Cantidad <span class="priority">*<span/></label>
 					  <input type="number" required id="cantidad" name="cantidad" placeholder="Cantidad" class="form-control"/>
@@ -746,54 +760,54 @@
 					<div class="col-md-3 mb-3">
 					  <label>Precio de Compra <span class="priority">*<span/></label>
 					  <input type="number" required id="precio_compra" name="precio_compra" step="0.01" placeholder="Precio Compra" class="form-control"/>
-					</div>					
-				</div>	
+					</div>
+				</div>
 				<div class="form-row">
 					<div class="col-md-3 mb-3">
 					  <label>Precio de Venta <span class="priority">*<span/></label>
 					  <input type="number" required id="precio_venta" name="precio_venta" step="0.01" placeholder="Precio Venta" class="form-control"/>
-					</div>	
+					</div>
 					<div class="col-md-3 mb-3">
 					  <label>Cantidad Mínima</label>
 					  <input type="number" id="cantidad_minima" name="cantidad_minima" placeholder="Cantidad Mínima" class="form-control"/>
-					</div>	
+					</div>
 					<div class="col-md-3 mb-3">
 					  <label>Cantidad Máxima</label>
 					  <input type="number" id="cantidad_maxima" name="cantidad_maxima" placeholder="Cantidad Máxima" class="form-control"/>
-					</div>						
-				</div>					
-				<div class="form-row">			  
+					</div>
+				</div>
+				<div class="form-row">
 					<div class="col-md-12 mb-3">
 					  <label>Descripción</label>
-					  <textarea id="descripcion" name="descripcion" placeholder="Descripción" class="form-control" maxlength="100" rows="2"></textarea>	
+					  <textarea id="descripcion" name="descripcion" placeholder="Descripción" class="form-control" maxlength="100" rows="2"></textarea>
 				      <p id="charNum_descripcion">100 Caracteres</p>
 					</div>
-				</div>	
+				</div>
 
-				<div class="form-group custom-control custom-checkbox custom-control-inline">	
-				  <div class="col-md-5">			
+				<div class="form-group custom-control custom-checkbox custom-control-inline">
+				  <div class="col-md-5">
 						<label class="switch">
 							<input type="checkbox" id="producto_activo" name="producto_activo" value="1" checked>
 							<div class="slider round"></div>
 						</label>
-						<span class="question mb-2" id="label_producto_activo"></span>				
-				  </div>				  	
-				  <div class="col-md-8">		
+						<span class="question mb-2" id="label_producto_activo"></span>
+				  </div>
+				  <div class="col-md-8">
 						 <label class="form-check-label mr-1" for="defaultCheck1">¿ISV Venta?</label>
 						<label class="switch">
 							<input type="checkbox" id="producto_isv_factura" name="producto_isv_factura" value="1">
 							<div class="slider round"></div>
 						</label>
-						<span class="question mb-2" id="label_producto_isv_factura"></span>				
-				  </div>			  
-				</div>								 				 
+						<span class="question mb-2" id="label_producto_isv_factura"></span>
+				  </div>
+				</div>
 			</form>
-        </div> 		
+        </div>
 		<div class="modal-footer">
 			<button class="btn btn-primary ml-2" type="submit" id="reg_producto" form="formulario_productos"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>
 			<button class="btn btn-warning ml-2" type="submit" id="edi_producto" form="formulario_productos"><div class="sb-nav-link-icon"></div><i class="fas fa-edit fa-lg"></i> Editar</button>
-			<button class="btn btn-danger ml-2" type="submit" id="delete_producto" form="formulario_productos"><div class="sb-nav-link-icon"></div><i class="fa fa-trash"></i> Eliminar</button>				
-		</div>			
+			<button class="btn btn-danger ml-2" type="submit" id="delete_producto" form="formulario_productos"><div class="sb-nav-link-icon"></div><i class="fa fa-trash"></i> Eliminar</button>
+		</div>
       </div>
     </div>
 </div>
@@ -809,18 +823,18 @@
 			  <span aria-hidden="true">&times;</span>
 			</button>
         </div><div class="container"></div>
-        <div class="modal-body">		
-			<form class="form-horizontal FormularioAjax" id="formulario_almacen" action="" method="POST" data-form="" enctype="multipart/form-data">				
+        <div class="modal-body">
+			<form class="form-horizontal FormularioAjax" id="formulario_almacen" action="" method="POST" data-form="" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
-					    <input type="hidden" required="required" readonly id="almacen_id" name="almacen_id"/>	
+					    <input type="hidden" required="required" readonly id="almacen_id" name="almacen_id"/>
 						<div class="input-group mb-3">
 							<input type="text" required readonly id="pro" name="pro" class="form-control"/>
-							<div class="input-group-append">				
+							<div class="input-group-append">
 								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fa fa-plus-square"></i></span>
 							</div>
-						</div>	 
-					</div>							
+						</div>
+					</div>
 				</div>
 				<div class="form-row">
 					<div class="col-md-6 mb-3">
@@ -829,17 +843,17 @@
 					</div>
 					<div class="col-md-6 mb-3">
 					  <label for="apellido_proveedores">Ubicación <span class="priority">*<span/></label>
-					  <select id="ubicacion" name="ubicacion" class="form-control" data-toggle="tooltip" data-placement="top" title="Ubicacion" required>   				   
+					  <select id="ubicacion" name="ubicacion" class="form-control" data-toggle="tooltip" data-placement="top" title="Ubicacion" required>
 					  </select>
-					</div>					
-				</div>																	  				
+					</div>
+				</div>
 			</form>
-        </div>	
+        </div>
 		<div class="modal-footer">
 			<button class="btn btn-primary ml-2" type="submit" id="reg_almacen" form="formulario_almacen"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>
 			<button class="btn btn-warning ml-2" type="submit" id="edi_almacen" form="formulario_almacen"><div class="sb-nav-link-icon"></div><i class="fas fa-edit fa-lg"></i> Editar</button>
-			<button class="btn btn-danger ml-2" type="submit" id="delete_almacen" form="formulario_almacen"><div class="sb-nav-link-icon"></div><i class="fa fa-trash"></i> Eliminar</button>				
-		</div>			
+			<button class="btn btn-danger ml-2" type="submit" id="delete_almacen" form="formulario_almacen"><div class="sb-nav-link-icon"></div><i class="fa fa-trash"></i> Eliminar</button>
+		</div>
       </div>
     </div>
 </div>
@@ -855,18 +869,18 @@
 			  <span aria-hidden="true">&times;</span>
 			</button>
         </div><div class="container"></div>
-        <div class="modal-body">		
-			<form class="form-horizontal FormularioAjax" id="formulario_ubicacion" action="" method="POST" data-form="" enctype="multipart/form-data">				
+        <div class="modal-body">
+			<form class="form-horizontal FormularioAjax" id="formulario_ubicacion" action="" method="POST" data-form="" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
 					    <input type="hidden" required="required" readonly id="ubicacion_id" name="ubicacion_id"/>
 						<div class="input-group mb-3">
 							<input type="text" required readonly id="pro" name="pro" class="form-control"/>
-							<div class="input-group-append">				
+							<div class="input-group-append">
 								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fa fa-plus-square"></i></span>
 							</div>
-						</div>	 
-					</div>							
+						</div>
+					</div>
 				</div>
 				<div class="form-row">
 					<div class="col-md-6 mb-3">
@@ -875,17 +889,17 @@
 					</div>
 					<div class="col-md-6 mb-3">
 					  <label for="apellido_proveedores">Empresa <span class="priority">*<span/></label>
-					  <select id="empresa" name="empresa" class="form-control" data-toggle="tooltip" data-placement="top" title="Empresa" required>   				   
+					  <select id="empresa" name="empresa" class="form-control" data-toggle="tooltip" data-placement="top" title="Empresa" required>
 					 </select>
-					</div>					
-				</div>				
+					</div>
+				</div>
 			</form>
-        </div>		
+        </div>
 		<div class="modal-footer">
 			<button class="btn btn-primary ml-2" type="submit" id="reg_ubicacion" form="formulario_ubicacion"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>
 			<button class="btn btn-warning ml-2" type="submit" id="edi_ubicacion" form="formulario_ubicacion"><div class="sb-nav-link-icon"></div><i class="fas fa-edit fa-lg"></i> Editar</button>
-			<button class="btn btn-danger ml-2" type="submit" id="delete_ubicacion" form="formulario_ubicacion"><div class="sb-nav-link-icon"></div><i class="fa fa-trash"></i> Eliminar</button>				
-		</div>			
+			<button class="btn btn-danger ml-2" type="submit" id="delete_ubicacion" form="formulario_ubicacion"><div class="sb-nav-link-icon"></div><i class="fa fa-trash"></i> Eliminar</button>
+		</div>
       </div>
     </div>
 </div>
@@ -901,18 +915,18 @@
 			  <span aria-hidden="true">&times;</span>
 			</button>
         </div><div class="container"></div>
-        <div class="modal-body">		
-			<form class="form-horizontal FormularioAjax" id="formulario_medidas" action="" method="POST" data-form="" enctype="multipart/form-data">				
+        <div class="modal-body">
+			<form class="form-horizontal FormularioAjax" id="formulario_medidas" action="" method="POST" data-form="" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
 					    <input type="hidden" required="required" readonly id="medida_id" name="medida_id"/>
 						<div class="input-group mb-3">
 							<input type="text" required readonly id="pro" name="pro" class="form-control"/>
-							<div class="input-group-append">				
+							<div class="input-group-append">
 								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fa fa-plus-square"></i></span>
 							</div>
-						</div>	 
-					</div>							
+						</div>
+					</div>
 				</div>
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
@@ -922,15 +936,15 @@
 					<div class="col-md-8 mb-3">
 					  <label for="apellido_proveedores">Descripción <span class="priority">*<span/></label>
 					  <input type="text" required id="descripcion_medidas" name="descripcion_medidas" placeholder="Descripción" readonly class="form-control"  maxlength="30" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
-					</div>					
-				</div>																	  				
+					</div>
+				</div>
 			</form>
-        </div>	
+        </div>
 		<div class="modal-footer">
 			<button class="btn btn-primary ml-2" type="submit" id="reg_medidas" form="formulario_medidas"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>
 			<button class="btn btn-warning ml-2" type="submit" id="edi_medidas" form="formulario_medidas"><div class="sb-nav-link-icon"></div><i class="fas fa-edit fa-lg"></i> Editar</button>
-			<button class="btn btn-danger ml-2" type="submit" id="delete_medidas" form="formulario_medidas"><div class="sb-nav-link-icon"></div><i class="fa fa-trash"></i> Eliminar</button>				
-		</div>			
+			<button class="btn btn-danger ml-2" type="submit" id="delete_medidas" form="formulario_medidas"><div class="sb-nav-link-icon"></div><i class="fa fa-trash"></i> Eliminar</button>
+		</div>
       </div>
     </div>
 </div>
@@ -939,7 +953,7 @@
 <!--INICIO MODAL PAGOS FACTURACION---->
 <div class="modal fade" id="modal_pagos">
 	<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">	
+      <div class="modal-content">
 			<div class="row justify-content-center">
 				<div class="col-lg-12 col-12">
 					<div class="card card0">
@@ -947,33 +961,33 @@
 							<!-- Sidebar -->
 							<div class="bg-light border-right" id="sidebar-wrapper">
 								<div class="sidebar-heading pt-5 pb-4"><strong>Método de pago</strong></div>
-								<div class="list-group list-group-flush"> 
+								<div class="list-group list-group-flush">
 
 									<a data-toggle="tab" href="#menu1" id="tab1" class="tabs list-group-item bg-light active1">
 										<div class="list-div my-2">
 											<div class="fas fa-money-bill-alt fa-lg"></div> &nbsp;&nbsp; Efectivo
 										</div>
-									</a> 
+									</a>
 									<a data-toggle="tab" href="#menu2" id="tab2" class="tabs list-group-item">
 										<div class="list-div my-2">
 											<div class="far fa-credit-card fa-lg"></div> &nbsp;&nbsp; Tarjeta
 										</div>
-									</a> 	
+									</a>
 									<a data-toggle="tab" href="#menu5" id="tab5" class="tabs list-group-item">
 										<div class="list-div my-2">
 											<div class="fa fa-pause fa-lg"></div> &nbsp;&nbsp; Mixto
 										</div>
-									</a> 																		
+									</a>
 									<a data-toggle="tab" href="#menu3" id="tab3" class="tabs list-group-item bg-light">
 										<div class="list-div my-2">
 											<div class="fas fa-exchange-alt fa-lg"></div> &nbsp;&nbsp; Transferencia
 										</div>
-									</a> 
+									</a>
 									<a data-toggle="tab" href="#menu4" id="tab4" class="tabs list-group-item bg-light">
 										<div class="list-div my-2">
 											<div class="fas fa-money-check fa-lg"></div> &nbsp;&nbsp; Cheque
 										</div>
-									</a>									
+									</a>
 								</div>
 							</div> <!-- Page Content -->
 							<div id="page-content-wrapper">
@@ -1011,22 +1025,22 @@
 													<form class="FormularioAjax" id="formEfectivoBill" action="<?php echo SERVERURL;?>php/facturacion/addPagoEfectivo.php" method="POST" data-form="save" autocomplete="off" enctype="multipart/form-data">
 														<div class="row">
 															<div class="col-11">
-																<div class="input-group"> 	
+																<div class="input-group">
 																	<label for="monto_efectivo">Efectivo</label>
-																	<input type="hidden" name="factura_id_efectivo" id="factura_id_efectivo"> 
-																	<input type="hidden" name="monto_efectivo" id="monto_efectivo" placeholder="0.00"> 
-																	<input type="number" name="efectivo_bill" id="efectivo_bill" class="inputfield" placeholder="0.00" step="0.01">																						
+																	<input type="hidden" name="factura_id_efectivo" id="factura_id_efectivo">
+																	<input type="hidden" name="monto_efectivo" id="monto_efectivo" placeholder="0.00">
+																	<input type="number" name="efectivo_bill" id="efectivo_bill" class="inputfield" placeholder="0.00" step="0.01">
 																</div>
 															</div>
 															<div class="col-11">
 																<div class="input-group">
 																	<label for="cambio_efectivo">Cambio</label>
-																	<input type="number" readonly name="cambio_efectivo" id="cambio_efectivo" class="inputfield" step="0.01" placeholder="0.00">																
+																	<input type="number" readonly name="cambio_efectivo" id="cambio_efectivo" class="inputfield" step="0.01" placeholder="0.00">
 																</div>
 															</div>
 														</div>
 														<div class="row">
-															<div class="col-md-12"> 
+															<div class="col-md-12">
 																<input type="submit" value="Efectuar Pago" id="pago_efectivo" class="pay btn btn-info placeicon" form="formEfectivoBill">
 															</div>
 														</div>
@@ -1044,31 +1058,31 @@
 													<form class="FormularioAjax" id="formTarjetaBill" method="POST" data-form="save" action="<?php echo SERVERURL;?>php/facturacion/addPagoTarjeta.php" autocomplete="off" enctype="multipart/form-data">
 														<div class="row">
 															<div class="col-12">
-																<div class="input-group"> 
-																<label>Número de Tarjeta</label> 
+																<div class="input-group">
+																<label>Número de Tarjeta</label>
 																<input type="hidden" name="factura_id_tarjeta" id="factura_id_tarjeta">
 																<input type="text" id="cr_bill" name="cr_bill" class="inputfield"  placeholder="XXXX">
 																<input type="hidden" name="monto_efectivo" id="monto_efectivo" placeholder="0.00">
-																																
+
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-6">
-																<div class="input-group"> 
+																<div class="input-group">
 																	<label> Fecha de Expiración</label>
 																	<input type="text" name="exp" id="exp" class="mask inputfield" placeholder="MM/YY">
 																</div>
 															</div>
 															<div class="col-6">
-																<div class="input-group"> 
+																<div class="input-group">
 																	<label>Número Aprobación</label>
-																	<input type="text" name="cvcpwd" id="cvcpwd" class="placeicon inputfield"> 																	 
+																	<input type="text" name="cvcpwd" id="cvcpwd" class="placeicon inputfield">
 																</div>
 															</div>
 														</div>
 														<div class="row">
-															<div class="col-md-12"> 
+															<div class="col-md-12">
 																<input type="submit" value="Efectuar Pago" id="pago_tarjeta" class="pay btn btn-info placeicon" form="formTarjetaBill">
 															</div>
 														</div>
@@ -1086,47 +1100,47 @@
 													<form class="FormularioAjax" id="formMixtoBill" action="<?php echo SERVERURL;?>php/facturacion/addPagoMixto.php" method="POST" data-form="save" autocomplete="off" enctype="multipart/form-data">
 														<div class="row">
 															<div class="col-12 col-md-6">
-																<div class="input-group"> 	
+																<div class="input-group">
 																	<label for="monto_efectivo">Efectivo</label>
-																	<input type="hidden" name="factura_id_mixto" id="factura_id_mixto"> 
-																	<input type="hidden" name="monto_efectivo" id="monto_efectivo_mixto" placeholder="0.00"> 
-																	<input type="number" name="efectivo_bill" id="efectivo_bill_mixto" class="inputfield" placeholder="0.00" step="0.01">																						
-																	<input type="hidden" readonly name="cambio_efectivo" id="cambio_efectivo_mixto" class="inputfield" step="0.01" placeholder="0.00">																
+																	<input type="hidden" name="factura_id_mixto" id="factura_id_mixto">
+																	<input type="hidden" name="monto_efectivo" id="monto_efectivo_mixto" placeholder="0.00">
+																	<input type="number" name="efectivo_bill" id="efectivo_bill_mixto" class="inputfield" placeholder="0.00" step="0.01">
+																	<input type="hidden" readonly name="cambio_efectivo" id="cambio_efectivo_mixto" class="inputfield" step="0.01" placeholder="0.00">
 																</div>
 															</div>
-															
+
 															<div class="col-12 col-md-6">
 																<div class="input-group">
 																	<label for="monto_tarjeta">Tarjeta</label>
-																	<input type="number" readonly name="monto_tarjeta" id="monto_tarjeta" class="inputfield" step="0.01" placeholder="0.00">																
+																	<input type="number" readonly name="monto_tarjeta" id="monto_tarjeta" class="inputfield" step="0.01" placeholder="0.00">
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-12">
-																<div class="input-group"> 
-																<label>Número de Tarjeta</label> 
+																<div class="input-group">
+																<label>Número de Tarjeta</label>
 																<input type="text" id="cr_bill_mixto" name="cr_bill" class="inputfield"  placeholder="XXXX">
-																																																
+
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-6">
-																<div class="input-group"> 
+																<div class="input-group">
 																	<label> Fecha de Expiración</label>
 																	<input type="text" name="exp" id="exp_mixto" class="mask inputfield" placeholder="MM/YY">
 																</div>
 															</div>
 															<div class="col-6">
-																<div class="input-group"> 
+																<div class="input-group">
 																	<label>Número Aprobación</label>
-																	<input type="text" name="cvcpwd" id="cvcpwd_mixto" class="placeicon inputfield"> 																	 
+																	<input type="text" name="cvcpwd" id="cvcpwd_mixto" class="placeicon inputfield">
 																</div>
 															</div>
 														</div>
 														<div class="row">
-															<div class="col-md-12"> 
+															<div class="col-md-12">
 																<input type="submit" value="Efectuar Pago" id="pago_efectivo_mixto" class="pay btn btn-info placeicon" form="formMixtoBill">
 															</div>
 														</div>
@@ -1135,7 +1149,7 @@
 												</div>
 											</div>
 										</div>
-									</div>									
+									</div>
 									<div id="menu3" class="tab-pane">
 										<div class="row justify-content-center">
 											<div class="col-11">
@@ -1144,71 +1158,33 @@
 													<form class="FormularioAjax" id="formTransferenciaBill" method="POST" data-form="save" action="<?php echo SERVERURL;?>php/facturacion/addPagoTransferencia.php" autocomplete="off" enctype="multipart/form-data">
 														<div class="row">
 															<div class="col-12">
-															    <label>Banco</label> 
-																<div class="input-group"> 																	
+															    <label>Banco</label>
+																<div class="input-group">
 																	<input type="hidden" name="factura_id_transferencia" id="factura_id_transferencia">
 																	<select required name="bk_nm" id="bk_nm" class="custom-select inputfield" data-toggle="tooltip" data-placement="top" title="Banco">
 																		<option value="">Seleccione un Banco</option>
-																	</select> 																	
-																	<input type="hidden" name="monto_efectivo" id="monto_efectivo" placeholder="0.00">								
+																	</select>
+																	<input type="hidden" name="monto_efectivo" id="monto_efectivo" placeholder="0.00">
 																</div>
 															</div>
 														</div>
 														<div class="row">
 															<div class="col-12">
-																<div class="input-group"> 	
-																	<label>Número de Autorización</label> 
-																	<input type="text" name="ben_nm" id="ben_nm" class="inputfield" placeholder="Número de Autorización">							
+																<div class="input-group">
+																	<label>Número de Autorización</label>
+																	<input type="text" name="ben_nm" id="ben_nm" class="inputfield" placeholder="Número de Autorización">
 																</div>
 															</div>
 															<div class="col-12" style="display: none;">
-																<div class="input-group"> 																	
-																	<input type="text" name="scode" placeholder="ABCDAB1S" class="placeicon" minlength="8" maxlength="11"> 
-																	<label>SWIFT CODE</label> 
+																<div class="input-group">
+																	<input type="text" name="scode" placeholder="ABCDAB1S" class="placeicon" minlength="8" maxlength="11">
+																	<label>SWIFT CODE</label>
 																</div>
 															</div>
 														</div>
 														<div class="row">
-															<div class="col-md-12"> 
-																<input type="submit" value="Efectuar Pago" id="pago_transferencia" class="pay btn btn-info placeicon" form="formTransferenciaBill"> 
-															</div>
-														</div>
-														<div class="RespuestaAjax"></div>
-													</form>
-												</div>
-											</div>
-										</div>
-									</div>		
-									
-									<div id="menu4" class="tab-pane">
-										<div class="row justify-content-center">
-											<div class="col-11">
-												<div class="form-card">
-													<h3 class="mt-0 mb-4 text-center">Ingrese detalles del Cheque</h3>
-													<form class="FormularioAjax" id="formChequeBill" method="POST" data-form="save" action="<?php echo SERVERURL;?>php/facturacion/addPagoCheque.php" autocomplete="off" enctype="multipart/form-data">
-														<div class="row">
-															<div class="col-12">
-															    <label>Banco</label> 
-																<div class="input-group"> 																	
-																	<input type="hidden" name="factura_id_cheque" id="factura_id_cheque">
-																	<select required name="bk_nm_chk" id="bk_nm_chk" class="custom-select inputfield" data-toggle="tooltip" data-placement="top" title="Banco">
-																		<option value="">Seleccione un Banco</option>
-																	</select> 																	
-																	<input type="hidden" name="monto_efectivo" id="monto_efectivo" placeholder="0.00">								
-																</div>
-															</div>
-														</div>
-														<div class="row">
-															<div class="col-12">
-																<div class="input-group"> 	
-																	<label>Número de Cheque</label> 
-																	<input type="text" name="check_num" id="check_num" class="inputfield" placeholder="Número de Cheque">							
-																</div>
-															</div>
-														</div>
-														<div class="row">
-															<div class="col-md-12"> 
-																<input type="submit" value="Efectuar Pago" id="pago_transferencia" class="pay btn btn-info placeicon" form="formChequeBill"> 
+															<div class="col-md-12">
+																<input type="submit" value="Efectuar Pago" id="pago_transferencia" class="pay btn btn-info placeicon" form="formTransferenciaBill">
 															</div>
 														</div>
 														<div class="RespuestaAjax"></div>
@@ -1217,7 +1193,45 @@
 											</div>
 										</div>
 									</div>
-																		
+
+									<div id="menu4" class="tab-pane">
+										<div class="row justify-content-center">
+											<div class="col-11">
+												<div class="form-card">
+													<h3 class="mt-0 mb-4 text-center">Ingrese detalles del Cheque</h3>
+													<form class="FormularioAjax" id="formChequeBill" method="POST" data-form="save" action="<?php echo SERVERURL;?>php/facturacion/addPagoCheque.php" autocomplete="off" enctype="multipart/form-data">
+														<div class="row">
+															<div class="col-12">
+															    <label>Banco</label>
+																<div class="input-group">
+																	<input type="hidden" name="factura_id_cheque" id="factura_id_cheque">
+																	<select required name="bk_nm_chk" id="bk_nm_chk" class="custom-select inputfield" data-toggle="tooltip" data-placement="top" title="Banco">
+																		<option value="">Seleccione un Banco</option>
+																	</select>
+																	<input type="hidden" name="monto_efectivo" id="monto_efectivo" placeholder="0.00">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-12">
+																<div class="input-group">
+																	<label>Número de Cheque</label>
+																	<input type="text" name="check_num" id="check_num" class="inputfield" placeholder="Número de Cheque">
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-12">
+																<input type="submit" value="Efectuar Pago" id="pago_transferencia" class="pay btn btn-info placeicon" form="formChequeBill">
+															</div>
+														</div>
+														<div class="RespuestaAjax"></div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+
 									<div id="menu4" class="tab-pane">
 										<div class="row justify-content-center">
 											<div class="col-11">
@@ -1237,13 +1251,13 @@
 												</div>
 											</div>
 										</div>
-									</div>									
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>				
+			</div>
       </div>
     </div>
 </div>
@@ -1259,8 +1273,8 @@
 			  <span aria-hidden="true">&times;</span>
 			</button>
         </div><div class="container"></div>
-        <div class="modal-body">		
-			<form class="form-horizontal" id="formDescuentoFacturacion" action="" method="POST" data-form="" enctype="multipart/form-data">				
+        <div class="modal-body">
+			<form class="form-horizontal" id="formDescuentoFacturacion" action="" method="POST" data-form="" enctype="multipart/form-data">
 				<div class="form-row">
 					<div class="col-md-12 mb-3">
 					    <input type="hidden" required="required" readonly id="descuento_productos_id" name="descuento_productos_id"/>
@@ -1268,11 +1282,11 @@
 						<input type="hidden" required="required" readonly id="col_index" name="col_index" class="form-control"/>
 						<div class="input-group mb-3">
 							<input type="text" required readonly id="pro_descuento_fact" name="pro_descuento_fact" class="form-control"/>
-							<div class="input-group-append">				
+							<div class="input-group-append">
 								<span class="input-group-text"><div class="sb-nav-link-icon"></div><i class="fa fa-plus-square fa-lg"></i></span>
 							</div>
-						</div>	 
-					</div>							
+						</div>
+					</div>
 				</div>
 				<div class="form-row">
 					<div class="col-md-8 mb-3">
@@ -1282,7 +1296,7 @@
 					<div class="col-md-4 mb-3">
 					  <label for="precio_descuento_fact">Precio <span class="priority">*<span/></label>
 					  <input type="text" readonly required id="precio_descuento_fact" name="precio_descuento_fact" placeholder="Precio" class="form-control"  maxlength="30" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" step="0.01"/>
-					</div>					
+					</div>
 				</div>
 				<div class="form-row">
 					<div class="col-md-4 mb-3">
@@ -1292,14 +1306,14 @@
 					<div class="col-md-4 mb-3">
 					  <label for="descuento_fact">Valor Descuento <span class="priority">*<span/></label>
 					  <input type="text" required id="descuento_fact" name="descuento_fact" placeholder="Descuento" class="form-control"  maxlength="30" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" step="0.01"/>
-					</div>				
-				</div>					
-				<div class="RespuestaAjax"></div> 
+					</div>
+				</div>
+				<div class="RespuestaAjax"></div>
 			</form>
-        </div>	
+        </div>
 		<div class="modal-footer">
-			<button class="guardar btn btn-primary ml-2" type="submit" id="reg_DescuentoFacturacion" form="formDescuentoFacturacion"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>				
-		</div>			
+			<button class="guardar btn btn-primary ml-2" type="submit" id="reg_DescuentoFacturacion" form="formDescuentoFacturacion"><div class="sb-nav-link-icon"></div><i class="far fa-save fa-lg"></i> Registrar</button>
+		</div>
       </div>
     </div>
 </div>

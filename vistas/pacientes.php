@@ -271,12 +271,12 @@ $mysqli->close();//CERRAR CONEXIÓN
 					  <label for="telefono">Identidad </label>
 					  <input type="number" name="identidad_manual" class="form-control" id="identidad_manual" maxlength="100" value = "0" readonly />
 					</div>
-					<div class="col-md-4 mb-3">
-					    <label for="telefono">Sexo</label>
+					<div class="col-md-3 mb-3">
+					    <label for="departamento_id">Sexo <span class="priority">*<span/></label>
 						<div class="input-group mb-3">
-							<select class="selectpicker" id="sexo_manual" name="sexo_manual" readonly data-live-search="true" title="Genero">			  
+							<select class="selectpicker" id="sexo_manual" name="sexo_manual" required data-live-search="true" title="Sexo">			  
 							</select>
-						</div>
+						</div>					  
 					</div>					
 				</div>					
 				 <div class="form-check-inline">

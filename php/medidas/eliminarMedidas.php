@@ -31,7 +31,7 @@ if($result_medidas->num_rows ==0){
 			6 => "Medidas",//FUNCION DE LA TABLA QUE LLAMAREMOS PARA QUE ACTUALICE (DATATABLE BOOSTRAP)
 			7 => "modal_medidas", //Modals Para Cierre Automatico
 			8 => "",
-			9 => "Eliminar", //PERMITE CERRAR EL MODAL SEGUN EL INDICADOR este indicador esta en main.js
+			9 => "Eliminar", //PERMITE CERRAR EL MODAL SEGUN EL INDICADOR este indicador esta en main.js			
 		);	
 
 		/*********************************************************************************************************************************************************************/
