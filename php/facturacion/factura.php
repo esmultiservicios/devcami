@@ -13,7 +13,7 @@
 		<tr>
 			<td class="logo_factura">
 				<div>
-					<img src="<?php echo SERVERURL; ?>img/logo_factura.jpg" width="150px" height="100px">
+					<img src="<?php echo SERVERURL; ?>img/logo_factura.jpg" width="250px" height="100px">
 				</div>
 			</td>
 			<td class="info_empresa">
@@ -22,7 +22,7 @@
 					<p><?php echo $consulta_registro['direccion_empresa']; ?></p>
 					<p>Teléfono: <?php echo $consulta_registro['empresa_telefono']; ?></p>
 					<p>Correo: <?php echo $consulta_registro['empresa_correo']; ?></p>
-					<p><?php echo $consulta_registro['otra_informacion']; ?></p>
+					<p><?php echo $consulta_registro['otra_informacion']; ?></p>					
 				</div>
 			</td>
 			<td class="info_factura">
@@ -34,7 +34,7 @@
 					<p><b>RTN:</b> <?php echo $consulta_registro['rtn']; ?></p>
 					<p><b>Desde:</b> </b><?php echo $consulta_registro['prefijo'].''.$consulta_registro['rango_inicial']; ?> <b>Hasta:</b> <?php echo $consulta_registro['prefijo'].''.$consulta_registro['rango_final']; ?></p>
 					<p><b>Fecha de Activación:</b> <?php echo $consulta_registro['fecha_activacion']; ?></p>
-					<p><b>Fecha Limite de Emisión:</b> <?php echo $consulta_registro['fecha_limite']; ?></p>
+					<p><b>Fecha Limite de Emisión:</b> <?php echo $consulta_registro['fecha_limite']; ?></p>					
 				</div>
 			</td>
 		</tr>
@@ -46,13 +46,13 @@
 					<span class="h3">Cliente</span>
 					<table class="datos_cliente">
 						<tr>
-							<td><label>ID/RTN:</label><p><?php
+							<td><label>ID/RTN:</label><p><?php 
 									if(strlen($consulta_registro['identidad'])<10){
 										echo "";
 									}else{
 										echo $consulta_registro['identidad'];
 									}
-
+							
 							?></p></td>
 							<td><label>Expediente:</label><p><?php echo $consulta_registro['expediente']; ?></p></td>
 							<td><label>Teléfono:</label> <p><?php echo $consulta_registro['tel_paciente']; ?></p></td>
@@ -94,8 +94,8 @@
 					$subtotal = 0;
 					$importe = 0;
 					$i = 1;
-
-					while($registro_detalles = $result_factura_detalle->fetch_assoc()){
+					
+					while($registro_detalles = $result_factura_detalle->fetch_assoc()){										
 						$total_ = 0;
 						$importe = 0;
 
@@ -105,14 +105,14 @@
 						$subtotal += $importe;
 						$descuentos += $registro_detalles["descuento"];
 						$descuentos_neto += $descuentos;
-						$isv_neto += $registro_detalles["isv_valor"];
-
+						$isv_neto += $registro_detalles["isv_valor"];	
+						
 						if($registro_detalles["isv_valor"] > 0){
 							$importe_gravado += ($registro_detalles["precio"] * $registro_detalles["cantidad"]);
 						}else{
 							$importe_excento += ($registro_detalles["precio"] * $registro_detalles["cantidad"]);
-						}
-
+						}							
+						
 						echo '
 						  <tr>
 						    <td>'.$i.'</td>
@@ -123,11 +123,11 @@
 							<td class="textright">L. '.number_format($total_,2).'</td>
 						  </tr>
 						';
-
+						
 						$i++;
 					}
 					$total_despues_isv = ($total + $isv_neto) - $descuentos;
-
+				
 				?>
 			</tbody>
 			<tfoot id="detalle_totales">
@@ -139,15 +139,15 @@
 					<td class="textright"><span>L. <?php echo number_format($total,2);?></span></td>
 				</tr>
 				<tr>
-					<td colspan="5" class="textright"><span><?php
+					<td colspan="5" class="textright"><span><?php 
 						if ($consulta_registro['edad'] >= 60)
-							echo "Descuentos y Rebajas Otorgados Tercera Edad";
+							echo "Descuentos y Rebajas Otorgados Tercera Edad"; 
 						else
 							echo "Descuentos y Rebajas Otorgados";
 					?>
 					</span></td>
 					<td class="textright"><span>L. <?php echo number_format($descuentos,2); ?></span></td>
-				</tr>
+				</tr>				
 				<tr>
 					<td colspan="5" class="textright"><span>Sub-Total</span></td>
 					<td class="textright"><span>L. <?php echo number_format($subtotal,2);?></span></td>
@@ -159,7 +159,7 @@
 				<tr>
 					<td colspan="5" class="textright"><span>Importe Excento</span></td>
 					<td class="textright"><span>L. <?php echo number_format($importe_excento,2);?></span></td>
-				</tr>
+				</tr>				
 				<tr>
 					<td colspan="5" class="textright"><span>Importe Gravado 15%</span></td>
 					<td class="textright"><span><?php echo number_format($importe_gravado,2); ?></span></td>
@@ -167,15 +167,15 @@
 				<tr>
 					<td colspan="5" class="textright"><span>Importe Gravado 18%</span></td>
 					<td class="textright"><span>L. <?php echo number_format(0,2);?></span></td>
-				</tr>
+				</tr>	
 				<tr>
 					<td colspan="5" class="textright"><span>ISV 15%</span></td>
 					<td class="textright"><span><?php echo number_format($isv_neto,2); ?></span></td>
-				</tr>
+				</tr>	
 				<tr>
 					<td colspan="5" class="textright"><span>ISV 18%</span></td>
 					<td class="textright"><span>L. <?php echo number_format(0,2);?></span></td>
-				</tr>
+				</tr>			
 				<tr>
 					<td colspan="5" class="textright"><span>Total</span></td>
 					<td class="textright"><span>L. <?php echo number_format($total_despues_isv,2); ?></span></td>
@@ -183,23 +183,23 @@
 		</tfoot>
 	</table>
 	<div>
-	    <p class="nota"><?php
+	    <p class="nota"><?php 
 			if($consulta_registro["notas"] != ""){
 				echo "<p class='h3'><b>Nota:</b> ".$consulta_registro["notas"]."</p>";
-			}
+			}		
 		?></p>
 		<p class="nota"><center><?php echo convertir($total_despues_isv);?></center></p>
 		<p class="nota"></p>
-		<p class="nota">La factura es beneficio de todos "Exíjala"</p>
+		<p class="nota">La factura es beneficio de todos "Exíjala"</p>	
 		<p class="nota">N° correlativo de orden de compra excenta __________________</p>
 		<p class="nota">N° correlativo constancia de registro Exonerado __________________</p>
-		<p class="nota">N° identificativo del registro de la SAG __________________</p>
+		<p class="nota">N° identificativo del registro de la SAG __________________</p>	
 		<p class="nota"><br/><br/><br/><br/></p>
-		<p class="nota"><center><b>__________________________</center></p>
-		<p class="nota"><center><b>Firma y Sello</center></p>
+		<p class="nota"><center><b>__________________________</center></p>	
+		<p class="nota"><center><b>Firma y Sello</center></p>		
 		<p class="nota"><br/><br/></p>
-		<p class="nota"><center><b>Original:</b> Cliente</center></p>
-		<p class="nota"><center><b>Copia:</b> Emisor</center></p>
+		<p class="nota"><center><b>Original:</b> Cliente</center></p>	
+		<p class="nota"><center><b>Copia:</b> Emisor</center></p>			
 		<h4 class="label_gracias"><?php  echo $consulta_registro["eslogan"]?></h4>
 	</div>
 
