@@ -398,6 +398,7 @@ Se debe agregar unos codigos que estan en myjava_facturacion.php inician con Men
 	text-align: center;
 	align-items: center;
 	padding-top:6px;
+	z-index: 1000; /* Asegura que el footer esté encima del contenido */
 }
 
 .footer1{
@@ -411,6 +412,7 @@ Se debe agregar unos codigos que estan en myjava_facturacion.php inician con Men
 	text-align: center;
 	align-items: center;
 	padding-top:6px;
+	z-index: 1000; /* Asegura que el footer esté encima del contenido */
 }
 
 .tableFixHead { 
