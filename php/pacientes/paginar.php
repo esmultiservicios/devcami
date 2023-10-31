@@ -62,17 +62,18 @@ $result = $mysqli->query($query);
   
 $tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
 					<tr>
-					   <th width="2%">N°</th>
-					   <th width="4%">Expediente</th>
-					   <th width="10%">Identidad</th>
-					   <th width="21%">Paciente</th>
-					   <th width="5%">Genero</th>					   
-					   <th width="5%">Telefono1</th>
-					   <th width="5%">Telefono2</th>	
-					   <th width="8%">Correo</th>
-					   <th width="20%">Dirección</th>
-					   <th width="4%">Estado</th>						   
-					   <th width="9%">Opciones</th>
+					   <th width="4.33%">N°</th>
+					   <th width="8.33%">Expediente</th>
+					   <th width="8.33%">Identidad</th>
+					   <th width="20.33%">Paciente</th>
+					   <th width="4.33%">Genero</th>					   
+					   <th width="8.33%">Telefono1</th>
+					   <th width="8.33%">Telefono2</th>	
+					   <th width="8.33%">Correo</th>
+					   <th width="8.33%">Dirección</th>
+					   <th width="4.33%">Estado</th>
+					   <th width="8.33%">Editar</th>
+					   <th width="8.33%">Eliminar</th>
 					</tr>';
 
 $i=1;						
@@ -88,13 +89,13 @@ while($registro2 = $result->fetch_assoc()){
 	   <td>'.$registro2['telefono2'].'</td>
 	   <td>'.$registro2['email'].'</td>	   
 	   <td>'.$registro2['localidad'].'</td>	
-	   <td>'.$registro2['estado'].'</td>   		   
+	   <td>'.$registro2['estado'].'</td> 
 	   <td>
-		   <a style="text-decoration:none;" title="Asignar Expediente a Usuario" href="javascript:modal_agregar_expediente('.$registro2['pacientes_id'].','.$registro2['expediente_'].');void(0);" class="fas fas fa-plus fa-lg"></a>
-		   <a style="text-decoration:none;" title = "Asignar Expediente a Usuario de Forma Manual" href="javascript:modal_agregar_expediente_manual('.$registro2['pacientes_id'].');void(0);" class="fas fa-edit fa-lg"></a>			   
-		   <a style="text-decoration:none;" title = "Editar Usuario" href="javascript:editarRegistro('.$registro2['pacientes_id'].');void(0);" class="fas fa-user-edit fa-lg"></a>
-		   <a style="text-decoration:none;" title = "Eliminar Usuario" href="javascript:modal_eliminar('.$registro2['pacientes_id'].');void(0);" class="fas fa-trash fa-lg"></a>
-	   </td>		              		  
+			<a class="btn btn btn-secondary ml-2" href="javascript:editarRegistro('.$registro2['pacientes_id'].');void(0);"><div class="sb-nav-link-icon"></div><i class="fas fa-user-edit fa-lg"></i> Editar</a>
+		</td>
+		<td>
+			<a class="btn btn btn-secondary ml-2" href="javascript:modal_eliminar('.$registro2['pacientes_id'].');void(0);"><div class="sb-nav-link-icon"></div><i class="fas fa-trash fa-lg"></i> Eliminar</a>
+		</td>	   	              		  
 	</tr>';
 	$i++;
 }

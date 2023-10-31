@@ -590,9 +590,12 @@ function editarRegistro(id) {
                 $('#formulario_colaboradores #nombre').val(datos[0]);
                 $('#formulario_colaboradores #apellido').val(datos[1]);
                 $('#formulario_colaboradores #empresa').val(datos[2]);
+                $('#formulario_colaboradores #empresa').selectpicker('refresh');
                 $('#formulario_colaboradores #puesto').val(datos[3]);
+                $('#formulario_colaboradores #puesto').selectpicker('refresh');
                 $('#formulario_colaboradores #identidad').val(datos[4]);
                 $('#formulario_colaboradores #estatus').val(datos[5]);
+                $('#formulario_colaboradores #estatus').selectpicker('refresh');
 
                 $('#formulario_colaboradores').attr({
                     'data-form': 'update'
@@ -757,7 +760,9 @@ function puesto() {
         type: 'POST',
         url: url,
         success: function(data) {
+            $('#formulario_colaboradores #puesto').html("");
             $('#formulario_colaboradores #puesto').html(data);
+            $('#formulario_colaboradores #puesto').selectpicker('refresh');
         }
     });
     return false;
@@ -772,6 +777,7 @@ function empresa() {
         success: function(data) {
             $('#formulario_colaboradores #empresa').html("");
             $('#formulario_colaboradores #empresa').html(data);
+            $('#formulario_colaboradores #empresa').selectpicker('refresh');
         }
     });
     return false;
@@ -786,6 +792,7 @@ function servicio() {
         success: function(data) {
             $('#formulario_servicios_colaboradores #servicio_colaborador').html("");
             $('#formulario_servicios_colaboradores #servicio_colaborador').html(data);
+            $('#formulario_servicios_colaboradores #servicio_colaborador').selectpicker('refresh');
         }
     });
     return false;
@@ -799,9 +806,11 @@ function puestoServcioColaborador() {
         success: function(data) {
             $('#formulario_servicios_colaboradores #puesto_id').html("");
             $('#formulario_servicios_colaboradores #puesto_id').html(data);
+            $('#formulario_servicios_colaboradores #puesto_id').selectpicker('refresh');
 
             $('#formulario_asignacion_servicios_colaboradores #puesto_id').html("");
             $('#formulario_asignacion_servicios_colaboradores #puesto_id').html(data);
+            $('#formulario_asignacion_servicios_colaboradores #puesto_id').selectpicker('refresh');
         }
     });
     return false;
@@ -822,6 +831,8 @@ $(document).ready(function() {
                     "");
                 $('#formulario_asignacion_servicios_colaboradores #colaborador_id').html(
                     data);
+                $('#formulario_asignacion_servicios_colaboradores #colaborador_id')
+                    .selectpicker('refresh');
             }
         });
         return false;
@@ -836,6 +847,7 @@ function getJornadaColaborador() {
         success: function(data) {
             $('#formulario_servicios_colaboradores #jornada_id').html("");
             $('#formulario_servicios_colaboradores #jornada_id').html(data);
+            $('#formulario_servicios_colaboradores #jornada_id').selectpicker('refresh');
         }
     });
     return false;
@@ -849,6 +861,7 @@ function getServicioAsignacion() {
         success: function(data) {
             $('#formulario_asignacion_servicios_colaboradores #servicio_id').html("");
             $('#formulario_asignacion_servicios_colaboradores #servicio_id').html(data);
+            $('#formulario_asignacion_servicios_colaboradores #servicio_id').selectpicker('refresh');
         }
     });
     return false;
@@ -866,6 +879,8 @@ $(document).ready(function() {
             success: function(data) {
                 $('#formulario_servicios_colaboradores #colaborador_id').html("");
                 $('#formulario_servicios_colaboradores #colaborador_id').html(data);
+                $('#formulario_servicios_colaboradores #colaborador_id').selectpicker(
+                    'refresh');
             }
         });
 
@@ -891,9 +906,11 @@ function getEstatus() {
         success: function(data) {
             $('#main_form #status').html("");
             $('#main_form #status').html(data);
+            $('#main_form #status').selectpicker('refresh');
 
             $('#formulario_colaboradores #estatus').html("");
             $('#formulario_colaboradores #estatus').html(data);
+            $('#formulario_colaboradores #estatus').selectpicker('refresh');
         }
     });
 }
