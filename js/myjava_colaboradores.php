@@ -354,7 +354,7 @@ function modal_eliminarServicio(id) {
     }
 }
 
-function modal_eliminarJornadaColaboradores(id) {
+function modal_eliminarJornadaColaboradores(colaborador_id, id) {
     if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2) {
         swal({
                 title: "¿Estas seguro?",

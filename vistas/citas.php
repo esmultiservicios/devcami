@@ -74,7 +74,7 @@ $año=date("Y", strtotime($fecha));
 						<div class="input-group-append">				
 							<span class="input-group-text"><div class="sb-nav-link-icon"></div>Consultorio</span>
 						</div>
-						<select id="servicio" name="servicio" class="selectpicker" title="Consultorio" data-live-search="true">
+						<select id="servicio" name="servicio" class="selectpicker" title="Consultorio" data-live-search="true" data-size="7">
 						</select>
 					</div>
 				</div>	
@@ -83,7 +83,7 @@ $año=date("Y", strtotime($fecha));
 						<div class="input-group-append">				
 							<span class="input-group-text"><div class="sb-nav-link-icon"></div>Profesional</span>
 						</div>
-						<select id="medico_general" name="medico_general" class="selectpicker" title="Consultorio" data-live-search="true">
+						<select id="medico_general" name="medico_general" class="selectpicker" title="Consultorio" data-live-search="true" data-size="7">
 						</select>
 					</div>
 				</div>													
@@ -142,7 +142,7 @@ $año=date("Y", strtotime($fecha));
 <script src='<?php echo SERVERURL; ?>js/query/moment.min.js'></script>	
 <script src='<?php echo SERVERURL; ?>/js/query/fullcalendar.min.js'></script>
 <script src="<?php echo SERVERURL; ?>js/query/menu-despelgable.js"></script>
-<script src="<?php echo SERVERURL; ?>js/query/arriba.js"></script>   
+<script src="<?php echo SERVERURL; ?>js/query/arriba.js"></script> 
 
 <?php 	
 	include "../js/main.php"; 

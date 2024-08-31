@@ -102,11 +102,11 @@ while($registro2 = $result->fetch_assoc()){
 
 if($nroProductos == 0){
 	$tabla = $tabla.'<tr>
-	   <td colspan="11" style="color:#C7030D">No se encontraron resultados</td>
+	   <td colspan="12" style="color:#C7030D">No se encontraron resultados</td>
 	</tr>';		
 }else{
    $tabla = $tabla.'<tr>
-	  <td colspan="11"><b><p ALIGN="center">Total de Registros Encontrados '.number_format($nroProductos).'</p></b>
+	  <td colspan="12"><b><p ALIGN="center">Total de Registros Encontrados '.number_format($nroProductos).'</p></b>
    </tr>';		
 }   
 
@@ -116,4 +116,3 @@ $array = array(0 => $tabla,
 			   1 => $lista);
 
 echo json_encode($array);
-?>

@@ -11,7 +11,6 @@ $consulta = "SELECT pacientes_id, CONCAT(nombre, ' ', apellido) AS 'paciente'
 $result = $mysqli->query($consulta) or die($mysqli->error);
 
 if($result->num_rows>0){
-	echo '<option value="">Seleccione</option>';
 	while($consulta2 = $result->fetch_assoc()){
 		echo '<option value="'.$consulta2['pacientes_id'].'">'.$consulta2['paciente'].'</option>';
 	}
@@ -19,4 +18,3 @@ if($result->num_rows>0){
 
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN
-?>

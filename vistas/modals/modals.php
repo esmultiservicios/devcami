@@ -833,7 +833,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-3 mb-3">
-                            <label for="medida">Medida </label>
+                            <label for="medida">Medida <span class="priority">*<span /></label>
                             <div class="input-group mb-3">
                                 <select class="selectpicker" id="medida" name="medida" required data-live-search="true"
                                     title="Medida">
@@ -841,7 +841,7 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="almacen">Almacén </label>
+                            <label for="almacen">Almacén <span class="priority">*<span /></label>
                             <div class="input-group mb-3">
                                 <select class="selectpicker" id="almacen" name="Almacén" required
                                     data-live-search="true" title="Medida">
@@ -1356,11 +1356,10 @@
                                                                 <div class="input-group">
                                                                     <input type="hidden" name="factura_id_transferencia"
                                                                         id="factura_id_transferencia">
-                                                                    <select required name="bk_nm" id="bk_nm"
-                                                                        class="custom-select inputfield"
-                                                                        data-toggle="tooltip" data-placement="top"
-                                                                        title="Banco">
-                                                                        <option value="">Seleccione un Banco</option>
+                                                                    <select id="bk_nm" name="bk_nm" required
+                                                                        class="selectpicker col-12" data-size="5"
+                                                                        data-width="100%" data-live-search="true"
+                                                                        title="Seleccione un Banco">
                                                                     </select>
                                                                     <input type="hidden" name="monto_efectivo"
                                                                         id="monto_efectivo" placeholder="0.00">

@@ -101,7 +101,7 @@ $result = $mysqli->query($registro);
 	    </tr>';		
 	}else{
        $tabla = $tabla.'<tr>
-	      <td colspan="7"><b><p ALIGN="center">Total de Registros Encontrados '.$nroProductos.'</p></b>
+	      <td colspan="13"><b><p ALIGN="center">Total de Registros Encontrados '.$nroProductos.'</p></b>
 	   </tr>';		
 	}   
 	
@@ -114,4 +114,3 @@ $result = $mysqli->query($registro);
 	
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN	
-?>

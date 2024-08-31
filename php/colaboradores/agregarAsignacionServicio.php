@@ -22,36 +22,34 @@ if($result->num_rows==0){
 	$servicios_colaboradores_id = correlativo('servicios_colaboradores_id', 'servicios_colaboradores');
 	$insert = "INSERT INTO servicios_colaboradores VALUES('$servicios_colaboradores_id', '$colaborador_id', '$servicio_id', '$usuario', '$fecha_registro')";
 	$query = $mysqli->query($insert);
-	if($query){
-		$datos = array(
-			0 => "Almacenado", 
-			1 => "Registro Almacenado Correctamente", 
-			2 => "success",
-			3 => "btn-primary",
-			4 => "formulario_asignacion_servicios_colaboradores",
-			5 => "Registro",
-			6 => "asignarServicioColaboradores",//FUNCION DE LA TABLA QUE LLAMAREMOS PARA QUE ACTUALICE (DATATABLE BOOSTRAP)
-			7 => "asignar_servicio_colaborador", //Modals Para Cierre Automatico
-		);
-	}else{
-		$datos = array(
-			0 => "Error", 
-			1 => "No se puedo almacenar este registro, por favor intente más tarde", 
-			2 => "error",
-			3 => "btn-danger",
-			4 => "",
-			5 => "",		
-		);
-	}
+
+	// Establecer el resultado basado en el éxito de la consulta
+	$datos = $query ? [
+		0 => "Almacenado", 
+		1 => "Registro Almacenado Correctamente", 
+		2 => "success",
+		3 => "btn-primary",
+		4 => "formulario_asignacion_servicios_colaboradores",
+		5 => "Registro",
+		6 => "asignarServicioColaboradores", // FUNCION DE LA TABLA QUE LLAMAREMOS PARA QUE ACTUALICE (DATATABLE BOOSTRAP)
+		7 => "asignar_servicio_colaborador", // Modals Para Cierre Automático
+	] : [
+		0 => "Error", 
+		1 => "No se pudo almacenar este registro, por favor intente más tarde", 
+		2 => "error",
+		3 => "btn-danger",
+		4 => "",
+		5 => "",
+	];
 }else{
-	$datos = array(
+	$datos = [
 		0 => "Error", 
 		1 => "Lo sentimos este registro ya existe no se puede almacenar", 
 		2 => "error",
 		3 => "btn-danger",
 		4 => "",
 		5 => "",		
-	);	
+	];	
 }
 
 echo json_encode($datos);

@@ -163,7 +163,7 @@
         </form>
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">
-            <!--<center><img src="<?php echo SERVERURL; ?>img/logo_clinicare_footer.png" width="30%" height="30%"></center>© 2017 -  <?php echo date("Y");?> Copyright: -->
+            © 2017 -  <?php echo date("Y");?> Copyright:
             <center>
                 <p class="navbar-text"> Todos los derechos reservados
                 </p>

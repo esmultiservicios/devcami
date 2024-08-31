@@ -492,6 +492,10 @@ function llenarTabla(dato) {
 		getCategoriaOperacion();
 		getProductos(1);
 	}
+
+	if (dato == "asignarServicioColaboradores") {
+		paginationAsignacionServiciosColaboradores(1);
+	}	
 }
 
 $(function () {

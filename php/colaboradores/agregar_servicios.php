@@ -1,88 +1,85 @@
 <?php
-session_start();   
-include "../funtions.php";
+session_start();
 
-//CONEXION A DB
-$mysqli = connect_mysqli(); 
+// Incluir la clase BaseDataAccess
+require_once '../BaseDataAccess.php';
 
-$id = $_POST['id-registro'];
-$nombre = $_POST['servicios'];
-$fecha_registro = date("Y-m-d H:i:s");
-$fecha = date("Y-m-d");
-$usuario = $_SESSION['colaborador_id'];
+// Crear una instancia de BaseDataAccess
+$db = new BaseDataAccess();
 
-$nombres = cleanStringStrtolower($nombre);
-//OBTENER CORRELATIVO
-$correlativo= "SELECT MAX(servicio_id) AS max, COUNT(servicio_id) AS count 
-   FROM servicios";
-$result = $mysqli->query($correlativo);
-$correlativo2 = $result->fetch_assoc();
+// Verificar si 'servicios' está definido y no está vacío
+if (isset($_POST['servicios']) && !empty(trim($_POST['servicios']))) {
+    $servicioNombre = trim($_POST['servicios']);
+    
+    // Preparar la consulta para verificar si el servicio ya existe
+    $query = "SELECT servicio_id FROM servicios WHERE nombre = ?";
+    $parameters = [
+        'nombre' => $servicioNombre
+    ];
 
-$numero = $correlativo2['max'];
-$cantidad = $correlativo2['count'];
+    $resultado = $db->executeScalarQuery($query, $parameters);
 
-if ( $cantidad == 0 )
-	$numero = 1;
-else
-    $numero = $numero + 1;	
-	
-//VERIFICAMOS EL PROCESO
-//CONSULTAMOS QUE EL REGISTRO EXISTA
-$consulta = "SELECT servicio_id 
-      FROM servicios 
-	  WHERE nombre = '$nombre'";
-$result = $mysqli->query($consulta);	  
-$consulta2 = $result->fetch_assoc();
-$consulta_nombre = $consulta2['servicio_id'];
+    if (empty($resultado)) {
+        // El servicio no existe, por lo tanto, lo registramos
+        $insertQuery = "
+            INSERT INTO servicios (
+                nombre
+            ) VALUES (
+                ?
+            )
+        ";
 
-if($consulta_nombre == ""){
-	$insert = "INSERT INTO servicios 
-	   VALUES('$numero', '$nombres')";
-	$query = $mysqli->query($insert);
-	
-   //INGRESAR REGISTROS EN LA ENTIDAD HISTORIAL
-   $historial_numero = historial();
-   $estado_historial = "Agregar";
-   $observacion_historial = "Se ha agregado un nuevo servicio: $nombre";
-   $modulo = "Servicios";
-   $insert = "INSERT INTO historial 
-       VALUES('$historial_numero','0','0','$modulo','$numero','0','0','$fecha','$estado_historial','$observacion_historial','$usuario','$fecha_registro')";	
-   $mysqli->query($insert);	   
-   /********************************************/		
-	
-	if($query){
-		$datos = array(
-			0 => "Almacenado", 
-			1 => "Registro Almacenado Correctamente", 
-			2 => "success",
-			3 => "btn-primary",
-			4 => "formulario_servicios",
-			5 => "Registro",
-			6 => "Servicios",//FUNCION DE LA TABLA QUE LLAMAREMOS PARA QUE ACTUALICE (DATATABLE BOOSTRAP)
-			7 => "registrar_servicios", //Modals Para Cierre Automatico
-		);
-	}else{
-		$datos = array(
-			0 => "Error", 
-			1 => "No se puedo almacenar este registro, los datos son incorrectos por favor corregir", 
-			2 => "error",
-			3 => "btn-danger",
-			4 => "",
-			5 => "",			
-		);
-	}	
-}else{
-	$datos = array(
-		0 => "Error", 
-		1 => "Lo sentimos este registro ya existe no se puede almacenar", 
-		2 => "error",
-		3 => "btn-danger",
-		4 => "",
-		5 => "",		
-	);	
+        $insertParameters = [
+            'nombre' => $servicioNombre
+        ];
+
+        $insertResult = $db->executeNonQuery($insertQuery, $insertParameters);
+
+        if ($insertResult) {
+			$datos = [
+				0 => "Éxito",  
+				1 => "El servicio ha sido registrado exitosamente",
+				2 => "success",
+				3 => "btn-success",
+				4 => "formulario_servicios",
+				5 => "Registro",
+				6 => "Servicios", //FUNCION DE LA TABLA QUE LLAMAREMOS PARA QUE ACTUALICE (DATATABLE BOOSTRAP)
+				7 => "registrar_servicios", //Modals Para Cierre Automatico
+			];			
+        } else {
+            $datos = [
+                0 => "Error", 
+                1 => "Hubo un problema al intentar registrar el servicio", 
+                2 => "error",
+                3 => "btn-danger",
+                4 => "",
+                5 => "",
+			];			
+            ;
+        }
+    } else {
+        // El servicio ya existe
+        $datos = [
+            0 => "Error", 
+            1 => "Lo sentimos, este registro ya existe y no se puede almacenar", 
+            2 => "error",
+            3 => "btn-danger",
+            4 => "",
+            5 => "",
+			];			
+        ;
+    }
+} else {
+    // El valor 'servicios' no está definido o está vacío
+    $datos = [
+        0 => "Error", 
+        1 => "El nombre del servicio no puede estar vacío", 
+        2 => "error",
+        3 => "btn-danger",
+        4 => "",
+        5 => "",
+	];
 }
 
+// Imprimir el resultado como JSON o manejarlo según sea necesario
 echo json_encode($datos);
-$result->free();//LIMPIAR RESULTADO
-$mysqli->close();//CERRAR CONEXIÓN
-?>

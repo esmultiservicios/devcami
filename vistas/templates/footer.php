@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-11 text-left">
                     <small>
-                        <center><img src="<?php echo SERVERURL; ?>img/logo_clinicare_footer.png" width="35px"
+                        <center><img src="<?php echo SERVERURL; ?>img/logo_icono.png" width="35px"
                                 height="35px"></center>
                     </small>
                 </div>

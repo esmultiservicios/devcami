@@ -241,10 +241,21 @@ function nombre_mes_corto($mes){
 }
 
 
-function connect(){
-	$conexion = mysql_connect(SERVER, USER, PASS);
-	mysql_select_db(DB, $conexion);
-	mysql_query("SET NAMES 'utf8'");			
+function connect() {
+    // Crear una conexión utilizando mysqli
+    $conexion = new mysqli(SERVER, USER, PASS, DB);
+
+    // Verificar la conexión
+    if ($conexion->connect_error) {
+		die("Conexión fallida: {$conexion->connect_error}");
+    }
+
+    // Establecer el conjunto de caracteres a UTF-8
+    if (!$conexion->set_charset("utf8")) {
+        die("Error al cargar el conjunto de caracteres utf8: " . $conexion->error);
+    }
+
+    return $conexion;
 }
 
 function connect_mysqli(){
@@ -253,7 +264,7 @@ function connect_mysqli(){
 	$mysqli->set_charset("utf8");
 	
 	if ($mysqli->connect_errno) {
-	   echo "Fallo al conectar a MySQL: " . $mysqli->connect_error;
+	   echo "Fallo al conectar a MySQL: {$mysqli->connect_error}";
 	   exit;
 	}
 	

@@ -5,7 +5,6 @@ include "../funtions.php";
 //CONEXION A DB
 $mysqli = connect_mysqli();
 
-$expediente = 0;
 $nombre = cleanStringStrtolower($_POST['name']);
 $apellido = cleanStringStrtolower($_POST['lastname']);
 $sexo = $_POST['sexo'];
@@ -102,6 +101,8 @@ $result = $mysqli->query($select) or die($mysqli->error);
 
 if($result->num_rows==0){
 	$pacientes_id = correlativo('pacientes_id ', 'pacientes');
+	$expediente = correlativo('expediente ', 'pacientes');
+	
 	$insert = "INSERT INTO pacientes 
 		VALUES ('$pacientes_id','$expediente','$identidad','$nombre','$apellido','$sexo','$telefono1','$telefono2','$fecha_nacimiento','$correo','$fecha','$pais_id','$departamento_id','$municipio_id','$localidad','$religion_id','$profesion_id','$estado_civil','$responsable','$responsable_id','$usuario','$estado','$fecha_registro','$referido_id')";
 	$query = $mysqli->query($insert);
@@ -139,4 +140,3 @@ if($result->num_rows==0){
 }
 
 echo json_encode($datos);
-?>

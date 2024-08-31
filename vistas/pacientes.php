@@ -130,7 +130,7 @@ $mysqli->close();//CERRAR CONEXIÓN
                                 <label for="sexo">Sexo <span class="priority">*<span /></label>
                                 <div class="input-group mb-3">
                                     <select class="selectpicker" id="sexo" name="sexo" required data-live-search="true"
-                                        title="Genero">
+                                        title="Genero" data-width="100%" data-size="7">
                                     </select>
                                 </div>
                             </div>
@@ -149,27 +149,27 @@ $mysqli->close();//CERRAR CONEXIÓN
                         </div>
 
                         <div class="form-row">
-                            <div class="col-md-3 mb-3">
-                                <label for="pais_id">País <span class="priority">*<span /></label>
+                            <div class="col-md-4 mb-3">
+                                <label for="pais_id">País</label>
                                 <div class="input-group mb-3">
-                                    <select class="selectpicker" id="pais_id" name="pais_id" required
-                                        data-live-search="true" title="País">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="departamento_id">Departamentos <span class="priority">*<span /></label>
-                                <div class="input-group mb-3">
-                                    <select class="selectpicker" id="departamento_id" name="departamento_id" required
-                                        data-live-search="true" title="Departamentos">
+                                    <select class="selectpicker" id="pais_id" name="pais_id" data-live-search="true"
+                                        title="País" data-width="100%" data-size="7">
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="municipio_id">Municipios <span class="priority">*<span /></label>
+                                <label for="departamento_id">Departamentos</label>
                                 <div class="input-group mb-3">
-                                    <select class="selectpicker" id="municipio_id" name="municipio_id" required
-                                        data-live-search="true" title="Municipios">
+                                    <select class="selectpicker" id="departamento_id" name="departamento_id"
+                                        data-live-search="true" title="Departamentos" data-width="100%" data-size="7">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="municipio_id">Municipios</label>
+                                <div class="input-group mb-3">
+                                    <select class="selectpicker" id="municipio_id" name="municipio_id"
+                                        data-live-search="true" title="Municipios" data-width="100%" data-size="7">
                                     </select>
                                 </div>
                             </div>
@@ -177,15 +177,15 @@ $mysqli->close();//CERRAR CONEXIÓN
 
                         <div class="form-row">
                             <div class="col-md-12 mb-3">
-                                <label for="direccion">Dirección <span class="priority">*<span /></label>
-                                <input type="text" required="required" id="direccion" name="direccion"
-                                    placeholder="Dirección Completa" placeholder="Dirección" class="form-control" />
+                                <label for="direccion">Dirección </label>
+                                <input type="text" id="direccion" name="direccion" placeholder="Dirección Completa"
+                                    placeholder="Dirección" class="form-control" />
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="col-md-12 mb-3">
-                                <label for="telefono_proveedores">Correo</label>
+                                <label for="correo">Correo</label>
                                 <input type="email" name="correo" id="correo" placeholder="alguien@algo.com"
                                     class="form-control" data-toggle="tooltip" data-placement="top"
                                     title="Este correo será utilizado para enviar las citas creadas y las reprogramaciones, como las notificaciones de las citas pendientes de los usuarios."
@@ -203,7 +203,7 @@ $mysqli->close();//CERRAR CONEXIÓN
                                 <label for="responsable_id">Parentesco </label>
                                 <div class="input-group mb-3">
                                     <select class="selectpicker" id="responsable_id" name="responsable_id"
-                                        data-live-search="true" title="Parentesco">
+                                        data-live-search="true" title="Parentesco" data-width="100%" data-size="7">
                                     </select>
                                 </div>
                             </div>
@@ -213,7 +213,7 @@ $mysqli->close();//CERRAR CONEXIÓN
                                 <label for="referido_id">Referido por: </label>
                                 <div class="input-group mb-3">
                                     <select class="selectpicker" id="referido_id" name="referido_id"
-                                        data-live-search="true" title="Referido por">
+                                        data-live-search="true" title="Referido por" data-width="100%" data-size="7">
                                     </select>
                                 </div>
                             </div>
@@ -288,19 +288,19 @@ $mysqli->close();//CERRAR CONEXIÓN
                         </div>
                         <div class="form-row" id="grupo_expediente">
                             <div class="col-md-6 mb-3">
-                                <label for="expediente">Nombre</label>
-                                <input type="text" required readonly id="name_manual" name="name_manual"
-                                    class="form-control" readonly />
+                                <label for="name_manual">Nombre</label>
+                                <input type="text" required readonly id="" name="name_manual" class="form-control"
+                                    readonly />
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="edad">Edad</label>
+                                <label for="edad_manual">Edad</label>
                                 <input type="text" required class="form-control" name="edad_manual" id="edad_manual"
                                     maxlength="100" readonly />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="nombre">Expediente </label>
+                                <label for="expediente_usuario_manual">Expediente </label>
                                 <input type="text" class="form-control" id="expediente_usuario_manual" readonly
                                     name="expediente_usuario_manual" autofocus placeholder="Expediente"
                                     maxlength="100" />
@@ -311,27 +311,27 @@ $mysqli->close();//CERRAR CONEXIÓN
                                     placeholder="Identidad" id="identidad_ususario_manual" maxlength="100" />
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="fecha">Fecha</label>
+                                <label for="fecha_re_manual">Fecha</label>
                                 <input type="date" class="form-control" name="fecha_re_manual" id="fecha_re_manual"
                                     value="<?php echo date ("Y-m-d");?>" maxlength="100" readonly />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="sexo">Expediente </label>
+                                <label for="expediente_manual">Expediente </label>
                                 <input type="text" name="expediente_manual" class="form-control" id="expediente_manual"
                                     maxlength="100" value="0" readonly />
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="telefono">Identidad </label>
+                                <label for="identidad_manual">Identidad </label>
                                 <input type="number" name="identidad_manual" class="form-control" id="identidad_manual"
                                     maxlength="100" value="0" readonly />
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="departamento_id">Sexo <span class="priority">*<span /></label>
+                                <label for="sexo_manual">Sexo <span class="priority">*<span /></label>
                                 <div class="input-group mb-3">
                                     <select class="selectpicker" id="sexo_manual" name="sexo_manual" required
-                                        data-live-search="true" title="Sexo">
+                                        data-live-search="true" title="Sexo" data-width="100%" data-size="7">
                                     </select>
                                 </div>
                             </div>

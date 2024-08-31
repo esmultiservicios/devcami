@@ -52,8 +52,8 @@ if(isset($_POST['cantidad'])){//COMPRUEBO SI LA VARIABLE ESTA DIFINIDA
 
 $precio_compra = $_POST['precio_compra'];
 $precio_venta = $_POST['precio_venta'];
-$cantidad_minima = $_POST['cantidad_minima'];
-$cantidad_maxima = $_POST['cantidad_maxima'];
+$cantidad_minima = isset($_POST['cantidad_minima']) && $_POST['cantidad_minima'] !== '' ? intval($_POST['cantidad_minima']) : 0;
+$cantidad_maxima = isset($_POST['cantidad_maxima']) && $_POST['cantidad_maxima'] !== '' ? intval($_POST['cantidad_maxima']) : 0;
 
 if(isset($_POST['producto_activo'])){
 	if(isset($_POST['producto_activo'])){
