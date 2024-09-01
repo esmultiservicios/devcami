@@ -404,20 +404,19 @@
                         </div>
                     </div>
 
-
                     <div class="form-row" id="grupo">
                         <div class="col-md-4 mb-3">
                             <label for="servicio">Consultorio </label>
                             <div class="input-group mb-3">
-                                <select class="selectpicker" id="servicio" name="servicio" required
-                                    data-live-search="true" title="Consultorio">
+                                <select class="selectpicker" id="servicio" name="servicio" data-live-search="true"
+                                    title="Consultorio">
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="medico">Profesional </label>
                             <div class="input-group mb-3">
-                                <select class="selectpicker" id="medico" name="medico" required data-live-search="true"
+                                <select class="selectpicker" id="medico" name="medico" data-live-search="true"
                                     title="Profesional">
                                 </select>
                             </div>
@@ -816,7 +815,7 @@
                                 oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="categoria">Categoría </label>
+                            <label for="categoria">Categoría <span class="priority">*<span /></label>
                             <div class="input-group mb-3">
                                 <select class="selectpicker" id="categoria" name="categoria" required
                                     data-live-search="true" title="Categoría">
@@ -843,7 +842,7 @@
                         <div class="col-md-3 mb-3">
                             <label for="almacen">Almacén <span class="priority">*<span /></label>
                             <div class="input-group mb-3">
-                                <select class="selectpicker" id="almacen" name="Almacén" required
+                                <select class="selectpicker" id="almacen" name="almacen" required
                                     data-live-search="true" title="Medida">
                                 </select>
                             </div>

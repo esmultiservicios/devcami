@@ -90,7 +90,8 @@ $tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
 			<th width="10.33%">Servicio</th>
 			<th width="10.33%">Observación</th>
 			<th width="10.33">Comentario</th>				
-			<th width="5.33%">Opciones</th>
+			<th width="8.33%">Registrar</th>
+			<th width="8.33%">Ausencias</th>
 		   </tr>';
 			
 $i=1;			
@@ -111,11 +112,13 @@ while($registro2 = $result->fetch_assoc()){
 	   <td>'.$registro2['colaborador'].'</td>		   
 	   <td>'.$registro2['servicio'].'</td>
 	   <td>'.$registro2['observacion'].'</td>	
-	   <td>'.$registro2['comentario'].'</td>			   
+	   <td>'.$registro2['comentario'].'</td>
 	   <td>
-		   <a style="text-decoration:none;" title = "Agregar Preclínica" href="javascript:editarRegistro('.$registro2['agenda_id'].','.$registro2['expediente'].');void(0);" class="fas fa-notes-medical fa-lg"></a>			   			   
-		   <a style="text-decoration:none;" title = "Usuario no se presentó  a su cita" href="javascript:nosePresntoRegistro('.$registro2['agenda_id'].','.$registro2['pacientes_id'].');void(0);" class="fas fa-times-circle fa-lg"></a>
-	   </td>
+			<a class="btn btn btn-secondary ml-2" href="javascript:editarRegistro('.$registro2['agenda_id'].','.$registro2['expediente'].');void(0);" title = "Agregar Preclínica"><div class="sb-nav-link-icon"></div><i class="fas fa-notes-medical fa-lg"></i> Preclínica</a>
+		</td>
+		<td>
+			<a class="btn btn btn-secondary ml-2" title = "Usuario no se presentó  a su cita" href="javascript:nosePresntoRegistro('.$registro2['agenda_id'].','.$registro2['pacientes_id'].');void(0);"><div class="sb-nav-link-icon"></div><i class="fas fa-times-circle fa-lg"></i> Ausencia</a>
+		</td>		   
   </tr>';		
   $i++;
 }

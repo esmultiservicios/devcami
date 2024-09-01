@@ -23,4 +23,3 @@ echo $paciente;
  
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN
-?>

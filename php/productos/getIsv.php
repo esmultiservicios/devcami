@@ -24,4 +24,3 @@ echo json_encode($datos);
 
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN
-?>

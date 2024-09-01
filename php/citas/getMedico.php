@@ -4,17 +4,13 @@ include "../funtions.php";
 	
 //CONEXION A DB
 $mysqli = connect_mysqli();
+$servicio_id = $_POST['servicio'];
 
 //CONSULTA LOS DATOS DE LA ENTIDAD CORPORACION
-$consulta = "SELECT c.colaborador_id AS 'colaborador_id', c.nombre AS nombre, c.apellido AS 'apellido'
-              FROM jornada_colaboradores AS jc
-              INNER JOIN colaboradores AS c
-              ON jc.colaborador_id = c.colaborador_id
-              INNER JOIN puesto_colaboradores AS pc
-              ON c.puesto_id = pc.puesto_id
-              INNER JOIN users AS u
-              ON jc.colaborador_id = u.colaborador_id
-              WHERE u.estatus = 1";
+$consulta = "SELECT c.colaborador_id, c.nombre, c.apellido
+    FROM servicios_colaboradores AS sc
+    INNER JOIN colaboradores AS c ON sc.colaborador_id = c.colaborador_id
+    WHERE sc.servicio_id = $servicio_id";
 $result = $mysqli->query($consulta);			  
 
 if($result->num_rows>0){
@@ -32,9 +28,3 @@ if($result->num_rows>0){
 
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN
-?>
-
-
-               
-			   
-               

@@ -1,7 +1,7 @@
 <script>
 $(document).ready(function() {
     getServicio();
-    getProfesionales();
+    getProfesionalesOtros();
     getHoraConsulta();
     actualizarEventos();
     var hoy = new Date();
@@ -716,69 +716,42 @@ function agregaRegistro() {
         url: url,
         async: true,
         data: $('#form-addevent').serialize(),
-        success: function(registro) {
-            if (registro == 1) {
-                $('#form-addevent')[0].reset();
+        dataType: 'json', // Asegúrate de que esperas JSON
+        success: function(response) {
+            $('#form-addevent')[0].reset();
+
+            if (response.error) {
+                // Manejar el caso de error
                 swal({
                     title: "Error",
-                    text: "Los datos ingresados son incorrectos",
+                    text: response.error,
                     type: "error",
                     confirmButtonClass: 'btn-danger'
                 });
                 $("#mensaje_ModalAdd #mensaje_ModalAdd").attr('disabled', true);
-                return false;
-            } else if (registro == 2) {
-                $('#form-addevent')[0].reset();
-                swal({
-                    title: "Error",
-                    text: "Usuario ya tiene cita agendada en ese dia",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
-                });
-                $("#mensaje_ModalAdd #mensaje_ModalAdd").attr('disabled', true);
-                return false;
-            } else if (registro == 3) {
-                $('#form-addevent')[0].reset();
-                swal({
-                    title: "Error",
-                    text: "El médico ya tiene esta hora ocupada",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
-                });
-                $("#mensaje_ModalAdd #mensaje_ModalAdd").attr('disabled', true);
-                return false;
-            } else if (registro == 4) {
-                $('#form-addevent')[0].reset();
-                swal({
-                    title: "Error",
-                    text: "Error al completar el registro, por favor verifique la información",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
-                });
-                $("#mensaje_ModalAdd #mensaje_ModalAdd").attr('disabled', true);
-                return false;
-            } else {
+            } else if (response.success) {
+                // Manejar el caso de éxito
                 $("#mensaje_ModalAdd #mensaje_ModalAdd").attr('disabled', false);
+
                 $("#calendar").fullCalendar('renderEvent', {
-                        id: registro.id,
-                        title: registro.title,
-                        start: registro.start,
-                        end: registro.end,
-                        color: registro.color,
-                    },
-                    true);
+                    id: response.id, // ID del evento
+                    title: response.title, // Título del evento
+                    start: moment(response.start).toDate(), // Fecha de inicio del evento
+                    end: moment(response.end).toDate(), // Fecha de fin del evento
+                    color: response.color, // Color del evento
+                }, true);
+
                 $('#form-addevent')[0].reset();
                 swal({
                     title: "Success",
-                    text: "Cita agendada correctamente",
+                    text: response.success,
                     type: "success",
                     timer: 3000,
                 });
                 $('#ModalAdd').modal('hide');
                 $("#ModalAdd_enviar").attr('disabled', true);
-                reportePDF(registro.id);
-                sendEmail(registro.id);
-                return false;
+                reportePDF(response.id);
+                sendEmail(response.id);
             }
         },
         error: function() {
@@ -922,69 +895,53 @@ function actualizar() {
     $('#mensaje_ModalAdd').removeClass('error');
     var eventID = $('#ModalEdit #id').val();
     var url = '<?php echo SERVERURL; ?>php/citas/actualizarEventTitle.php';
+
     $.ajax({
         url: url,
-        async: true,
-        data: $('#form-editevent').serialize(),
         type: "POST",
-        success: function(json) {
-            if (json == 1) {
+        dataType: 'json', // Asegúrate de que esperas JSON
+        data: $('#form-editevent').serialize(),
+        success: function(response) {
+            if (response.success) {
                 swal({
-                    title: "Success",
-                    text: "Cita modificada correctamente",
+                    title: "Éxito",
+                    text: response.success,
                     type: "success",
-                    timer: 3000, //timeOut for auto-close							
+                    timer: 3000
                 });
+
                 $('#ModalEdit').modal('hide');
                 reportePDF(eventID);
                 sendEmailCambioCita(eventID);
-                $("#ModalDelete_enviar").attr('disabled', true);
-                $("#ModalEdit_enviar").attr('disabled', true);
-                $("#ModalImprimir_enviar").attr('disabled', true);
+
+                $("#ModalDelete_enviar, #ModalEdit_enviar, #ModalImprimir_enviar").attr('disabled', true);
+
+                // Si cambia el colaborador, eliminar y actualizar el evento
                 if ($('#form-editevent #colaborador').val() != $('#form-editevent #medico1').val()) {
-                    $("#calendar").fullCalendar('removeEvents', eventID);
-                    $('#calendar').fullCalendar('rerenderEvents');
-                    $('#calendar').fullCalendar('updateEvent', json);
-                    $('#calendar').fullCalendar('rerenderEvents');
-                    $("#ModalEdit_enviar").attr('disabled', false);
-                } else {
-                    $('#calendar').fullCalendar('updateEvent', json);
-                    $('#calendar').fullCalendar('rerenderEvents');
-                    $("#ModalEdit_enviar").attr('disabled', false);
+                    $('#calendar').fullCalendar('removeEvents', eventID);
                 }
-            } else if (json == 2) {
+
+                $('#calendar').fullCalendar('updateEvent', response);
+                $('#calendar').fullCalendar('rerenderEvents');
+
+                $("#ModalEdit_enviar").attr('disabled', false);
+            } else if (response.error) {
                 swal({
                     title: "Error",
-                    text: "Los datos ingresados son incorrectos",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
-                });
-                $("#ModalEdit_enviar").attr('disabled', true);
-            } else if (json == 3) {
-                swal({
-                    title: "Error",
-                    text: "Usuario ya tiene cita agendada en ese dia",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
-                });
-                $("#ModalEdit_enviar").attr('disabled', true);
-            } else if (json == 4) {
-                swal({
-                    title: "Error",
-                    text: "El médico ya tiene esta hora ocupada",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
-                });
-                $("#ModalEdit_enviar").attr('disabled', true);
-            } else if (json == 5) {
-                swal({
-                    title: "Error",
-                    text: "Este usuario ya tiene realizada su preclínica, no se puede realizar ningún cambio",
+                    text: response.error,
                     type: "error",
                     confirmButtonClass: 'btn-danger'
                 });
                 $("#ModalEdit_enviar").attr('disabled', true);
             }
+        },
+        error: function() {
+            swal({
+                title: "Error",
+                text: "Ocurrió un error inesperado.",
+                type: "error",
+                confirmButtonClass: 'btn-danger'
+            });
         }
     });
 }
@@ -996,50 +953,36 @@ function eliminar() {
     var url = '<?php echo SERVERURL; ?>php/citas/eliminarEventTitle.php';
     $.ajax({
         url: url,
-        data: 'delete=delete&id=' + eventID + '&comentario=' + comentario,
+        data: {
+            id: eventID,
+            comentario: comentario
+        },
         type: "POST",
-        async: true,
-        success: function(json) {
-            if (json == 1) {
-                $('#form-editevent')[0].reset();
-                $("#calendar").fullCalendar('removeEvents', eventID);
-                $('#calendar').fullCalendar('rerenderEvents');
+        dataType: 'json', // Asegúrate de que esperas JSON
+        success: function(response) {
+            $('#form-editevent')[0].reset();
+            $("#calendar").fullCalendar('removeEvents', eventID);
+            $('#calendar').fullCalendar('rerenderEvents');
+
+            if (response.success) {
                 swal({
                     title: "Success",
-                    text: "Cita eliminada correctamente",
+                    text: response.success,
                     type: "success",
-                    timer: 3000, //timeOut for auto-close
+                    timer: 3000, // timeOut for auto-close
                 });
                 $('#ModalEdit').modal('hide');
                 $("#ModalDelete_enviar").attr('disabled', true);
                 $("#ModalEdit_enviar").attr('disabled', true);
                 $("#ModalImprimir_enviar").attr('disabled', true);
                 $("#form-editevent #fecha_citaedit").val(getFechaSistema());
-                return false;
-            } else if (json == 2) {
+            } else if (response.error) {
                 swal({
                     title: "Error",
-                    text: "No se puedo eliminar el registro",
+                    text: response.error,
                     type: "error",
                     confirmButtonClass: 'btn-danger'
                 });
-                return false;
-            } else if (json == 3) {
-                swal({
-                    title: "Error",
-                    text: "No se puedo eliminar el registro ya se realizo la preclínica para este usuario",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
-                });
-                return false;
-            } else if (json == 4) {
-                swal({
-                    title: "Error",
-                    text: "Lo sentimos, no se puede eliminar esta cita, debido a que sobrepasa el tiempo permitido, por favor proceda a reprogramar la cita, para poder continuar",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
-                });
-                return false;
             } else {
                 swal({
                     title: "Error",
@@ -1047,8 +990,15 @@ function eliminar() {
                     type: "error",
                     confirmButtonClass: 'btn-danger'
                 });
-                return false;
             }
+        },
+        error: function() {
+            swal({
+                title: "Error",
+                text: "Error en la solicitud. Por favor, inténtelo de nuevo.",
+                type: "error",
+                confirmButtonClass: 'btn-danger'
+            });
         }
     });
 }
@@ -1379,7 +1329,10 @@ function getColaborador_id(dato) {
             } else {
                 ;
                 $('#ModalEdit #medico1').val(data);
+                $('#ModalEdit #medico1').selectpicker('refresh');
+
                 $('#ModalEdit #colaborador').val(data);
+                $('#ModalEdit #colaborador').selectpicker('refresh');
             }
         }
     });
@@ -1496,7 +1449,7 @@ function agregaAusencias() {
         success: function(registro) {
             if (registro == 1) {
                 pagination_ausencias(1);
-                getProfesionales();
+                getProfesionalesOtros();
                 $('#formulario_ausencias #comentario_ausencias').val("");
                 $('#formulario_ausencias #pro_ausencias').val("Registro");
                 swal({
@@ -1881,29 +1834,52 @@ function getServicio() {
         type: "POST",
         url: url,
         success: function(data) {
-            $('#botones_citas #servicio').html("");
             $('#botones_citas #servicio').html(data);
             $('#botones_citas #servicio').selectpicker('refresh');
         }
     });
 }
 
-function getProfesionales() {
+$('#botones_citas #servicio').on("change", function() {
+    var servicio = $(this).val();
+    getProfesionales(servicio);
+});
+
+function getProfesionales(servicio) {
+    var url = '<?php echo SERVERURL; ?>php/citas/getMedico.php';
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+            servicio: servicio
+        }, // Enviar datos correctamente
+        success: function(data) {
+            // Actualizar elementos
+            $('#botones_citas #medico_general').html(data);
+            $('#botones_citas #medico_general').selectpicker('refresh');
+
+            $('#form-editevent #colaborador').html(data);
+            $('#form-editevent #colaborador').selectpicker('refresh');
+
+            $('#formulario_ausencias #medico_ausencia').html(data);
+            $('#formulario_ausencias #medico_ausencia').selectpicker('refresh');
+        }
+    });
+}
+
+function getProfesionalesOtros() {
     var url = '<?php echo SERVERURL; ?>php/citas/getMedico.php';
 
     $.ajax({
         type: "POST",
         url: url,
         success: function(data) {
-            $('#botones_citas #medico_general').html("");
-            $('#botones_citas #medico_general').html(data);
-            $('#botones_citas #medico_general').selectpicker('refresh');
+            // Actualizar elementos
 
-            $('#form-editevent #colaborador').html("");
             $('#form-editevent #colaborador').html(data);
             $('#form-editevent #colaborador').selectpicker('refresh');
 
-            $('#formulario_ausencias #medico_ausencia').html("");
             $('#formulario_ausencias #medico_ausencia').html(data);
             $('#formulario_ausencias #medico_ausencia').selectpicker('refresh');
         }

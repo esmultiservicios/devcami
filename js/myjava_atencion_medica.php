@@ -7,7 +7,6 @@ $(document).ready(function() {
     setInterval('evaluarRegistrosPendientes()', 1800000); //CADA MEDIA HORA
     getColaboradoresFacturacion();
     getPacientesFacturacion();
-    getColaboradoresFacturacion();
     getServiciosFacturacion();
 });
 
@@ -262,7 +261,9 @@ function editarRegistro(pacientes_id, agenda_id) {
                 url: url,
                 data: 'pacientes_id=' + pacientes_id + '&agenda_id=' + agenda_id,
                 success: function(valores) {
-                    var array = eval(valores);
+                    // Usar JSON.parse en lugar de eval
+                    var array = JSON.parse(valores);
+
                     $('#reg_atencion').hide();
                     $('#edi_atencion').show();
                     $('#formulario_atenciones #pro').val('Registro');
@@ -270,11 +271,20 @@ function editarRegistro(pacientes_id, agenda_id) {
                     $('#formulario_atenciones #agenda_id').val(agenda_id);
                     $('#formulario_atenciones #identidad').val(array[0]);
                     $('#formulario_atenciones #nombre').val(array[1]);
+
+                    // Imprime el valor de edad en consola para verificar
                     $('#formulario_atenciones #edad').val(array[2]);
+
                     $('#formulario_atenciones #procedencia').val(array[3]);
                     $('#formulario_atenciones #religion_id').val(array[4]);
+                    $('#formulario_atenciones #religion_id').selectpicker('refresh');
+
                     $('#formulario_atenciones #profesion_id').val(array[5]);
+                    $('#formulario_atenciones #profesion_id').selectpicker('refresh');
+
                     $('#formulario_atenciones #paciente_consulta').val(array[6]);
+                    $('#formulario_atenciones #paciente_consulta').selectpicker('refresh');
+
                     $('#formulario_atenciones #fecha').val(array[7]);
                     $('#formulario_atenciones #fecha_nac').val(array[8]);
                     $('#formulario_atenciones #antecedentes').val(array[9]);
@@ -283,7 +293,11 @@ function editarRegistro(pacientes_id, agenda_id) {
                     $('#formulario_atenciones #diagnostico').val(array[12]);
                     $('#formulario_atenciones #seguimiento_read').val(array[13]);
                     $('#formulario_atenciones #servicio_id').val(array[14]);
+                    $('#formulario_atenciones #servicio_id').selectpicker('refresh');
+
                     $('#formulario_atenciones #estado_civil').val(array[15]);
+                    $('#formulario_atenciones #estado_civil').selectpicker('refresh');
+
                     $('#formulario_atenciones #num_hijos').val(array[16]);
                     $("#formulario_atenciones #fecha").attr('readonly', true);
                     $("#edi_atencion").attr('disabled', false);
@@ -291,8 +305,9 @@ function editarRegistro(pacientes_id, agenda_id) {
                     $('#formulario_atenciones #consultorio_').hide();
                     $('#formulario_atenciones .nav-tabs li:eq(0) a').tab('show');
 
-                    //DESHABILITAR OBJETOS
+                    // DESHABILITAR OBJETOS
                     $('#formulario_atenciones #paciente_consulta').attr('disabled', true);
+                    $('#formulario_atenciones #procedencia').attr('readonly', false);
 
                     $('#formulario_atenciones').attr({
                         'data-form': 'save'
@@ -335,6 +350,7 @@ function editarRegistro(pacientes_id, agenda_id) {
         });
     }
 }
+
 
 //INICIO ABRIR VENTANA MODAL PARA EL METODO DE PAGO
 function metodoPago(pacientes_id, agenda_id, colaborador_id, tipo_tarifa) {
@@ -568,13 +584,16 @@ $('#formulario_atenciones #seguimiento').keyup(function() {
 
 function caracteresSeguimiento() {
     var max_chars = 3200;
-    var chars = $('#formulario_atenciones #seguimiento').val().length;
+    var chars = $('#formulario_atenciones #seguimiento').val().length; // Obtiene la longitud del texto
     var diff = max_chars - chars;
 
-    $('#formulario_atenciones #charNum_seguimiento').html(diff + ' Caracteres');
+    $('#formulario_atenciones #charNum_seguimiento').html(diff + ' Caracteres restantes');
 
-    if (diff == 0) {
-        return false;
+    // Si el número de caracteres restantes es menor o igual a 0, deshabilita el input o realiza alguna acción
+    if (diff <= 0) {
+        $('#formulario_atenciones #seguimiento').val($('#formulario_atenciones #seguimiento').val().substring(0,
+            max_chars));
+        $('#formulario_atenciones #charNum_seguimiento').html('0 Caracteres restantes');
     }
 }
 
@@ -622,7 +641,14 @@ $(document).ready(function(e) {
                     $('#formulario_atenciones #edad').val(array[2]);
                     $('#formulario_atenciones #procedencia').val(array[3]);
                     $('#formulario_atenciones #religion_id').val(array[4]);
+                    $('#formulario_atenciones #religion_id').selectpicker('refresh');
+
                     $('#formulario_atenciones #profesion_id').val(array[5]);
+                    $('#formulario_atenciones #profesion_id').selectpicker('refresh');
+
+                    $('#formulario_atenciones #estado_civil').val(array[13]);
+                    $('#formulario_atenciones #estado_civil').selectpicker('refresh');
+
                     $('#formulario_atenciones #paciente_consulta').val(array[6]);
                     $('#formulario_atenciones #antecedentes').val(array[7]);
                     $('#formulario_atenciones #historia_clinica').val(array[8]);
@@ -1613,7 +1639,7 @@ function evaluarRegistrosPendientesEmail() {
 //FIN PARA EVALUAR SI HAY REGISTROS PENDIENTES PARA EL PROFESIONAL Y ENVIARLOS POR CORREO ELECTRONICO COMO RECORDATORIO
 
 function getConsultorio() {
-    var url = '<?php echo SERVERURL; ?>php/citas/getServicio.php';
+    var url = '<?php echo SERVERURL; ?>php/citas/getServicioFacturas.php';
 
     $.ajax({
         type: 'POST',
@@ -1724,7 +1750,8 @@ function formFactura() {
 
     $('#formulario_facturacion #fecha').attr('readonly', true);
     $('#formulario_facturacion #colaborador_id').val(getColaborador_id());
-    $('#formulario_facturacion #colaborador_nombre').val(getProfesional());
+    $('#formulario_facturacion #colaborador_id').selectpicker('refresh');
+
     $('#formulario_facturacion').attr({
         'data-form': 'save'
     });
@@ -1741,7 +1768,6 @@ function formFactura() {
 }
 
 function FormAtencionMedica() {
-    $('#formulario_atenciones')[0].reset();
     $('#main_facturacion').hide();
     $('#facturacion').hide();
     $('#atencionMedica').show();
@@ -1754,10 +1780,24 @@ function FormAtencionMedica() {
     accion = false;
 }
 
+function volver() {
+    $('#main_facturacion').hide();
+    $('#atencionMedica').hide();
+    $('#label_acciones_factura').html("");
+    $('#facturacion').hide();
+    $('#acciones_atras').addClass("breadcrumb-item active");
+    $('#acciones_factura').removeClass("active");
+    $('.footer').show();
+    $('.footer1').hide();
+}
+
 $('#acciones_atras').on('click', function(e) {
     e.preventDefault();
-    if ($('#formulario_facturacion #cliente_nombre').val() != "" || $(
-            '#formulario_facturacion #colaborador_nombre').val() != "") {
+
+    // Comprobación de campos específicos en el formulario de facturación
+    if ($('#formulario_facturacion #cliente_nombre').val() !== "" ||
+        $('#formulario_facturacion #colaborador_nombre').val() !== "") {
+
         let formData;
         let title;
         let message;
@@ -1775,80 +1815,87 @@ $('#acciones_atras').on('click', function(e) {
             return obj;
         }
 
-        // Selecciona el formulario y serializa los datos según el valor de 'accion'
+        // Serialización del formulario según la variable 'accion'
         if (accion) {
-            formData = serializeToObject($('#facturacion').serialize());
+            formData = serializeToObject($('#formulario_facturacion').serialize());
             title = "Tiene datos en la factura";
             message =
                 "¿Está seguro que desea volver? Recuerde que tiene información en la factura que perderá.";
         } else {
             formData = serializeToObject($('#formulario_atenciones').serialize());
-            title = "Tiene datos en la historia clinica";
+            title = "Tiene datos en la historia clínica";
             message =
-                "¿Está seguro que desea volver? Recuerde que tiene información en la historia clinica que perderá.";
+                "¿Está seguro que desea volver? Recuerde que tiene información en la historia clínica que perderá.";
         }
 
         // Lista de campos a excluir
-        const camposAExcluir = ['fecha', 'agenda_id', 'pacientes_id'];
+        const camposAExcluir = [
+            'fecha',
+            'agenda_id',
+            'pacientes_id',
+            'colaborador_id',
+            'paciente_consulta',
+            'edad',
+            'pro',
+            'servicio_id'
+        ];
 
-        // Elimina los campos especificados
+        // Eliminar los campos especificados
         camposAExcluir.forEach(campo => {
             if (campo in formData) {
                 delete formData[campo];
             }
         });
 
-        // Imprime el contenido de formData después de eliminar campos
+        // Imprimir el contenido de formData después de excluir campos
         console.log('Contenido de formData después de excluir campos:', formData);
 
-        // Verifica si formData contiene valores
-        if (Object.keys(formData).some(key => formData[key] !== "")) {
-            // Muestra SweetAlert si el formulario tiene datos
-            swal({
-                    title: title,
-                    text: message,
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonClass: "btn-warning",
-                    confirmButtonText: "¡Si, deseo volver!",
-                    closeOnConfirm: false
-                },
-                function() {
-                    $('#main_facturacion').show();
-                    $('#atencionMedica').show();
-                    $('#label_acciones_factura').html("");
-                    $('#facturacion').hide();
-                    $('#acciones_atras').addClass("breadcrumb-item active");
-                    $('#acciones_factura').removeClass("active");
-                    $('#formulario_facturacion')[0].reset();
-                    swal.close();
-                    $('.footer').show();
-                    $('.footer1').hide();
-                });
-        } else {
+        // Verificar si hay datos relevantes en el formulario
+        const tieneDatos = Object.keys(formData).some(key => {
+            const valor = formData[key];
+            // Chequear si el valor no es vacío, "0", null, o "undefined"
+            return valor.trim() !== "" && valor !== "0" && valor !== "null" && valor !== "undefined";
+        });
 
-            if (accion) {
+        console.log('¿Tiene datos relevantes?:', tieneDatos);
+
+        if (tieneDatos) {
+            // Mostrar SweetAlert si el formulario tiene datos relevantes
+            swal({
+                title: title,
+                text: message,
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-warning",
+                confirmButtonText: "¡Sí, deseo volver!",
+                closeOnConfirm: false
+            }, function() {
                 $('#main_facturacion').show();
+                $('#atencionMedica').hide();
                 $('#label_acciones_factura').html("");
                 $('#facturacion').hide();
-                $('#atencionMedica').hide();
                 $('#acciones_atras').addClass("breadcrumb-item active");
                 $('#acciones_factura').removeClass("active");
+                $('#formulario_facturacion')[0].reset();
+                swal.close();
                 $('.footer').show();
                 $('.footer1').hide();
-            } else {
-                $('#main_facturacion').show();
-                $('#label_acciones_factura').html("");
-                $('#facturacion').hide();
-                $('#atencionMedica').hide();
-                $('#acciones_atras').addClass("breadcrumb-item active");
-                $('#acciones_factura').removeClass("active");
-                $('.footer').show();
-                $('.footer1').hide();
-            }
+            });
+        } else {
+            // Lógica para cuando no hay datos relevantes
+            $('#main_facturacion').show();
+            $('#atencionMedica').hide();
+            $('#label_acciones_factura').html("");
+            $('#facturacion').hide();
+            $('#acciones_atras').addClass("breadcrumb-item active");
+            $('#acciones_factura').removeClass("active");
+            $('.footer').show();
+            $('.footer1').hide();
         }
     } else {
+        // Lógica para cuando no hay datos en los campos de nombre
         $('#main_facturacion').show();
+        $('#atencionMedica').show();
         $('#label_acciones_factura').html("");
         $('#facturacion').hide();
         $('#acciones_atras').addClass("breadcrumb-item active");
@@ -1856,10 +1903,6 @@ $('#acciones_atras').on('click', function(e) {
         $('.footer').show();
         $('.footer1').hide();
     }
-});
-
-$(document).ready(function() {
-    getServicio();
 });
 
 function getProfesional() {
@@ -1888,11 +1931,15 @@ function showFactura(atencion_id) {
             $('#formulario_facturacion')[0].reset();
             $('#formulario_facturacion #pro').val("Registro");
             $('#formulario_facturacion #pacientes_id').val(datos[0]);
-            $('#formulario_facturacion #cliente_nombre').val(datos[1]);
+            $('#formulario_facturacion #pacientes_id').selectpicker('refresh');
+
             $('#formulario_facturacion #fecha').val(getFechaActual());
             $('#formulario_facturacion #colaborador_id').val(datos[3]);
-            $('#formulario_facturacion #colaborador_nombre').val(datos[4]);
+            $('#formulario_facturacion #colaborador_id').selectpicker('refresh');
+
             $('#formulario_facturacion #servicio_id').val(datos[5]);
+            $('#formulario_facturacion #servicio_id').selectpicker('refresh');
+
             $('#label_acciones_volver').html("ATA");
             $('#label_acciones_receta').html("Receta");
 
@@ -1906,6 +1953,7 @@ function showFactura(atencion_id) {
             limpiarTabla();
 
             $('#main_facturacion').hide();
+            $('#atencionMedica').hide();
             $('#facturacion').show();
 
             $('#formulario_facturacion').attr({
@@ -2110,16 +2158,6 @@ $(document).ready(function() {
         });
     });
 });
-
-function volver() {
-    $('#main_facturacion').show();
-    $('#label_acciones_factura').html("");
-    $('#facturacion').hide();
-    $('#acciones_atras').addClass("breadcrumb-item active");
-    $('#acciones_factura').removeClass("active");
-    $('.footer').show();
-    $('.footer1').hide();
-}
 
 function getFechaActual() {
     var url = '<?php echo SERVERURL; ?>php/atencion_pacientes/getFechaActual.php';

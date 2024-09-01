@@ -162,8 +162,6 @@ function funciones() {
     getClientes();
     getProfesionales();
     getEstado();
-
-    getServicio();
     getBanco();
     listar_productos_facturas_buscar();
 }
@@ -351,27 +349,91 @@ $('#acciones_atras').on('click', function(e) {
     e.preventDefault();
     if ($('#formulario_facturacion #cliente_nombre').val() != "" || $(
             '#formulario_facturacion #colaborador_nombre').val() != "") {
-        swal({
-                title: "Tiene datos en la factura",
-                text: "¿Esta seguro que desea volver, recuerde que tiene información en la factura la perderá?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonClass: "btn-warning",
-                confirmButtonText: "¡Si, deseo volver!",
-                closeOnConfirm: false
-            },
-            function() {
-                $('#main_facturacion').show();
-                $('#label_acciones_factura').html("");
-                $('#facturacion').hide();
-                $('#acciones_atras').addClass("breadcrumb-item active");
-                $('#acciones_factura').removeClass("active");
-                $('#formulario_facturacion')[0].reset();
-                swal.close();
-                $('.footer').show();
-                $('.footer1').hide();
+        let formData;
+        let title;
+        let message;
+
+        // Función para convertir una cadena URL-encoded a un objeto
+        function serializeToObject(serializedString) {
+            const obj = {};
+            const pairs = serializedString.split('&');
+            pairs.forEach(function(pair) {
+                const [key, value] = pair.split('=');
+                if (key) {
+                    obj[decodeURIComponent(key)] = decodeURIComponent(value || '');
+                }
             });
+            return obj;
+        }
+
+        formData = serializeToObject($('#formulario_facturacion').serialize());
+        console.log('Contenido inicial de formData:', formData); // Imprime el contenido inicial de formData
+
+        title = "Tiene datos en la factura";
+        message = "¿Está seguro que desea volver? Recuerde que tiene información en la factura que perderá.";
+
+        // Lista de campos a excluir
+        const camposAExcluir = ['fecha', 'agenda_id', 'pacientes_id'];
+
+        // Elimina los campos especificados
+        camposAExcluir.forEach(campo => {
+            if (campo in formData) {
+                delete formData[campo];
+            }
+        });
+
+        // Imprime el contenido de formData después de eliminar campos
+        console.log('Contenido de formData después de excluir campos:', formData);
+
+        // Verifica si formData contiene valores que no sean cadenas vacías, arrays vacíos, null/undefined, o "0"
+        const tieneDatos = Object.keys(formData).some(key => {
+            const valor = formData[key];
+            if (Array.isArray(valor)) {
+                return valor.some(v => v.trim() !== "" && v !== "0" && v !== null && v !==
+                    "undefined"); // Chequeo para arrays
+            } else {
+                return valor.trim() !== "" && valor !== "0" && valor !== null && valor !==
+                    "undefined"; // Chequeo para cadenas de texto
+            }
+        });
+
+        console.log('¿Tiene datos relevantes?:', tieneDatos);
+
+        if (tieneDatos) {
+            // Muestra SweetAlert si el formulario tiene datos relevantes
+            swal({
+                    title: title,
+                    text: message,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-warning",
+                    confirmButtonText: "¡Si, deseo volver!",
+                    closeOnConfirm: false
+                },
+                function() {
+                    $('#main_facturacion').show();
+                    $('#label_acciones_factura').html("");
+                    $('#facturacion').hide();
+                    $('#acciones_atras').addClass("breadcrumb-item active");
+                    $('#acciones_factura').removeClass("active");
+                    $('#formulario_facturacion')[0].reset();
+                    swal.close();
+                    $('.footer').show();
+                    $('.footer1').hide();
+                });
+        } else {
+            // Lógica para cuando no hay datos relevantes
+            $('#main_facturacion').show();
+            $('#label_acciones_factura').html("");
+            $('#facturacion').hide();
+            $('#acciones_atras').addClass("breadcrumb-item active");
+            $('#acciones_factura').removeClass("active");
+            $('#formulario_facturacion')[0].reset(); // Asegúrate de que el formulario se restablezca
+            $('.footer').show();
+            $('.footer1').hide();
+        }
     } else {
+        // Lógica para cuando no hay datos en los campos de nombre
         $('#main_facturacion').show();
         $('#label_acciones_factura').html("");
         $('#facturacion').hide();
@@ -381,6 +443,7 @@ $('#acciones_atras').on('click', function(e) {
         $('.footer1').hide();
     }
 });
+
 
 $('#form_main #factura').on('click', function(e) {
     e.preventDefault();
@@ -632,7 +695,8 @@ function deleteBill(facturas_id) {
     if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2) {
         swal({
                 title: "¿Estas seguro?",
-                text: "¿Desea eliminar la factura para el paciente: " + getNumeroNombrePaciente(facturas_id) + "?",
+                text: "¿Desea eliminar la factura para el paciente: " + getNumeroNombrePaciente(
+                    facturas_id) + "?",
                 type: "info",
                 showCancelButton: true,
                 confirmButtonClass: "btn-primary",

@@ -18,4 +18,3 @@ echo $servicio_id;
 
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN
-?>

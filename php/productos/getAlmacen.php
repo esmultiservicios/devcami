@@ -10,12 +10,12 @@ $consulta = "SELECT * FROM almacen";
 $result = $mysqli->query($consulta) or die($mysqli->error);			  
 
 if($result->num_rows>0){
-	echo '<option value="">Seleccione</option>';
 	while($consulta2 = $result->fetch_assoc()){
 		echo '<option value="'.$consulta2['almacen_id'].'">'.$consulta2['nombre'].'</option>';
 	}	
+}else{
+	echo '<option value="">No se encontraron registros</option>';
 }
 
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN
-?>

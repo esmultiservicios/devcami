@@ -12,4 +12,3 @@ if($fecha_sistema_mes == $fecha_mes){
 }else{
 	echo 2;//NO ESTA PERMITIDO REALIZAR CAMBIOS FUERA DE ESTE MES.
 }
-?>

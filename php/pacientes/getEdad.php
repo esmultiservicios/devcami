@@ -37,5 +37,4 @@ $array = array(
 	3 => $anos." ".$palabra_anos.", ".$meses." ".$palabra_mes." y ".$dias." ".$palabra_dia, 
 );			  			  
 			   
-echo json_encode($array);		   
-?>
+echo json_encode($array);

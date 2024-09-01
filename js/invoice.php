@@ -399,9 +399,9 @@ function getPacientesFacturacion() {
         url: url,
         async: true,
         success: function(data) {
-            $('#facturacion #pacientes_id').html("");
-            $('#facturacion #pacientes_id').html(data);
-            $('#facturacion #pacientes_id').selectpicker('refresh');
+            $('#formulario_facturacion #pacientes_id').html("");
+            $('#formulario_facturacion #pacientes_id').html(data);
+            $('#formulario_facturacion #pacientes_id').selectpicker('refresh');
         }
     });
 }
@@ -414,24 +414,24 @@ function getColaboradoresFacturacion() {
         url: url,
         async: true,
         success: function(data) {
-            $('#facturacion #colaborador_id').html("");
-            $('#facturacion #colaborador_id').html(data);
-            $('#facturacion #colaborador_id').selectpicker('refresh');
+            $('#formulario_facturacion #colaborador_id').html("");
+            $('#formulario_facturacion #colaborador_id').html(data);
+            $('#formulario_facturacion #colaborador_id').selectpicker('refresh');
         }
     });
 }
 
 function getServiciosFacturacion() {
-    var url = '<?php echo SERVERURL; ?>php/citas/getServicio.php';
+    var url = '<?php echo SERVERURL; ?>php/citas/getServicioFacturas.php';
 
     $.ajax({
         type: "POST",
         url: url,
         async: true,
         success: function(data) {
-            $('#facturacion #servicio_id').html("");
-            $('#facturacion #servicio_id').html(data);
-            $('#facturacion #servicio_id').selectpicker('refresh');
+            $('#formulario_facturacion #servicio_id').html("");
+            $('#formulario_facturacion #servicio_id').html(data);
+            $('#formulario_facturacion #servicio_id').selectpicker('refresh');
         }
     });
 }

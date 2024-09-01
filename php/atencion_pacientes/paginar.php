@@ -92,18 +92,19 @@ $result = $mysqli->query($registro) or die($mysqli->error);
 
 $tabla = $tabla.'<table class="table table-striped table-condensed table-hover">
 			<tr>
-			<th width="1.33%">No.</th>
-			<th width="10.33%">Identidad</th>				
-			<th width="22.33%">Nombre</th>
-			<th width="6.33%">Fecha</th>
-			<th width="6.33%">Hora</th>
-			<th width="4.33%">Paciente</th>
-			<th width="10.33%">Servicio</th>
-			<th width="4.33%">Teléfono</th>
-			<th width="13.33%">Observación</th>
-			<th width="13.33%">Comentario</th>
-			<th width="4.33%">Estado</th>
-			<th width="3.33%">Opciones</th>
+			<th width="2.69%">No.</th>
+			<th width="5.69%">Identidad</th>				
+			<th width="14.69%">Nombre</th>
+			<th width="6.69%">Fecha</th>
+			<th width="5.69%">Hora</th>
+			<th width="2.69%">Paciente</th>
+			<th width="7.69%">Servicio</th>
+			<th width="7.69%">Teléfono</th>
+			<th width="14.69%">Observación</th>
+			<th width="11.69%">Comentario</th>
+			<th width="2.69%">Estado</th>
+			<th width="8.69%">Registrar</th>
+			<th width="8.69%">Ausencia</th>
 			</tr>';
 $i = 1;				
 while($registro2 = $result->fetch_assoc()){		  
@@ -122,20 +123,22 @@ while($registro2 = $result->fetch_assoc()){
             <td>'.$registro2['comentario'].'</td>
             <td>'.$registro2['estatus'].'</td>			
 			<td>
-			  <a style="text-decoration:none;" data-toggle="tooltip" data-placement="right" title = "Agregar Atención a Paciente" href="javascript:editarRegistro('.$registro2['pacientes_id'].','.$registro2['agenda_id'].');void(0);" class="fas fa-book-medical fa-lg"></a>			  			  
-			  <a style="text-decoration:none;" data-toggle="tooltip" data-placement="right" title = "Marcar Ausencia" href="javascript:nosePresentoRegistro('.$registro2['pacientes_id'].','.$registro2['agenda_id'].','.$registro2['fecha'].');void(0);" class="fas fa-times-circle fa-lg"></a> 
-			</td>
+					<a class="btn btn btn-secondary ml-2" title = "Agregar Atención a Paciente" href="javascript:editarRegistro('.$registro2['pacientes_id'].','.$registro2['agenda_id'].');void(0);""><div class="sb-nav-link-icon"></div><i class="fas fa-book-medical fa-lg"></i> Atención</a>
+				</td>
+				<td>
+					<a class="btn btn btn-secondary ml-2" title = "Marcar Ausencia" href="javascript:nosePresentoRegistro('.$registro2['pacientes_id'].','.$registro2['agenda_id'].','.$registro2['fecha'].');void(0);"><div class="sb-nav-link-icon"></div><i class="fas fa-times-circle fa-lg"></i> Ausencia</a>
+				</td>			
 			</tr>';	
 			$i++;				
 }
 
 if($nroProductos == 0){
 	$tabla = $tabla.'<tr>
-	   <td colspan="12" style="color:#C7030D">No se encontraron resultados</td>
+	   <td colspan="14" style="color:#C7030D">No se encontraron resultados</td>
 	</tr>';		
 }else{
    $tabla = $tabla.'<tr>
-	  <td colspan="12"><b><p ALIGN="center">Total de Registros Encontrados: '.$nroProductos.'</p></b>
+	  <td colspan="14"><b><p ALIGN="center">Total de Registros Encontrados: '.$nroProductos.'</p></b>
    </tr>';		
 }        
 
@@ -148,4 +151,3 @@ echo json_encode($array);
 
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN	
-?>

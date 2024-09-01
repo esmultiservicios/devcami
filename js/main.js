@@ -109,6 +109,7 @@ $('.FormularioAjax').submit(function (e) {
 						if (datos[4] != "") {
 							$('#' + datos[4])[0].reset();
 							$('#' + datos[4] + ' #pro').val(datos[5]);
+							$('input:first').focus();
 						}
 
 						llenarTabla(datos[6]);
@@ -162,8 +163,6 @@ $('.FormularioAjax').submit(function (e) {
 			}
 		});
 });
-
-
 
 /*##########################################################################################################################################################################################################################################################################################################################*/
 /*##########################################################################################################################################################################################################################################################################################################################*/
@@ -445,12 +444,10 @@ function llenarTabla(dato) {
 
 	if (dato == "FacturaAtenciones") {
 		getServicio();
-		listar_pacientes_buscar();
-		listar_servicios_factura_buscar();
 		listar_productos_facturas_buscar();
 		pagination(1);
 		limpiarTabla();
-		volver();
+		//volver();
 		cleanFooterValueBill();
 	}
 
@@ -472,9 +469,6 @@ function llenarTabla(dato) {
 
 	if (dato == "AtencionMedica") {
 		pagination(1);
-		listar_pacientes_buscar();
-		listar_servicios_buscar();
-		listar_servicios_factura_buscar();
 		listar_productos_facturas_buscar();
 		$('.footer').show();
 		$('.footer1').hide();

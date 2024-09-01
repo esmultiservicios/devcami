@@ -9,7 +9,7 @@ $pacientes_id = $_POST['pacientes_id'];
 
 //CONSULTAR LOS DATOS DEL PACIENTE
 $sql = "SELECT identidad AS 'identidad', fecha_nacimiento 'fecha_nacimiento', CONCAT(nombre, ' ', apellido) AS 'paciente', profesion_id AS 'profesion', 
-   localidad AS 'localidad', religion_id AS 'religion'
+   localidad AS 'localidad', religion_id AS 'religion', estado_civil
    FROM pacientes
    WHERE pacientes_id = '$pacientes_id'";
    
@@ -24,6 +24,7 @@ $profesion = "";
 $religion = "";
 $servicio_id = "";
 $fecha_cita = "";
+$estado_civil = "estado_civil";
 
 //OBTENEMOS LOS VALORES DEL REGISTRO
 if($result->num_rows>0){
@@ -33,6 +34,7 @@ if($result->num_rows>0){
 	$localidad = $consulta_registro['localidad'];	
 	$religion = $consulta_registro['religion'];
 	$profesion = $consulta_registro['profesion'];	
+	$estado_civil = $consulta_registro['estado_civil'];	
 	
 	//CONSULTA AÑO, MES y DIA DEL PACIENTE
 	$valores_array = getEdad($fecha_nacimiento);
@@ -91,11 +93,11 @@ $datos = array(
      9 => $examen_fisico,
      10 => $seguimiento_consulta,
      11 => $diagnostico,	 
-     12 => $fecha_nacimiento,	 
+     12 => $fecha_nacimiento,	
+	 13 =>$estado_civil 
 );	
 	
 echo json_encode($datos);
 
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN
-?>

@@ -14,4 +14,3 @@ $neto =  $monto - $descuento;
 echo $neto;
 
 $mysqli->close();//CERRAR CONEXIÓN
-?>

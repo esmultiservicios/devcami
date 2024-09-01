@@ -13,6 +13,7 @@ $consulta = "SELECT s.servicio_id AS 'servicio_id', s.nombre AS 'servicio'
 $result = $mysqli->query($consulta); 
 
 if($result->num_rows>0){
+	echo '<option value="">Sin seleccion</option>';
 	while($consulta2 = $result->fetch_assoc()){
 		echo '<option value="'.$consulta2['servicio_id'].'">'.$consulta2['servicio'].'</option>';
 	}
@@ -22,4 +23,3 @@ if($result->num_rows>0){
 
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN
-?>

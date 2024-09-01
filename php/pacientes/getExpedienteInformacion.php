@@ -20,4 +20,3 @@ echo $expediente;
 
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN
-?>
