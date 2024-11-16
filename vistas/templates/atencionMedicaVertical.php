@@ -56,6 +56,7 @@
                     <div class="col-md-12 mb-3">
                         <input type="hidden" id="agenda_id" name="agenda_id" class="form-control">
                         <input type="hidden" required readonly id="pacientes_id" name="pacientes_id" />
+						<input type="hidden" id="edad_consulta" name="edad_consulta" readonly class="form-control" />
                         <div class="input-group mb-3">
                             <input type="text" required readonly id="pro" name="pro" class="form-control" />
                             <div class="input-group-append">
@@ -121,7 +122,7 @@
                                 <input type="number" name="num_hijos" id="num_hijos" value="" class="form-control" />
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="servicio_id">Consultorio</label>
+                                <label for="servicio_id">Consultorio <span class="priority">*<span /></label>
                                 <div class="input-group mb-3">
                                     <select class="selectpicker" id="servicio_id" name="servicio_id"
                                         data-live-search="true" title="Consultorio" data-width="100%" data-size="7">

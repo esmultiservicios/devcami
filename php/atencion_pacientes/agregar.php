@@ -25,7 +25,6 @@ $diagnostico = cleanStringStrtolower($_POST['diagnostico']);
 $seguimiento = cleanStringStrtolower($_POST['seguimiento']);
 $num_hijos = $_POST['num_hijos'];
 $localidad = cleanStringStrtolower($_POST['procedencia']);
-$numero_hijos = cleanStringStrtolower($_POST['num_hijos']);
 
 if(isset($_POST['religion_id'])){//COMPRUEBO SI LA VARIABLE ESTA DIFINIDA
 	if($_POST['religion_id'] == ""){
@@ -63,8 +62,7 @@ $update = "UPDATE pacientes
 		estado_civil = '$estado_civil',
 		religion_id = '$religion_id', 
 		profesion_id = '$profesion_id',
-		localidad = '$localidad',
-		numero_hijos = '$numero_hijos'
+		localidad = '$localidad'
 	WHERE pacientes_id = '$pacientes_id'";
 $mysqli->query($update) or die($mysqli->error);
 /*##############################################################################################################################################################################################*/

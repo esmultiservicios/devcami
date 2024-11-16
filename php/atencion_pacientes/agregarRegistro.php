@@ -24,7 +24,6 @@ $fecha_cita_end =  date("Y-m-d H:i:s", strtotime($fecha));
 $fecha_registro = date("Y-m-d H:i:s");
 $status = 1;//ESTADO PARA LA AGENDA DEL PACIENTE
 $estado = 1;//ESTADO DE LA ATENCION DEL PACIENTE PARA LA FACTURACION 1. PENDIENTE 2. PAGADA
-$numero_hijos = cleanStringStrtolower($_POST['num_hijos']);
 
 if(isset($_POST['religion_id'])){//COMPRUEBO SI LA VARIABLE ESTA DIFINIDA
 	if($_POST['religion_id'] == ""){
@@ -75,8 +74,7 @@ $update = "UPDATE pacientes
 		estado_civil = '$estado_civil', 
 		religion_id = '$religion_id',
 		profesion_id = '$profesion_id',
-		localidad = '$localidad',
-		numero_hijos = '$numero_hijos'
+		localidad = '$localidad'
 	WHERE pacientes_id = '$pacientes_id'";
 $mysqli->query($update) or die($mysqli->error);
 /*##############################################################################################################################################################################################*/

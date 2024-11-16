@@ -97,7 +97,7 @@
                         <input type="number" name="num_hijos" id="num_hijos" value="" class="form-control" />
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="servicio_id">Consultorio</label>
+                        <label for="servicio_id">Consultorio <span class="priority">*<span /></label>
                         <div class="input-group mb-3">
                             <select class="selectpicker" id="servicio_id" name="servicio_id" data-live-search="true"
                                 title="Consultorio" data-width="100%" data-size="7">
@@ -157,7 +157,7 @@
                                                 id="search_historia_clinica_stop"></i>
                                     </div>
                                 </div>
-                                <p id="charNum_historia">3200 Caracteres</p>
+                                <p id="charNum_historia_clinica">3200 Caracteres</p>
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                                                 id="search_exame_fisico_stop"></i>
                                     </div>
                                 </div>
-                                <p id="charNum_examen">3200 Caracteres</p>
+                                <p id="charNum_exame_fisico">3200 Caracteres</p>
                             </div>
                         </div>
                     </div>
