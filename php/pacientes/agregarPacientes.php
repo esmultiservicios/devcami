@@ -15,57 +15,14 @@ $correo = strtolower(cleanString($_POST['correo']));
 $fecha = date('Y-m-d');
 $numero_hijos = 0;
 
-if (isset($_POST['departamento_id'])) {  // COMPRUEBO SI LA VARIABLE ESTA DIFINIDA
-	if ($_POST['departamento_id'] == '') {
-		$departamento_id = 0;
-	} else {
-		$departamento_id = $_POST['departamento_id'];
-	}
-} else {
-	$departamento_id = 0;
-}
-
-if (isset($_POST['municipio_id'])) {  // COMPRUEBO SI LA VARIABLE ESTA DIFINIDA
-	if ($_POST['municipio_id'] == '') {
-		$municipio_id = 0;
-	} else {
-		$municipio_id = $_POST['municipio_id'];
-	}
-} else {
-	$municipio_id = 0;
-}
-
-if (isset($_POST['pais_id'])) {  // COMPRUEBO SI LA VARIABLE ESTA DIFINIDA
-	if ($_POST['pais_id'] == '') {
-		$pais_id = 0;
-	} else {
-		$pais_id = $_POST['pais_id'];
-	}
-} else {
-	$pais_id = 0;
-}
+$departamento_id = isset($_POST['departamento_id']) && $_POST['departamento_id'] !== '' ? $_POST['departamento_id'] : 0;
+$municipio_id = isset($_POST['municipio_id']) && $_POST['municipio_id'] !== '' ? $_POST['municipio_id'] : 0;
+$pais_id = isset($_POST['pais_id']) && $_POST['pais_id'] !== '' ? $_POST['pais_id'] : 0;
 
 $responsable = $_POST['responsable'];
 
-if (isset($_POST['responsable_id'])) {  // COMPRUEBO SI LA VARIABLE ESTA DIFINIDA
-	if ($_POST['responsable_id'] == '') {
-		$responsable_id = 0;
-	} else {
-		$responsable_id = $_POST['responsable_id'];
-	}
-} else {
-	$responsable_id = 0;
-}
-
-if (isset($_POST['referido_id'])) {  // COMPRUEBO SI LA VARIABLE ESTA DIFINIDA
-	if ($_POST['referido_id'] == '') {
-		$referido_id = 0;
-	} else {
-		$referido_id = $_POST['referido_id'];
-	}
-} else {
-	$referido_id = 0;
-}
+$responsable_id = isset($_POST['responsable_id']) && $_POST['responsable_id'] !== '' ? $_POST['responsable_id'] : 0;
+$referido_id = isset($_POST['referido_id']) && $_POST['referido_id'] !== '' ? $_POST['referido_id'] : 0;
 
 $localidad = cleanStringStrtolower($_POST['direccion']);
 $religion_id = 0;
@@ -105,9 +62,61 @@ if ($result->num_rows == 0) {
 	$expediente = correlativo('expediente ', 'pacientes');
 
 	$insert = "INSERT INTO pacientes 
-    (pacientes_id, expediente, identidad, nombre, apellido, genero, telefono1, telefono2, fecha_nacimiento, email, fecha, pais_id, departamento_id, municipio_id, localidad, religion_id, profesion_id, estado_civil, responsable, responsable_id, usuario, estado, fecha_registro, referido_id, escolaridad) 
-    VALUES 
-    ('$pacientes_id', '$expediente', '$identidad', '$nombre', '$apellido', '$sexo', '$telefono1', '$telefono2', '$fecha_nacimiento', '$correo', '$fecha', '$pais_id', '$departamento_id', '$municipio_id', '$localidad', '$religion_id', '$profesion_id', '$estado_civil', '$responsable', '$responsable_id', '$usuario', '$estado', '$fecha_registro', '$referido_id', '0')";
+	(
+		pacientes_id, 
+		expediente, 
+		identidad, 
+		nombre, 
+		apellido, 
+		genero, 
+		telefono1, 
+		telefono2, 
+		fecha_nacimiento, 
+		email, 
+		fecha, 
+		pais_id, 
+		departamento_id, 
+		municipio_id, 
+		localidad, 
+		religion_id, 
+		profesion_id, 
+		estado_civil, 
+		responsable, 
+		responsable_id, 
+		usuario, 
+		estado, 
+		fecha_registro, 
+		referido_id, 
+		numero_hijos
+	) 
+	VALUES 
+	(
+		'$pacientes_id', 
+		'$expediente', 
+		'$identidad', 
+		'$nombre', 
+		'$apellido', 
+		'$sexo',
+		'$telefono1', 
+		'$telefono2', 
+		'$fecha_nacimiento', 
+		'$correo',
+		'$fecha', 
+		'$pais_id', 
+		'$departamento_id', 
+		'$municipio_id', 
+		'$localidad', 
+		'$religion_id', 
+		'$profesion_id', 
+		'$estado_civil', 
+		'$responsable', 
+		'$responsable_id', 
+		'$usuario', 
+		'$estado', 
+		'$fecha_registro', 
+		'$referido_id', 
+		'$numero_hijos'
+	)";
 
 	$query = $mysqli->query($insert);
 
