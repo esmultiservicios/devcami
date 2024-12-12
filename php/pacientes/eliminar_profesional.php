@@ -15,15 +15,25 @@ $query_profesion = "SELECT nombre
    FROM profesion
    WHERE profesion_id = '$id'";
 $result = $mysqli->query($query_profesion);	
-$query_profesion1 = $result->fetch_assoc();
-$profesion_nombre = $query_profesion1['nombre'];
+
+$query_profesion1 = "";
+
+if($result->num_rows>0) {
+	$query_profesion1 = $result->fetch_assoc();
+	$profesion_nombre = $query_profesion1['nombre'];
+}
 
 $query = "SELECT pacientes_id
     FROM pacientes
-	WHERE prefesion_id = '$id'";
-$result = $mysqli->query($query);	
-$consular_profesion2 = $result->fetch_assoc();
-$pacientes_id = $consular_profesion2['pacientes_id'];
+	WHERE profesion_id = '$id'";
+$result = $mysqli->query($query);
+
+$pacientes_id = "";
+
+if($result->num_rows>0) {
+	$consular_profesion2 = $result->fetch_assoc();
+	$pacientes_id = $consular_profesion2['pacientes_id'];
+}
 
 if($pacientes_id==""){
     $delete = "DELETE FROM profesion 
@@ -50,4 +60,3 @@ if($pacientes_id==""){
 }
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN
-?>

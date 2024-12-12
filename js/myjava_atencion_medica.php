@@ -287,10 +287,6 @@ function editarRegistro(pacientes_id, agenda_id) {
 
                     $('#formulario_atenciones #fecha').val(array[7]);
                     $('#formulario_atenciones #fecha_nac').val(array[8]);
-                    $('#formulario_atenciones #antecedentes_medicos_no_psiquiatricos').val(array[9]);
-                    $('#formulario_atenciones #hospitaliaciones').val(array[10]);
-                    $('#formulario_atenciones #cirugias').val(array[11]);
-                    $('#formulario_atenciones #alergias').val(array[12]);
                     $('#formulario_atenciones #seguimiento_read').val(array[13]);
                     $('#formulario_atenciones #servicio_id').val(array[14]);
                     $('#formulario_atenciones #servicio_id').selectpicker('refresh');
@@ -487,21 +483,11 @@ function actualizarCaracteres(idCampo, idContador) {
 // Llama a la función para inicializar los contadores al cargar el DOM
 // Definir los límites de caracteres globalmente
 var limites = {
-    'alergias': 3200,
-    'seguimiento': 3200,
-    'antecedentes_medicos_psiquiatricos': 3200,
-    'historia_gineco_obstetrica': 3200,
-    'medicamentos_previos': 3200,
-    'medicamentos_actuales': 3200,
-    'legal': 3200,
-    'sustancias': 3200,
-    'rasgos_personalidad': 3200,
-    'informacion_adicional': 3200,
-    'pendientes': 3200,
+    'antecedentes': 3200,
+    'historia_clinica': 3200,
+    'exame_fisico': 3200,
     'diagnostico': 3200,
-    'antecedentes_medicos_no_psiquiatricos': 3200,
-    'hospitaliaciones': 3200,
-    'cirugias': 3200
+    'seguimiento': 3200,
 };
 
 $(document).ready(function() {
@@ -511,72 +497,89 @@ $(document).ready(function() {
 
 function inicializarContadores(limites) {
     Object.keys(limites).forEach(function(campo) {
-        $('#' + campo).on('input', function() {
-            actualizarCaracteres(campo, 'charNum_' + campo, limites[campo]);
-        });
+        var elemento = $('#' + campo);
+        if (elemento.length) {
+            elemento.on('input', function() {
+                actualizarCaracteres(campo, 'charNum_' + campo, limites[campo]);
+            });
 
-        // Para inicializar el contador cuando se carga la página
-        actualizarCaracteres(campo, 'charNum_' + campo, limites[campo]);
+            // Para inicializar el contador cuando se carga la página
+            actualizarCaracteres(campo, 'charNum_' + campo, limites[campo]);
+        } else {
+            console.error('Elemento no encontrado: ' + campo);
+        }
     });
 }
 
 function actualizarCaracteres(campo, contadorId, max_chars) {
     var texto = $('#' + campo).val();
-    var longitudTexto = texto.length;
+    if (texto !== undefined) {
+        var longitudTexto = texto.length;
 
-    // Si se supera el límite de caracteres, cortar el texto al límite
-    if (longitudTexto > max_chars) {
-        $('#' + campo).val(texto.substring(0, max_chars));
-        longitudTexto = max_chars;
+        // Si se supera el límite de caracteres, cortar el texto al límite
+        if (longitudTexto > max_chars) {
+            $('#' + campo).val(texto.substring(0, max_chars));
+            longitudTexto = max_chars;
+        }
+
+        $('#' + contadorId).text(longitudTexto + '/' + max_chars); // Muestra el número de caracteres y el límite
+    } else {
+        console.error('Elemento no encontrado: ' + campo);
     }
-
-    $('#' + contadorId).text(longitudTexto + '/' + max_chars); // Muestra el número de caracteres y el límite
 }
 
 function inicializarSpeechRecognition(limites) {
     Object.keys(limites).forEach(function(campo) {
-        // Ocultar los botones de parada al iniciar
-        $('#formulario_atenciones #search_' + campo + '_stop').hide();
+        var startButton = $('#formulario_atenciones #search_' + campo + '_start');
+        var stopButton = $('#formulario_atenciones #search_' + campo + '_stop');
+        var inputField = $('#formulario_atenciones #' + campo);
 
-        // Inicializar el reconocimiento de voz
-        var recognition = new webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.lang = "es";
+        if (startButton.length && stopButton.length && inputField.length) {
+            // Ocultar los botones de parada al iniciar
+            stopButton.hide();
 
-        // Evento al hacer clic en el botón de inicio de reconocimiento
-        $('#formulario_atenciones #search_' + campo + '_start').on('click', function(event) {
-            $('#formulario_atenciones #search_' + campo + '_start').hide();
-            $('#formulario_atenciones #search_' + campo + '_stop').show();
-            recognition.start();
+            // Inicializar el reconocimiento de voz
+            var recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.lang = "es";
 
-            recognition.onresult = function(event) {
-                var finalResult = '';
-                var valor_anterior = $('#formulario_atenciones #' + campo).val();
-                for (var i = event.resultIndex; i < event.results.length; ++i) {
-                    if (event.results[i].isFinal) {
-                        finalResult = event.results[i][0].transcript;
+            // Evento al hacer clic en el botón de inicio de reconocimiento
+            startButton.on('click', function(event) {
+                startButton.hide();
+                stopButton.show();
+                recognition.start();
 
-                        // Combinar texto anterior con el nuevo resultado, respetando el límite de caracteres
-                        var nuevoTexto = valor_anterior + ' ' + finalResult;
-                        if (nuevoTexto.length > limites[campo]) {
-                            nuevoTexto = nuevoTexto.substring(0, limites[campo]);
+                recognition.onresult = function(event) {
+                    var finalResult = '';
+                    var valor_anterior = inputField.val();
+                    for (var i = event.resultIndex; i < event.results.length; ++i) {
+                        if (event.results[i].isFinal) {
+                            finalResult = event.results[i][0].transcript;
+
+                            // Combinar texto anterior con el nuevo resultado, respetando el límite de caracteres
+                            var nuevoTexto = valor_anterior + ' ' + finalResult;
+                            if (nuevoTexto.length > limites[campo]) {
+                                nuevoTexto = nuevoTexto.substring(0, limites[campo]);
+                            }
+                            inputField.val(nuevoTexto);
+                            actualizarCaracteres(campo, 'charNum_' + campo, limites[campo]);
                         }
-                        $('#formulario_atenciones #' + campo).val(nuevoTexto);
-                        actualizarCaracteres(campo, 'charNum_' + campo, limites[campo]);
                     }
-                }
-            };
+                };
 
-            return false;
-        });
+                return false;
+            });
 
-        // Evento al hacer clic en el botón de detener reconocimiento
-        $('#formulario_atenciones #search_' + campo + '_stop').on('click', function(event) {
-            recognition.stop();
-            $('#formulario_atenciones #search_' + campo + '_stop').hide();
-            $('#formulario_atenciones #search_' + campo + '_start').show();
-            return false;
-        });
+            // Evento al hacer clic en el botón de detener reconocimiento
+            stopButton.on('click', function(event) {
+                recognition.stop();
+                stopButton.hide();
+                startButton.show();
+                return false;
+            });
+        } else {
+            console.error('Elemento no encontrado: ' + campo);
+        }
     });
 }
 
@@ -633,12 +636,7 @@ $(document).ready(function(e) {
                     $('#formulario_atenciones #estado_civil').selectpicker('refresh');
 
                     $('#formulario_atenciones #paciente_consulta').val(array[6]);
-                    $('#formulario_atenciones #antecedentes_medicos_no_psiquiatricos').val(
-                        array[7]);
-                    $('#formulario_atenciones #hospitaliaciones').val(array[8]);
-                    $('#formulario_atenciones #cirugias').val(array[9]);
                     $('#formulario_atenciones #seguimiento_read').val(array[10]);
-                    $('#formulario_atenciones #alergias').val(array[11]);
                     $('#formulario_atenciones #fecha_nac').val(array[12]);
                     $("#reg_atencion").attr('disabled', false);
                     return false;
@@ -913,7 +911,6 @@ function paginarSeguimiento(partida) {
 
 //INICIO FUNCION PARA LIMPIAR EL FORMULARIO DE PACIENTES
 function limpiarFormPacientes() {
-    $('#formulario_atenciones #hospitaliaciones').val('');
     $('#formulario_atenciones #hospitaliaciones_read').val('');
     $('#formulario_atenciones #seguimiento').val('');
     $('#formulario_atenciones #seguimiento_read').val('');

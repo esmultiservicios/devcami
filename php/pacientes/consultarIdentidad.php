@@ -11,15 +11,15 @@ $query = "SELECT pacientes_id
     FROM pacientes 
 	WHERE identidad = '$identidad'";
 $result = $mysqli->query($query);
-$consulta2 = $result->fetch_assoc();
 
-if($consulta2['pacientes_id'] == ""){
-	$pacientes_id = 0;
-}else{
+$pacientes_id = 0;
+
+if($result->num_rows>0){
+	$consulta2 = $result->fetch_assoc();
 	$pacientes_id = $consulta2['pacientes_id'];
 }
 
-if($pacientes_id != ""){
+if($pacientes_id != 0){
 	echo 1;
 }else{
 	echo 2;
@@ -27,4 +27,3 @@ if($pacientes_id != ""){
 
 $result->free();//LIMPIAR RESULTADO
 $mysqli->close();//CERRAR CONEXIÓN
-?>

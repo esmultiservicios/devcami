@@ -25,35 +25,10 @@ $fecha_registro = date("Y-m-d H:i:s");
 $status = 1;//ESTADO PARA LA AGENDA DEL PACIENTE
 $estado = 1;//ESTADO DE LA ATENCION DEL PACIENTE PARA LA FACTURACION 1. PENDIENTE 2. PAGADA
 
-if(isset($_POST['religion_id'])){//COMPRUEBO SI LA VARIABLE ESTA DIFINIDA
-	if($_POST['religion_id'] == ""){
-		$religion_id = 0;
-	}else{
-		$religion_id = $_POST['religion_id'];
-	}
-}else{
-	$religion_id = 0;
-}
+$religion_id = isset($_POST['religion_id']) && $_POST['religion_id'] !== '' ? $_POST['religion_id'] : 0;
+$profesion_id = isset($_POST['profesion_id']) && $_POST['profesion_id'] !== '' ? $_POST['profesion_id'] : 0;
+$estado_civil = isset($_POST['estado_civil']) && $_POST['estado_civil'] !== '' ? $_POST['estado_civil'] : 0;
 
-if(isset($_POST['profesion_id'])){//COMPRUEBO SI LA VARIABLE ESTA DIFINIDA
-	if($_POST['profesion_id'] == ""){
-		$profesion_id = 0;
-	}else{
-		$profesion_id = $_POST['profesion_id'];
-	}
-}else{
-	$profesion_id = 0;
-}
-
-if(isset($_POST['estado_civil'])){//COMPRUEBO SI LA VARIABLE ESTA DIFINIDA
-	if($_POST['estado_civil'] == ""){
-		$estado_civil = 0;
-	}else{
-		$estado_civil = $_POST['estado_civil'];
-	}
-}else{
-	$estado_civil = 0;
-}
 //CONSULTAR SERVICIO_ID
 $query_servicio = "SELECT servicio_id
 	FROM agenda
@@ -61,7 +36,7 @@ $query_servicio = "SELECT servicio_id
 $result_servicio = $mysqli->query($query_servicio) or die($mysqli->error);
 $consultar_servicio = $result_servicio->fetch_assoc(); 
 
-$servicio_id = "";
+$servicio_id = 0;
 
 if($result_servicio->num_rows>=0){
 	$servicio_id = $consultar_servicio['servicio_id'];

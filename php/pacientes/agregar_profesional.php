@@ -28,8 +28,14 @@ $consultar = "SELECT profesion_id
      FROM profesion 
 	 WHERE nombre = '$profesional'";
 $result = $mysqli->query($consultar);
-$consultar2 = $result->fetch_assoc();
-$profesional_id = $consultar2['profesion_id'];
+
+$profesional_id = "";
+
+if($result->num_rows>0){
+	$consultar2 = $result->fetch_assoc();
+	$profesional_id = $consultar2['profesion_id'];
+}
+
 
 if($profesional != ""){
   if($profesional_id == ""){
