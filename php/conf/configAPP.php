@@ -17,7 +17,7 @@ $serverName = $_SERVER['SERVER_NAME'];
 $port = ($_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443') ? ':' . $_SERVER['SERVER_PORT'] : '';
 
 // Obtener la ruta base
-$basePath = $serverName == 'localhost' ? '/devcami/' : '/';
+$basePath = $serverName == 'localhost' ? '/devcino/' : '/';
 
 // Construir la URL base
 $baseURL = $protocol . $serverName . $port . $basePath;

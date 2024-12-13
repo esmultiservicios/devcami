@@ -8,8 +8,7 @@ $(document).ready(function() {
     getResponsable();
     getReferido();
 
-    $('#form_main #nuevo-registro').on('click', function(e) {
-        e.preventDefault();
+    $('#form_main #nuevo-registro').on('click', function() {
         if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 5 ||
             getUsuarioSistema() == 6) {
             $('#formulario_pacientes #reg').show();

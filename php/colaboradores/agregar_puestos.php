@@ -15,35 +15,24 @@ $usuario = $_SESSION['colaborador_id'];
 $correlativo= "SELECT MAX(puesto_id) AS max, COUNT(puesto_id) AS count 
    FROM puesto_colaboradores";
 $result = $mysqli->query($correlativo);
+$correlativo2 = $result->fetch_assoc();
 
-$numero = 1;
+$numero = $correlativo2['max'];
+$cantidad = $correlativo2['count'];
 
-if($result->num_rows>0) {
-	$correlativo2 = $result->fetch_assoc();
-
-	$numero = $correlativo2['max'];
-	$cantidad = $correlativo2['count'];
-	
-	if ( $cantidad == 0 )
-		$numero = 1;
-	else
-		$numero = $numero + 1;
-}
+if ( $cantidad == 0 )
+	$numero = 1;
+else
+    $numero = $numero + 1;
 
 //CONSULTAMOS QUE EL REGISTRO EXISTA
 $consulta = "SELECT puesto_id 
       FROM puesto_colaboradores 
 	  WHERE nombre = '$nombre'";
-$result = $mysqli->query($consulta);
-
-$consulta_nombre = "";
-
-if($result->num_rows>0)  {
-	$consulta2 = $result->fetch_assoc();
-	$consulta_nombre = $consulta2['puesto_id'];
-		
-}
-
+$result = $mysqli->query($consulta);	  
+$consulta2 = $result->fetch_assoc();
+$consulta_nombre = $consulta2['puesto_id'];
+	
 //VERIFICAMOS EL PROCESO
 
 if($consulta_nombre == ""){
