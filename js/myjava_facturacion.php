@@ -14,27 +14,27 @@ $(document).ready(function() {
     funciones();
 
     //INICIO PAGINATION (PARA LAS BUSQUEDAS SEGUN SELECCIONES)
-    $('#form_main #bs_regis').on('keyup', function() {
+    $('#form_main_facturacion #bs_regis').on('keyup', function() {
         pagination(1);
     });
 
-    $('#form_main #fecha_b').on('change', function() {
+    $('#form_main_facturacion #fecha_b').on('change', function() {
         pagination(1);
     });
 
-    $('#form_main #fecha_f').on('change', function() {
+    $('#form_main_facturacion #fecha_f').on('change', function() {
         pagination(1);
     });
 
-    $('#form_main #clientes').on('change', function() {
+    $('#form_main_facturacion #clientes').on('change', function() {
         pagination(1);
     });
 
-    $('#form_main #profesional').on('change', function() {
+    $('#form_main_facturacion #profesional').on('change', function() {
         pagination(1);
     });
 
-    $('#form_main #estado').on('change', function() {
+    $('#form_main_facturacion #estado').on('change', function() {
         pagination(1);
     });
     //FIN PAGINATION (PARA LAS BUSQUEDAS SEGUN SELECCIONES)
@@ -171,17 +171,17 @@ function funciones() {
 function pagination(partida) {
     var url = '<?php echo SERVERURL; ?>php/facturacion/paginar.php';
 
-    var fechai = $('#form_main #fecha_b').val();
-    var fechaf = $('#form_main #fecha_f').val();
-    var dato = $('#form_main #bs_regis').val()
-    var clientes = $('#form_main #clientes').val();
-    var profesional = $('#form_main #profesional').val();
+    var fechai = $('#form_main_facturacion #fecha_b').val();
+    var fechaf = $('#form_main_facturacion #fecha_f').val();
+    var dato = $('#form_main_facturacion #bs_regis').val()
+    var clientes = $('#form_main_facturacion #clientes').val();
+    var profesional = $('#form_main_facturacion #profesional').val();
     var estado = '';
 
-    if ($('#form_main #estado').val() == "") {
+    if ($('#form_main_facturacion #estado').val() == "") {
         estado = 1;
     } else {
-        estado = $('#form_main #estado').val();
+        estado = $('#form_main_facturacion #estado').val();
     }
 
     $.ajax({
@@ -225,9 +225,9 @@ function getEstado() {
         url: url,
         async: true,
         success: function(data) {
-            $('#form_main #estado').html("");
-            $('#form_main #estado').html(data);
-            $('#form_main #estado').selectpicker('refresh');
+            $('#form_main_facturacion #estado').html("");
+            $('#form_main_facturacion #estado').html(data);
+            $('#form_main_facturacion #estado').selectpicker('refresh');
         }
     });
 }
@@ -445,7 +445,7 @@ $('#acciones_atras').on('click', function(e) {
 });
 
 
-$('#form_main #factura').on('click', function(e) {
+$('#form_main_facturacion #factura').on('click', function(e) {
     e.preventDefault();
     formFactura();
 });
@@ -782,7 +782,7 @@ function cierreCaja() {
     });
 }
 
-$('#form_main #cierre').on('click', function(e) {
+$('#form_main_facturacion #cierre').on('click', function(e) {
     e.preventDefault();
     cierreCaja();
 });

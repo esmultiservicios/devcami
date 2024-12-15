@@ -125,10 +125,10 @@ echo $fecha_inicial;
           <div class="form-group mr-1 mt-2">
             <input type="text" placeholder="Buscar por: Paciente, Identidad o Factura" data-toggle="tooltip" data-placement="top" title="Buscar por: Expediente, Nombre, Apellido, Identidad o Número de Factura" id="bs_regis" autofocus class="form-control" size="65"/>
           </div>
-          <div class="form-group mr-1">
+          <div class="form-group mr-1 mt-2">
             <button class="btn btn-primary" type="submit" id="factura" data-toggle="tooltip" data-placement="top" title="Crear Factura"><div class="sb-nav-link-icon"></div><i class="fas fa-file-invoice fa-lg"></i> Crear Factura</button>
           </div>
-          <div class="form-group mr-1">
+          <div class="form-group mt-2">
               <button class="btn btn-primary" type="submit" id="cierre" data-toggle="tooltip" data-placement="top" title="Cierre de Caja"><div class="sb-nav-link-icon"></div><i class="fas fa-calculator fa-lg"></i> Cierre de Caja</button>
           </div>
 				</form>
