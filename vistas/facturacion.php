@@ -1,34 +1,34 @@
 <?php
 session_start();
-include "../php/funtions.php";
+include '../php/funtions.php';
 
-//CONEXION A DB
+// CONEXION A DB
 $mysqli = connect_mysqli();
 
-if( isset($_SESSION['colaborador_id']) == false ){
-   header('Location: login.php');
+if (isset($_SESSION['colaborador_id']) == false) {
+  header('Location: login.php');
 }
 
-$_SESSION['menu'] = "Facturación";
+$_SESSION['menu'] = 'Facturación';
 
-if(isset($_SESSION['colaborador_id'])){
- $colaborador_id = $_SESSION['colaborador_id'];
-}else{
-   $colaborador_id = "";
+if (isset($_SESSION['colaborador_id'])) {
+  $colaborador_id = $_SESSION['colaborador_id'];
+} else {
+  $colaborador_id = '';
 }
 
 $type = $_SESSION['type'];
 
-$nombre_host = gethostbyaddr($_SERVER['REMOTE_ADDR']);//HOSTNAME
-$fecha = date("Y-m-d H:i:s");
-$comentario = mb_convert_case("Ingreso al Modulo de Facturación", MB_CASE_TITLE, "UTF-8");
+$nombre_host = gethostbyaddr($_SERVER['REMOTE_ADDR']);  // HOSTNAME
+$fecha = date('Y-m-d H:i:s');
+$comentario = mb_convert_case('Ingreso al Modulo de Facturación', MB_CASE_TITLE, 'UTF-8');
 
-if($colaborador_id != "" || $colaborador_id != null){
-   historial_acceso($comentario, $nombre_host, $colaborador_id);
+if ($colaborador_id != '' || $colaborador_id != null) {
+  historial_acceso($comentario, $nombre_host, $colaborador_id);
 }
 
-$mysqli->close();//CERRAR CONEXIÓN
- ?>
+$mysqli->close();  // CERRAR CONEXIÓN
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -39,18 +39,18 @@ $mysqli->close();//CERRAR CONEXIÓN
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Facturación :: <?php echo SERVEREMPRESA;?></title>
-	<?php include("script_css.php"); ?>
+    <title>Facturación :: <?php echo SERVEREMPRESA; ?></title>
+	<?php include ('script_css.php'); ?>
 </head>
 <body>
    <!--Ventanas Modales-->
    <!-- Small modal -->
 <!--INICIO VENTANA MODALES-->
-   <?php include("modals/modals.php");?>
+   <?php include ('modals/modals.php'); ?>
 <!--FIN VENTANA MODALES-->
 
-<?php include("templates/menu.php"); ?>
-<?php include("templates/modals.php"); ?>
+<?php include ('templates/menu.php'); ?>
+<?php include ('templates/modals.php'); ?>
 
 <br><br><br>
 <div class="container-fluid">
@@ -64,7 +64,7 @@ $mysqli->close();//CERRAR CONEXIÓN
 	<div id="main_facturacion">
 		<div class="card mb-4" id="main_facturacion">
 			<div class="card-body">
-				<form class="form-inline" id="form_main">
+				<form class="form-inline" id="form_main_facturacion">
           <div class="form-group mr-1">
             <div class="input-group">
               <div class="input-group-append">
@@ -98,20 +98,20 @@ $mysqli->close();//CERRAR CONEXIÓN
                 <span class="input-group-text"><div class="sb-nav-link-icon"></div>Fecha Inicio</span>
               </div>
               <input type="date" required="required" id="fecha_b" name="fecha_b" style="width:160px;" data-toggle="tooltip" data-placement="top" title="Fecha Inicial" value="<?php
-                  $fecha = date ("Y-m-d");
+$fecha = date('Y-m-d');
 
-                  $año = date("Y", strtotime($fecha));
-                  $mes = date("m", strtotime($fecha));
-                  $dia = date("d", mktime(0,0,0, $mes+1, 0, $año));
+$año = date('Y', strtotime($fecha));
+$mes = date('m', strtotime($fecha));
+$dia = date('d', mktime(0, 0, 0, $mes + 1, 0, $año));
 
-                  $dia1 = date('d', mktime(0,0,0, $mes, 1, $año)); //PRIMER DIA DEL MES
-                  $dia2 = date('d', mktime(0,0,0, $mes, $dia, $año)); // ULTIMO DIA DEL MES
+$dia1 = date('d', mktime(0, 0, 0, $mes, 1, $año));  // PRIMER DIA DEL MES
+$dia2 = date('d', mktime(0, 0, 0, $mes, $dia, $año));  // ULTIMO DIA DEL MES
 
-                  $fecha_inicial = date("Y-m-d", strtotime($año."-".$mes."-".$dia1));
-                  $fecha_final = date("Y-m-d", strtotime($año."-".$mes."-".$dia2));
+$fecha_inicial = date('Y-m-d', strtotime($año . '-' . $mes . '-' . $dia1));
+$fecha_final = date('Y-m-d', strtotime($año . '-' . $mes . '-' . $dia2));
 
-                  echo $fecha_inicial;
-                ?>" class="form-control"/>
+echo $fecha_inicial;
+?>" class="form-control"/>
             </div>
           </div>
           <div class="form-group mr-1">
@@ -119,16 +119,16 @@ $mysqli->close();//CERRAR CONEXIÓN
               <div class="input-group-append">
                 <span class="input-group-text"><div class="sb-nav-link-icon"></div>Fecha Fin</span>
               </div>
-              <input type="date" required="required" id="fecha_f" name="fecha_f" style="width:160px;" value="<?php echo date ("Y-m-d");?>" data-toggle="tooltip" data-placement="top" title="Fecha Final" class="form-control"/>
+              <input type="date" required="required" id="fecha_f" name="fecha_f" style="width:160px;" value="<?php echo date('Y-m-d'); ?>" data-toggle="tooltip" data-placement="top" title="Fecha Final" class="form-control"/>
             </div>
           </div>
           <div class="form-group mr-1 mt-2">
             <input type="text" placeholder="Buscar por: Paciente, Identidad o Factura" data-toggle="tooltip" data-placement="top" title="Buscar por: Expediente, Nombre, Apellido, Identidad o Número de Factura" id="bs_regis" autofocus class="form-control" size="65"/>
           </div>
-          <div class="form-group mr-1 mt-2">
+          <div class="form-group mr-1">
             <button class="btn btn-primary" type="submit" id="factura" data-toggle="tooltip" data-placement="top" title="Crear Factura"><div class="sb-nav-link-icon"></div><i class="fas fa-file-invoice fa-lg"></i> Crear Factura</button>
           </div>
-          <div class="form-group mt-2">
+          <div class="form-group mr-1">
               <button class="btn btn-primary" type="submit" id="cierre" data-toggle="tooltip" data-placement="top" title="Cierre de Caja"><div class="sb-nav-link-icon"></div><i class="fas fa-calculator fa-lg"></i> Cierre de Caja</button>
           </div>
 				</form>
@@ -153,25 +153,25 @@ $mysqli->close();//CERRAR CONEXIÓN
 		</div>
     </div>
 
-    <?php include("templates/factura.php"); ?>
+    <?php include ('templates/factura.php'); ?>
 </div>
 
-	<?php include("templates/footer.php"); ?>
-	<?php include("templates/footer_facturas.php"); ?>
+	<?php include ('templates/footer.php'); ?>
+	<?php include ('templates/footer_facturas.php'); ?>
 </div>
 
     <!-- add javascripts -->
 	<?php
-		include "script.php";
+  include 'script.php';
 
-		include "../js/main.php";
-		include "../js/invoice.php";
-		include "../js/myjava_facturacion.php";
-		include "../js/sms.php";
-		include "../js/select.php";
-		include "../js/functions.php";
-		include "../js/myjava_cambiar_pass.php";
-	?>
+  include '../js/main.php';
+  include '../js/invoice.php';
+  include '../js/myjava_facturacion.php';
+  include '../js/sms.php';
+  include '../js/select.php';
+  include '../js/functions.php';
+  include '../js/myjava_cambiar_pass.php';
+  ?>
 
 </body>
 </html>

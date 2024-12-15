@@ -341,7 +341,7 @@ var listar_reporte_pagos = function(){
 				titleAttr: 'Actualizar Pago',
 				className: 'btn btn-info',
 				action: 	function(){
-					listar_pacientes();
+					listar_reporte_pagos();
 				}
 			},					
 			{
@@ -375,7 +375,7 @@ var listar_reporte_pagos = function(){
 						margin: [0, 0, 0, 12],
 						alignment: 'left',
 						image: imagen, // Usando la variable que ya tiene la imagen base64
-						width: 170, // Ajusta el tamaño si es necesario
+						width: 100, // Ajusta el tamaño si es necesario
 						height: 45 // Ajusta el tamaño si es necesario
 					});
 				}
