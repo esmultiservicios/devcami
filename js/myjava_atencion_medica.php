@@ -487,24 +487,14 @@ function actualizarCaracteres(idCampo, idContador) {
 // Llama a la función para inicializar los contadores al cargar el DOM
 // Definir los límites de caracteres globalmente
 var limites = {
-    'alergias': 3200,
-    'seguimiento': 3200,
-    'antecedentes_medicos_psiquiatricos': 3200,
-    'historia_gineco_obstetrica': 3200,
-    'medicamentos_previos': 3200,
-    'medicamentos_actuales': 3200,
-    'legal': 3200,
-    'sustancias': 3200,
-    'rasgos_personalidad': 3200,
-    'informacion_adicional': 3200,
-    'pendientes': 3200,
+    'antecedentes': 3200,
+    'historia_clinica': 3200,
+    'exame_fisico': 3200,
     'diagnostico': 3200,
-    'antecedentes_medicos_no_psiquiatricos': 3200,
-    'hospitaliaciones': 3200,
-    'cirugias': 3200
+    'seguimiento': 3200,
 };
 
-$(document).ready(function() {
+$(function() {
     inicializarContadores(limites); // Iniciar el contador de caracteres con los límites
     inicializarSpeechRecognition(limites); // Inicializar reconocimiento de voz con los límites
 });
@@ -521,7 +511,14 @@ function inicializarContadores(limites) {
 }
 
 function actualizarCaracteres(campo, contadorId, max_chars) {
-    var texto = $('#' + campo).val();
+    // Verifica si el campo existe
+    if (!$('#' + campo).length) {
+        console.error(`El campo con el ID "${campo}" no existe.`);
+        return;
+    }
+
+    // Obtén el texto o usa una cadena vacía si no hay valor
+    var texto = $('#' + campo).val() || "";
     var longitudTexto = texto.length;
 
     // Si se supera el límite de caracteres, cortar el texto al límite
@@ -530,7 +527,8 @@ function actualizarCaracteres(campo, contadorId, max_chars) {
         longitudTexto = max_chars;
     }
 
-    $('#' + contadorId).text(longitudTexto + '/' + max_chars); // Muestra el número de caracteres y el límite
+    // Actualiza el contador de caracteres
+    $('#' + contadorId).text(longitudTexto + '/' + max_chars);
 }
 
 function inicializarSpeechRecognition(limites) {
