@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Factura</title>
     <link rel="stylesheet" href="<?php echo SERVERURL; ?>css/style_factura.css">
-	<link rel="shortcut icon" href="<?php echo SERVERURL; ?>img/logo_icono.png">
+	<link rel="shortcut icon" href="<?php echo SERVERURL; ?>img/isotipo.png">
 </head>
 <body>
 <?php echo $anulada; ?>
@@ -20,7 +20,7 @@
 		<tr>
 			<td class="logo_factura">
 				<div>
-					<img src="<?php echo SERVERURL; ?>img/logo_factura.jpg" width="250px" height="100px">
+					<img src="<?php echo SERVERURL; ?>img/logo.svg" width="230px" height="100px">
 				</div>
 			</td>
 			<td class="info_empresa">
