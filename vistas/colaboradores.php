@@ -71,7 +71,7 @@ $mysqli->close();//CERRAR CONEXIÓN
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Colaboradores</h4>
+                    <h4 class="modal-title">Registro de Colaboradores</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -106,8 +106,8 @@ $mysqli->close();//CERRAR CONEXIÓN
                                     class="form-control" />
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="edad">Identidad <span class="priority">*<span /></label>
-                                <input type="text" required name="identidad" id="identidad" maxlength="100"
+                                <label for="edad">Identidad</label>
+                                <input type="text" name="identidad" id="identidad" maxlength="100"
                                     class="form-control" data-toggle="tooltip" data-placement="top"
                                     title="Este número de Identidad debe estar exactamente igual al que se registro en Odoo en la ficha del Colaborador" />
                             </div>
@@ -122,10 +122,10 @@ $mysqli->close();//CERRAR CONEXIÓN
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3">
-                                <label for="puesto">Puesto <span class="priority">*<span /></label>
+                                <label for="puesto">Especialidades <span class="priority">*<span /></label>
                                 <div class="input-group mb-3">
                                     <select class="selectpicker" id="puesto" name="puesto" required
-                                        data-live-search="true" title="Puesto" data-size="5">
+                                        data-live-search="true" title="Especialidades" data-size="5">
                                     </select>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@ $mysqli->close();//CERRAR CONEXIÓN
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Puestos</h4>
+                    <h4 class="modal-title">Registro de Especialidades</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -173,7 +173,7 @@ $mysqli->close();//CERRAR CONEXIÓN
                         </div>
                         <div class="form-row" id="grupo_expediente">
                             <div class="col-md-12 mb-3">
-                                <input type="text" required name="puestosn" id="puestosn" placeholder="Puestos"
+                                <input type="text" required name="puestosn" id="puestosn" placeholder="Especialidades"
                                     maxlength="100" class="form-control" />
                             </div>
                         </div>
@@ -202,7 +202,7 @@ $mysqli->close();//CERRAR CONEXIÓN
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Servicios</h4>
+                    <h4 class="modal-title">Registro de Servicios</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -264,10 +264,10 @@ $mysqli->close();//CERRAR CONEXIÓN
                         </div>
                         <div class="form-row">
                             <div class="col-md-3 mb-3">
-                                <label for="sexo">Puesto <span class="priority">*<span /></label>
+                                <label for="sexo">Especialidades <span class="priority">*<span /></label>
                                 <div class="input-group mb-3">
                                     <select class="selectpicker" id="puesto_id" name="puesto_id" required
-                                        data-live-search="true" title="Puesto" data-size="5">
+                                        data-live-search="true" title="Especialidades" data-size="5">
                                     </select>
                                 </div>
                             </div>
@@ -350,7 +350,7 @@ $mysqli->close();//CERRAR CONEXIÓN
                         </div>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="sexo">Puesto <span class="priority">*<span /></label>
+                                <label for="sexo">Especialidades <span class="priority">*<span /></label>
                                 <div class="input-group mb-3">
                                     <select class="selectpicker" id="puesto_id" name="puesto_id" required
                                         data-live-search="true" title="Puesto" data-size="5">
@@ -434,19 +434,19 @@ $mysqli->close();//CERRAR CONEXIÓN
             <div class="form-group">
                 <button class="btn btn-primary ml-1" type="submit" id="nuevo-registro-colaboradores"
                     data-toggle="tooltip" data-placement="top" title="Nuevo colaborador">
-                    <div class="sb-nav-link-icon"></div><i class="fas fa-user-plus fa-lg"></i> Colaboradores
+                    <div class="sb-nav-link-icon"></div><i class="fas fa-user-plus fa-lg"></i> Registrar Colaboradores
                 </button>
             </div>
             <div class="form-group">
                 <button class="btn btn-info ml-1" type="submit" id="nuevo-registro-puestos" data-toggle="tooltip"
                     data-placement="top" title="Nuevo Puesto">
-                    <div class="sb-nav-link-icon"></div><i class="fas fa-network-wired fa-lg"></i> Puestos
+                    <div class="sb-nav-link-icon"></div><i class="fas fa-network-wired fa-lg"></i> Registrar Especialidades
                 </button>
             </div>
             <div class="form-group">
                 <button class="btn btn-warning ml-1" type="submit" id="nuevo-registro-servicios" data-toggle="tooltip"
                     data-placement="top" title="Nuevo Servicio">
-                    <div class="sb-nav-link-icon"></div><i class="fab fa-servicestack fa-lg"></i> Servicios
+                    <div class="sb-nav-link-icon"></div><i class="fab fa-servicestack fa-lg"></i> Registrar Servicios
                 </button>
             </div>
             <div class="form-group">
@@ -458,13 +458,7 @@ $mysqli->close();//CERRAR CONEXIÓN
             <div class="form-group">
                 <button class="btn btn-danger ml-1" type="submit" id="nuevo-registro-colaborador-servicios"
                     data-toggle="tooltip" data-placement="top" title="Asignar Jornada a Colaborador">
-                    <div class="sb-nav-link-icon"></div><i class="fas fa-people-carry fa-lg"></i> Jornada
-                </button>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-success ml-1" type="submit" id="reporte_excel" data-toggle="tooltip"
-                    data-placement="top" title="Exportar">
-                    <div class="sb-nav-link-icon"></div><i class="fas fa-download fa-lg"></i> Descargar
+                    <div class="sb-nav-link-icon"></div><i class="fas fa-people-carry fa-lg"></i> Registrar Jornada
                 </button>
             </div>
         </form>

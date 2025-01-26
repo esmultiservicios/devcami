@@ -46,6 +46,7 @@ while ($data = fgetcsv($handle, 1000, ",", ";")) {
 }
 
 echo 'OK';
+
 fclose($handle);
 }
 

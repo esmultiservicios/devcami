@@ -265,7 +265,6 @@ echo $fecha_inicial;
 		<div class="card-footer small text-muted">
 		</div>	
 	</div>
-	
     <?php include ('templates/footer.php'); ?>
 </div>
 

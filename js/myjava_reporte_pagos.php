@@ -196,8 +196,8 @@ function editarRegistro(pagos_id){
 		swal({
 			title: "Acceso Denegado",
 			text: "No tiene permisos para ejecutar esta acción",
-			type: "error",
-			confirmButtonClass: 'btn-danger'
+			icon: "error",
+			dangerMode: true
 		});
 	}
 }
@@ -341,7 +341,7 @@ var listar_reporte_pagos = function(){
 				titleAttr: 'Actualizar Pago',
 				className: 'btn btn-info',
 				action: 	function(){
-					listar_reporte_pagos();
+					listar_pacientes();
 				}
 			},					
 			{
@@ -375,7 +375,7 @@ var listar_reporte_pagos = function(){
 						margin: [0, 0, 0, 12],
 						alignment: 'left',
 						image: imagen, // Usando la variable que ya tiene la imagen base64
-						width: 100, // Ajusta el tamaño si es necesario
+						width: 170, // Ajusta el tamaño si es necesario
 						height: 45 // Ajusta el tamaño si es necesario
 					});
 				}

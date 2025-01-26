@@ -14,27 +14,27 @@ $(document).ready(function() {
     funciones();
 
     //INICIO PAGINATION (PARA LAS BUSQUEDAS SEGUN SELECCIONES)
-    $('#form_main_facturacion #bs_regis').on('keyup', function() {
+    $('#form_main #bs_regis').on('keyup', function() {
         pagination(1);
     });
 
-    $('#form_main_facturacion #fecha_b').on('change', function() {
+    $('#form_main #fecha_b').on('change', function() {
         pagination(1);
     });
 
-    $('#form_main_facturacion #fecha_f').on('change', function() {
+    $('#form_main #fecha_f').on('change', function() {
         pagination(1);
     });
 
-    $('#form_main_facturacion #clientes').on('change', function() {
+    $('#form_main #clientes').on('change', function() {
         pagination(1);
     });
 
-    $('#form_main_facturacion #profesional').on('change', function() {
+    $('#form_main #profesional').on('change', function() {
         pagination(1);
     });
 
-    $('#form_main_facturacion #estado').on('change', function() {
+    $('#form_main #estado').on('change', function() {
         pagination(1);
     });
     //FIN PAGINATION (PARA LAS BUSQUEDAS SEGUN SELECCIONES)
@@ -147,8 +147,8 @@ function pay(facturas_id) {
         swal({
             title: "Acceso Denegado",
             text: "No tiene permisos para ejecutar esta acción",
-            type: "error",
-            confirmButtonClass: 'btn-danger'
+            icon: "error",
+            dangerMode: true
         });
     }
 
@@ -171,17 +171,17 @@ function funciones() {
 function pagination(partida) {
     var url = '<?php echo SERVERURL; ?>php/facturacion/paginar.php';
 
-    var fechai = $('#form_main_facturacion #fecha_b').val();
-    var fechaf = $('#form_main_facturacion #fecha_f').val();
-    var dato = $('#form_main_facturacion #bs_regis').val()
-    var clientes = $('#form_main_facturacion #clientes').val();
-    var profesional = $('#form_main_facturacion #profesional').val();
+    var fechai = $('#form_main #fecha_b').val();
+    var fechaf = $('#form_main #fecha_f').val();
+    var dato = $('#form_main #bs_regis').val()
+    var clientes = $('#form_main #clientes').val();
+    var profesional = $('#form_main #profesional').val();
     var estado = '';
 
-    if ($('#form_main_facturacion #estado').val() == "") {
+    if ($('#form_main #estado').val() == "") {
         estado = 1;
     } else {
-        estado = $('#form_main_facturacion #estado').val();
+        estado = $('#form_main #estado').val();
     }
 
     $.ajax({
@@ -225,9 +225,9 @@ function getEstado() {
         url: url,
         async: true,
         success: function(data) {
-            $('#form_main_facturacion #estado').html("");
-            $('#form_main_facturacion #estado').html(data);
-            $('#form_main_facturacion #estado').selectpicker('refresh');
+            $('#form_main #estado').html("");
+            $('#form_main #estado').html(data);
+            $('#form_main #estado').selectpicker('refresh');
         }
     });
 }
@@ -257,25 +257,32 @@ function getBanco() {
 //INICIO ENVIAR FACTURA POR CORREO ELECTRONICO
 function mailBill(facturas_id) {
     swal({
-            title: "¿Estas seguro?",
-            text: "¿Desea enviar este numero de factura: # " + getNumeroFactura(facturas_id) + "?",
-            type: "info",
-            showCancelButton: true,
-            confirmButtonClass: "btn-primary",
-            confirmButtonText: "¡Sí, enviar la factura!",
-            cancelButtonText: "Cancelar",
-            closeOnConfirm: false
+        title: "¿Estas seguro?",
+        text: "¿Desea enviar este numero de factura: # " + getNumeroFactura(facturas_id) + "?",
+        icon: "warning",
+        buttons: {
+            cancel: {
+                text: "Cancelar",
+                visible: true
+            },
+            confirm: {
+                text: "¡Sí, enviar la factura!",
+            }
         },
-        function() {
+        closeOnClickOutside: false
+    }).then((willConfirm) => {
+        if (willConfirm === true) {
             sendMail(facturas_id);
-        });
+        }
+    });
 }
 //FIN ENVIAR FACTURA POR CORREO ELECTRONICO
 
 //INICIO IMPRIMIR FACTURACION
 function printBill(facturas_id) {
-    var url = '<?php echo SERVERURL; ?>php/facturacion/generaFactura.php?facturas_id=' + facturas_id;
-    window.open(url);
+    var type = 'Factura_media'; 
+    var url = '<?php echo SERVERURLWINDOWS; ?>?id=' + facturas_id + '&type=' + type;
+    window.open(url, '_blank');    
 }
 //FIN IMPRIMIR FACTURACION
 
@@ -293,7 +300,7 @@ function sendMail(facturas_id) {
             if (bill == 1) {
                 swal({
                     title: "Success",
-                    text: "La factura ha sido enviada por correo satisfactoriamente",
+                    icon: "La factura ha sido enviada por correo satisfactoriamente",
                     type: "success",
                 });
             }
@@ -404,7 +411,7 @@ $('#acciones_atras').on('click', function(e) {
             swal({
                     title: title,
                     text: message,
-                    type: "warning",
+                    icon: "warning",
                     showCancelButton: true,
                     confirmButtonClass: "btn-warning",
                     confirmButtonText: "¡Si, deseo volver!",
@@ -445,7 +452,7 @@ $('#acciones_atras').on('click', function(e) {
 });
 
 
-$('#form_main_facturacion #factura').on('click', function(e) {
+$('#form_main #factura').on('click', function(e) {
     e.preventDefault();
     formFactura();
 });
@@ -694,25 +701,30 @@ $(document).ready(function() {
 function deleteBill(facturas_id) {
     if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2) {
         swal({
-                title: "¿Estas seguro?",
-                text: "¿Desea eliminar la factura para el paciente: " + getNumeroNombrePaciente(
-                    facturas_id) + "?",
-                type: "info",
-                showCancelButton: true,
-                confirmButtonClass: "btn-primary",
-                confirmButtonText: "¡Sí, Eliminar la!",
-                cancelButtonText: "Cancelar",
-                closeOnConfirm: false
+            title: "¿Estas seguro?",
+            text: "¿Desea eliminar la factura para el paciente: " + getNumeroNombrePaciente(facturas_id) + "?",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "Cancelar",
+                    visible: true
+                },
+                confirm: {
+                    text: "¡Sí, Eliminar la!",
+                }
             },
-            function() {
+            closeOnClickOutside: false
+        }).then((willConfirm) => {
+            if (willConfirm === true) {
                 eliminarFacturaBorrador(facturas_id);
-            });
+            }
+        });
     } else {
         swal({
             title: "Acceso Denegado",
             text: "No tiene permisos para ejecutar esta acción",
-            type: "error",
-            confirmButtonClass: 'btn-danger'
+            icon: "error",
+            dangerMode: true
         });
     }
 }
@@ -728,7 +740,7 @@ function eliminarFacturaBorrador(facturas_id) {
                 swal({
                     title: "Success",
                     text: "Registro eliminado correctamente",
-                    type: "success",
+                    icon: "success",
                     timer: 3000,
                 });
                 pagination(1);
@@ -737,16 +749,16 @@ function eliminarFacturaBorrador(facturas_id) {
                 swal({
                     title: "Error al eliminar el registro, por favor intentelo de nuevo o verifique que no tenga información almacenada",
                     text: "No tiene permisos para ejecutar esta acción",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
+                    icon: "error",
+                    dangerMode: true
                 });
                 return false;
             } else {
                 swal({
                     title: "No se puede procesar su solicitud, por favor intentelo de nuevo mas tarde",
                     text: "No tiene permisos para ejecutar esta acción",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
+                    icon: "error",
+                    dangerMode: true
                 });
                 return false;
             }
@@ -782,7 +794,7 @@ function cierreCaja() {
     });
 }
 
-$('#form_main_facturacion #cierre').on('click', function(e) {
+$('#form_main #cierre').on('click', function(e) {
     e.preventDefault();
     cierreCaja();
 });

@@ -46,7 +46,8 @@ $(document).ready(function() {
     funcionesFormPacientes();
 
     //INICIO ABRIR VENTANA MODAL PARA EL REGISTRO DE ATENCIONES DE PACIENTES
-    $('#form_main #nuevo_registro').on('click', function() {
+    $('#form_main #nuevo_registro').on('click', function(e) {
+        e.preventDefault();
         if (getUsuarioSistema() == 1 || getUsuarioSistema() == 2 || getUsuarioSistema() == 3 ||
             getUsuarioSistema() == 5) {
             $('#formulario_atenciones')[0].reset();
@@ -85,8 +86,8 @@ $(document).ready(function() {
             swal({
                 title: "Acceso Denegado",
                 text: "No tiene permisos para ejecutar esta acción",
-                type: "error",
-                confirmButtonClass: 'btn-danger'
+                icon: "error",
+                dangerMode: true
             });
         }
     });
@@ -108,8 +109,8 @@ $(document).ready(function() {
             swal({
                 title: "Acceso Denegado",
                 text: "No tiene permisos para ejecutar esta acción",
-                type: "error",
-                confirmButtonClass: 'btn-danger'
+                icon: "error",
+                dangerMode: true
             });
         }
     });
@@ -131,8 +132,8 @@ $(document).ready(function() {
             swal({
                 title: "Acceso Denegado",
                 text: "No tiene permisos para ejecutar esta acción",
-                type: "error",
-                confirmButtonClass: 'btn-danger'
+                icon: "error",
+                dangerMode: true
             });
         }
     });
@@ -146,7 +147,7 @@ $(document).ready(function() {
             swal({
                 title: "Advertencia",
                 text: "No puede cerrar esta venta, hay datos en el formulario, debe proceder con los datos de la facturación del paciente",
-                type: "warning",
+                icon: "warning",
                 confirmButtonClass: "btn-warning"
             });
             return false;
@@ -164,8 +165,8 @@ $(document).ready(function() {
             swal({
                 title: "Error",
                 text: "Hay registros en blanco, por favor llenar todos los datos del formulario antes de continuar",
-                type: "error",
-                confirmButtonClass: 'btn-danger'
+                icon: "error",
+                dangerMode: true
             });
             return false;
         }
@@ -193,8 +194,8 @@ $(document).ready(function() {
             swal({
                 title: "Acceso Denegado",
                 text: "No tiene permisos para ejecutar esta acción",
-                type: "error",
-                confirmButtonClass: 'btn-danger'
+                icon: "error",
+                dangerMode: true
             });
         }
     });
@@ -335,16 +336,16 @@ function editarRegistro(pacientes_id, agenda_id) {
             swal({
                 title: "Error",
                 text: "Lo sentimos, este registro ya existe, no se puede agregar nuevamente su atención",
-                type: "error",
-                confirmButtonClass: 'btn-danger'
+                icon: "error",
+                dangerMode: true
             });
         }
     } else {
         swal({
             title: "Acceso Denegado",
             text: "No tiene permisos para ejecutar esta acción",
-            type: "error",
-            confirmButtonClass: 'btn-danger'
+            icon: "error",
+            dangerMode: true
         });
     }
 }
@@ -388,35 +389,42 @@ function nosePresentoRegistro(pacientes_id, agenda_id) {
             swal({
                 title: "¿Esta seguro?",
                 text: "¿Desea remover este usuario: " + dato + " que no se presento a su cita?",
-                type: "input",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                inputPlaceholder: "Comentario",
-                cancelButtonText: "Cancelar",
-                confirmButtonText: "¡Sí, remover el usuario!",
-                confirmButtonClass: "btn-warning",
-            }, function(inputValue) {
-                if (inputValue === false) return false;
-                if (inputValue === "") {
-                    swal.showInputError("¡Necesita escribir algo!");
-                    return false
+                content: {
+                    element: "input",
+                    attributes: {
+                        placeholder: "Comentario",
+                        type: "text",
+                    },
+                },
+                icon: "warning",
+                buttons: {
+                    cancel: "Cancelar",
+                    confirm: {
+                        text: "¡Sí, remover el usuario!",
+                        closeModal: false,
+                    },
+                },
+            }).then((value) => {
+                if (value === null || value.trim() === "") {
+                    swal("¡Necesita escribir algo!", { icon: "error" });
+                    return false;
                 }
-                eliminarRegistro(agenda_id, inputValue);
+                eliminarRegistro(agenda_id, value);
             });
         } else {
             swal({
                 title: "Error",
                 text: "Error al ejecutar esta acción, el usuario debe estar en estatus pendiente",
                 type: "error",
-                confirmButtonClass: 'btn-danger'
+                dangerMode: true
             });
         }
     } else {
         swal({
             title: "Acceso Denegado",
             text: "No tiene permisos para ejecutar esta acción",
-            type: "error",
-            confirmButtonClass: 'btn-danger'
+            icon: "error",
+            dangerMode: true
         });
     }
 }
@@ -436,7 +444,7 @@ function eliminarRegistro(agenda_id, comentario, fecha) {
                 swal({
                     title: "Success",
                     text: "Ausencia almacenada correctamente",
-                    type: "success",
+                    icon: "success",
                     timer: 3000, //timeOut for auto-close
                 });
                 pagination(1);
@@ -445,24 +453,24 @@ function eliminarRegistro(agenda_id, comentario, fecha) {
                 swal({
                     title: "Error",
                     text: "Error al remover este registro",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
+                    icon: "error",
+                    dangerMode: true
                 });
                 return false;
             } else if (registro == 3) {
                 swal({
                     title: "Error",
                     text: "Este registro ya tiene almacenada una ausencia",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
+                    icon: "error",
+                    dangerMode: true
                 });
                 return false;
             } else {
                 swal({
                     title: "Error",
                     text: "Error al ejecutar esta acción",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
+                    icon: "error",
+                    dangerMode: true
                 });
             }
         }
@@ -511,24 +519,22 @@ function inicializarContadores(limites) {
 }
 
 function actualizarCaracteres(campo, contadorId, max_chars) {
-    // Verifica si el campo existe
-    if (!$('#' + campo).length) {
-        console.error(`El campo con el ID "${campo}" no existe.`);
-        return;
+    var texto = $('#' + campo).val();
+    
+    // Verificar si el campo tiene un valor
+    if (texto !== undefined) {
+        var longitudTexto = texto.length;
+
+        // Si se supera el límite de caracteres, cortar el texto al límite
+        if (longitudTexto > max_chars) {
+            $('#' + campo).val(texto.substring(0, max_chars));
+            longitudTexto = max_chars;
+        }
+
+        $('#' + contadorId).text(longitudTexto + '/' + max_chars); // Muestra el número de caracteres y el límite
+    } else {
+        console.error('El campo con id ' + campo + ' no tiene un valor definido.');
     }
-
-    // Obtén el texto o usa una cadena vacía si no hay valor
-    var texto = $('#' + campo).val() || "";
-    var longitudTexto = texto.length;
-
-    // Si se supera el límite de caracteres, cortar el texto al límite
-    if (longitudTexto > max_chars) {
-        $('#' + campo).val(texto.substring(0, max_chars));
-        longitudTexto = max_chars;
-    }
-
-    // Actualiza el contador de caracteres
-    $('#' + contadorId).text(longitudTexto + '/' + max_chars);
 }
 
 function inicializarSpeechRecognition(limites) {
@@ -710,8 +716,8 @@ $('#reg_transitoe').on('click', function(
             swal({
                 title: 'Error',
                 text: 'No se pueden enviar los datos, los campos estan vacíos',
-                type: 'error',
-                confirmButtonClass: 'btn-danger'
+                icon: 'error',
+                dangerMode: true
             });
             return false;
         } else {
@@ -722,8 +728,8 @@ $('#reg_transitoe').on('click', function(
         swal({
             title: "Acceso Denegado",
             text: "No tiene permisos para ejecutar esta acción",
-            type: "error",
-            confirmButtonClass: 'btn-danger'
+            icon: "error",
+            dangerMode: true
         });
     }
 });
@@ -739,8 +745,8 @@ $('#reg_transitor').on('click', function(
             swal({
                 title: 'Error',
                 text: 'No se pueden enviar los datos, los campos estan vacíos',
-                type: 'error',
-                confirmButtonClass: 'btn-danger'
+                icon: 'error',
+                dangerMode: true
             });
             return false;
         } else {
@@ -751,8 +757,8 @@ $('#reg_transitor').on('click', function(
         swal({
             title: "Acceso Denegado",
             text: "No tiene permisos para ejecutar esta acción",
-            type: "error",
-            confirmButtonClass: 'btn-danger'
+            icon: "error",
+            dangerMode: true
         });
     }
 });
@@ -795,8 +801,8 @@ $(document).ready(function() {
             swal({
                 title: "Error",
                 text: "Por favor seleccione un tipo de descuento antes de continuar",
-                type: "error",
-                confirmButtonClass: 'btn-danger'
+                icon: "error",
+                dangerMode: true
             });
             $('#formulario_metodoPago #descuento').focus();
         } else {
@@ -818,42 +824,6 @@ $(document).ready(function() {
     });
 });
 //FIN CAMBIAR PORCENTAJE SEGUN EL DESCUENTO SELECCIONADO
-
-//INICIO PAGINACION DE REGISTROS
-function pagination(partida) {
-    var url = '<?php echo SERVERURL; ?>php/atencion_pacientes/paginar.php';
-    var fechai = $('#form_main #fecha_b').val();
-    var fechaf = $('#form_main #fecha_f').val();
-    var dato = '';
-    var estado = '';
-
-    if ($('#form_main #estado').val() == "" || $('#form_main #estado').val() == null) {
-        estado = 0;
-    } else {
-        estado = $('#form_main #estado').val();
-    }
-
-    if ($('#form_main #bs_regis').val() == "" || $('#form_main #bs_regis').val() == null) {
-        dato = '';
-    } else {
-        dato = $('#form_main #bs_regis').val();
-    }
-
-    $.ajax({
-        type: 'POST',
-        url: url,
-        async: true,
-        data: 'partida=' + partida + '&fechai=' + fechai + '&fechaf=' + fechaf + '&dato=' + dato + '&estado=' +
-            estado,
-        success: function(data) {
-            var array = eval(data);
-            $('#agrega-registros').html(array[0]);
-            $('#pagination').html(array[1]);
-        }
-    });
-    return false;
-}
-//FIN PAGINACION DE REGISTROS
 
 //INICIO PAGINACION DE HISTORIAL DE ATENCIONES
 function paginationBusqueda(partida) {
@@ -943,8 +913,8 @@ function agregaRegistro() {
         swal({
             title: 'Error',
             text: 'No se puede agregar/modificar registros fuera de este periodo',
-            type: 'error',
-            confirmButtonClass: 'btn-danger'
+            icon: 'error',
+            dangerMode: true
         });
         return false;
     } else {
@@ -953,8 +923,8 @@ function agregaRegistro() {
             swal({
                 title: 'Error',
                 text: 'Debe seleccionar una fecha de nacimiento válida',
-                type: 'error',
-                confirmButtonClass: 'btn-danger'
+                icon: 'error',
+                dangerMode: true
             });
             return false;
         } else {
@@ -974,24 +944,24 @@ function agregaRegistro() {
                         swal({
                             title: "Error",
                             text: "Error al completar esta acción, no se puedo almacenar el registro",
-                            type: "error",
-                            confirmButtonClass: 'btn-danger'
+                            icon: "error",
+                            dangerMode: true
                         });
                         return false;
                     } else if (registro == 3) {
                         swal({
                             title: "Error",
                             text: "Lo sentimos, este registro ya ha sido almacenado",
-                            type: "error",
-                            confirmButtonClass: 'btn-danger'
+                            icon: "error",
+                            dangerMode: true
                         });
                         return false;
                     } else {
                         swal({
                             title: "Error",
                             text: "Error al procesar su solicitud, por favor intentelo de nuevo mas tarde",
-                            type: "error",
-                            confirmButtonClass: 'btn-danger'
+                            icon: "error",
+                            dangerMode: true
                         });
                         return false;
                     }
@@ -1018,8 +988,8 @@ function agregar() {
         swal({
             title: 'Error',
             text: 'No se puede agregar/modificar registros fuera de este periodo',
-            type: 'error',
-            confirmButtonClass: 'btn-danger'
+            icon: 'error',
+            dangerMode: true
         });
         return false;
     } else {
@@ -1028,8 +998,8 @@ function agregar() {
             swal({
                 title: 'Error',
                 text: 'Debe seleccionar una fecha de nacimiento válida',
-                type: 'error',
-                confirmButtonClass: 'btn-danger'
+                icon: 'error',
+                dangerMode: true
             });
             return false;
         } else {
@@ -1049,32 +1019,32 @@ function agregar() {
                         swal({
                             title: "Error",
                             text: "Error al completar esta acción, no se puedo almacenar el registro",
-                            type: "error",
-                            confirmButtonClass: 'btn-danger'
+                            icon: "error",
+                            dangerMode: true
                         });
                         return false;
                     } else if (registro == 3) {
                         swal({
                             title: "Error",
                             text: "Lo sentimos, este registro ya ha sido almacenado",
-                            type: "error",
-                            confirmButtonClass: 'btn-danger'
+                            icon: "error",
+                            dangerMode: true
                         });
                         return false;
                     } else if (registro == 4) {
                         swal({
                             title: "Error",
                             text: "Lo sentimos, este usuario ya se encuentra almacenado para este día, por favor verifique los registros de este paciente que aun está disponible en la agenda",
-                            type: "error",
-                            confirmButtonClass: 'btn-danger'
+                            icon: "error",
+                            dangerMode: true
                         });
                         return false;
                     } else {
                         swal({
                             title: "Error",
                             text: "Error al procesar su solicitud, por favor intentelo de nuevo mas tarde",
-                            type: "error",
-                            confirmButtonClass: 'btn-danger'
+                            icon: "error",
+                            dangerMode: true
                         });
                         return false;
                     }
@@ -1098,16 +1068,21 @@ function agregarMetodoPago() {
             if (registro == 1) {
                 $('#formulario_metodoPago')[0].reset();
                 swal({
-                        title: "Success",
-                        text: "Registro almacenado correctamente",
-                        type: "success",
-                        confirmButtonText: "¡Bien Hecho!",
-                        closeOnConfirm: false
+                    title: "Success",
+                    text: "Registro almacenado correctamente",
+                    icon: "warning",
+                    buttons: {
+                        confirm: {
+                            text: "¡Bien Hecho!",
+                        }
                     },
-                    function() {
+                    closeOnClickOutside: false
+                }).then((willConfirm) => {
+                    if (willConfirm === true) {
                         $('#metodoPago').modal('hide');
-                        swal.close();
-                    });
+                    }
+                });
+
                 limpiarFormMetodoPago();
                 $("#formulario_metodoPago #reg").attr('disabled', true);
                 return false;
@@ -1115,24 +1090,24 @@ function agregarMetodoPago() {
                 swal({
                     title: "Error",
                     text: "Error al completar esta acción, no se puedo almacenar el registro",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
+                    icon: "error",
+                    dangerMode: true
                 });
                 return false;
             } else if (registro == 3) {
                 swal({
                     title: "Error",
                     text: "Lo sentimos, este registro ya ha sido almacenado",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
+                    icon: "error",
+                    dangerMode: true
                 });
                 return false;
             } else {
                 swal({
                     title: "Error",
                     text: "Error al procesar su solicitud, por favor intentelo de nuevo mas tarde",
-                    type: "error",
-                    confirmButtonClass: 'btn-danger'
+                    icon: "error",
+                    dangerMode: true
                 });
                 return false;
             }
@@ -1154,8 +1129,8 @@ function agregarTransitoEnviadas() {
         swal({
             title: 'Error',
             text: 'No se puede agregar/modificar registros fuera de este periodo',
-            type: 'error',
-            confirmButtonClass: 'btn-danger'
+            icon: 'error',
+            dangerMode: true
         });
         return false;
     } else {
@@ -1171,7 +1146,7 @@ function agregarTransitoEnviadas() {
                         swal({
                             title: 'Almacenado',
                             text: 'Registro almacenado correctamente',
-                            type: 'success',
+                            icon: 'success',
                             timer: 3000,
                         });
                         limpiarTE();
@@ -1181,15 +1156,15 @@ function agregarTransitoEnviadas() {
                         swal({
                             title: 'Error',
                             text: 'Error al intentar almacenar este registro',
-                            type: 'error',
-                            confirmButtonClass: 'btn-danger'
+                            icon: 'error',
+                            dangerMode: true
                         });
                         return false;
                     } else if (registro == 3) {
                         swal({
                             title: "Error",
                             text: "Este registro no cuenta con atencion almacenada",
-                            type: "error",
+                            icon: "error",
                             confirmButtonClass: "btn-danger"
                         });
                         return false;
@@ -1197,7 +1172,7 @@ function agregarTransitoEnviadas() {
                         swal({
                             title: "Error",
                             text: "Este registro ya existe",
-                            type: "error",
+                            icon: "error",
                             confirmButtonClass: "btn-danger"
                         });
                         return false;
@@ -1205,8 +1180,8 @@ function agregarTransitoEnviadas() {
                         swal({
                             title: "Error",
                             text: "Error al completar el registro",
-                            type: "error",
-                            confirmButtonClass: 'btn-danger'
+                            icon: "error",
+                            dangerMode: true
                         });
                         return false;
                     }
@@ -1216,8 +1191,8 @@ function agregarTransitoEnviadas() {
             swal({
                 title: 'Error',
                 text: 'No se puede agregar/modificar registros fuera de esta fecha',
-                type: 'error',
-                confirmButtonClass: 'btn-danger'
+                icon: 'error',
+                dangerMode: true
             });
             return false;
         }
@@ -1235,8 +1210,8 @@ function agregarTransitoRecibidas() {
         swal({
             title: 'Error',
             text: 'No se puede agregar/modificar registros fuera de este periodo',
-            type: 'error',
-            confirmButtonClass: 'btn-danger'
+            icon: 'error',
+            dangerMode: true
         });
         return false;
     } else {
@@ -1252,7 +1227,7 @@ function agregarTransitoRecibidas() {
                         swal({
                             title: 'Almacenado',
                             text: 'Registro almacenado correctamente',
-                            type: 'success',
+                            icon: 'success',
                             timer: 3000,
                         });
                         $('#registro_transito_recibida').modal('hide');
@@ -1262,32 +1237,32 @@ function agregarTransitoRecibidas() {
                         swal({
                             title: 'Error',
                             text: 'Error al intentar almacenar este registro',
-                            type: 'error',
-                            confirmButtonClass: 'btn-danger'
+                            icon: 'error',
+                            dangerMode: true
                         });
                         return false;
                     } else if (registro == 3) {
                         swal({
                             title: 'Error',
                             text: 'Este registro no cuenta con atencion almacenada',
-                            type: 'error',
-                            confirmButtonClass: 'btn-danger'
+                            icon: 'error',
+                            dangerMode: true
                         });
                         return false;
                     } else if (registro == 4) {
                         swal({
                             title: 'Error',
                             text: 'Este registro ya existe',
-                            type: 'error',
-                            confirmButtonClass: 'btn-danger'
+                            icon: 'error',
+                            dangerMode: true
                         });
                         return false;
                     } else {
                         swal({
                             title: 'Error',
                             text: 'Error al completar el registro',
-                            type: 'error',
-                            confirmButtonClass: 'btn-danger'
+                            icon: 'error',
+                            dangerMode: true
                         });
                         return false;
                     }
@@ -1297,8 +1272,8 @@ function agregarTransitoRecibidas() {
             swal({
                 title: 'Error',
                 text: 'No se puede agregar/modificar registros fuera de esta fecha',
-                type: 'error',
-                confirmButtonClass: 'btn-danger'
+                icon: 'error',
+                dangerMode: true
             });
             return false;
         }
@@ -1482,6 +1457,10 @@ function getPacientes() {
             $('#formulario_transito_recibida #paciente_tr').html("");
             $('#formulario_transito_recibida #paciente_tr').html(data);
             $('#formulario_transito_recibida #paciente_tr').selectpicker('refresh');
+
+            $('#form_receta #receta_select_pacientes_id').html("");
+            $('#form_receta #receta_select_pacientes_id').html(data);
+            $('#form_receta #receta_select_pacientes_id').selectpicker('refresh');            
         }
     });
 }
@@ -1596,7 +1575,7 @@ function evaluarRegistrosPendientes() {
                     text: "Se le recuerda que tiene " + datos[0] + " " + string +
                         " de subir en las Atenciones Medicas en este mes de " + datos[1] +
                         ". Debe revisar sus registros pendientes.",
-                    type: 'warning',
+                    icon: 'warning',
                     confirmButtonClass: 'btn-warning'
                 });
             }
@@ -1723,12 +1702,16 @@ var accion = false;
 function formFactura() {
     $('#formulario_facturacion')[0].reset();
     $('#main_facturacion').hide();
+    $('.recetaMedica').hide();
     $('#facturacion').show();
 
     $('#label_acciones_volver').html("Volver");
     $('#acciones_atras').removeClass("active");
     $('#acciones_factura').addClass("active");
     $('#label_acciones_factura').html("Factura");
+
+    // Actualizar el breadcrumb
+    actualizarBreadcrumb("Atenciones Médicas / Factura");
 
     $('#formulario_facturacion #fecha').attr('readonly', true);
     $('#formulario_facturacion #colaborador_id').val(getColaborador_id());
@@ -1752,33 +1735,136 @@ function formFactura() {
 function FormAtencionMedica() {
     $('#main_facturacion').hide();
     $('#facturacion').hide();
+    $('.recetaMedica').hide();
     $('#atencionMedica').show();
 
     $('#label_acciones_volver').html("Volver");
     $('#acciones_atras').removeClass("active");
     $('#acciones_factura').addClass("active");
-    $('#label_acciones_factura').html("Historia Clinica");
+    $('#label_acciones_factura').html("Historia Clínica");
+
+    // Actualizar el breadcrumb
+    actualizarBreadcrumb("Atenciones Médicas / Receta Médica");
 
     accion = false;
 }
 
-function volver() {
+var accion = false;
+
+function formFactura() {
+    $('#formulario_facturacion')[0].reset();
     $('#main_facturacion').hide();
+    $('.recetaMedica').hide();
+    $('#facturacion').show();
+
+    $('#label_acciones_volver').html("Volver");
+    $('#acciones_atras').removeClass("active");
+    $('#acciones_factura').addClass("active");
+    $('#label_acciones_factura').html("Factura");
+
+    // Actualizar el breadcrumb
+    actualizarBreadcrumb("Atenciones Médicas / Factura");
+
+    $('#formulario_facturacion #fecha').attr('readonly', true);
+    $('#formulario_facturacion #colaborador_id').val(getColaborador_id());
+    $('#formulario_facturacion #colaborador_id').selectpicker('refresh');
+
+    $('#formulario_facturacion').attr({
+        'data-form': 'save'
+    });
+    $('#formulario_facturacion').attr({
+        'action': '<?php echo SERVERURL; ?>php/facturacion/addPreFactura.php'
+    });
+    limpiarTabla();
+    $('.footer').hide();
+    $('.footer1').show();
+    $('#formulario_facturacion #validar').hide();
+    $('#formulario_facturacion #guardar1').hide();    
+
+    accion = true;
+}
+
+function FormAtencionMedica() {
+    $('#main_facturacion').hide();
+    $('#facturacion').hide();
+    $('#atencionMedica').show();
+    $('.recetaMedica').hide();
+    $('#label_acciones_volver').html("Volver");
+    $('#acciones_atras').removeClass("active");
+    $('#acciones_factura').addClass("active");
+    $('#label_acciones_factura').html("Historia Clínica");
+
+    // Actualizar el breadcrumb
+    actualizarBreadcrumb("Atenciones Médicas");
+
+    accion = false;
+}
+
+$("#nueva_receta_medica").on("click", (e) => {
+    e.preventDefault();
+    mostrarRecetaMedica("");
+});
+
+function mostrarRecetaMedica(pacientes_id, colaboradorId, servicioId, colaboradorNombre, pacienteNombre) {
+    // Ocultar el elemento con ID main_facturacion
+    $('#main_facturacion').hide();
+    // Mostrar el elemento con clase recetaMedica
+    $('.recetaMedica').show();
+
+    // Actualizar el breadcrumb
+    actualizarBreadcrumb("Atenciones Médicas / Receta Médica");
+
+    if (pacientes_id != "") {
+        // Si pacientes_id no está vacío, asignarlo al campo oculto y ocultar el select
+        $('#form_receta #receta_pacientes_id').val(pacientes_id);
+        $('#form_receta #receta_colaboradorId').val(colaboradorId);
+        $('#form_receta #receta_servicioId').val(servicioId);
+        $('#form_receta #receta_pacienteNombre').val(pacienteNombre);
+            
+        $('#form_receta #datos_paciente').html("<b>Paciente:</b> " + pacienteNombre + " <b>Medico Tratante:</b> " + colaboradorNombre);
+
+        $('#form_receta #grupo_paciente_receta').hide();
+    } else {
+        // Si pacientes_id está vacío, mostrar el select
+        $('#form_receta #receta_pacientes_id').val('');
+        $('#form_receta #grupo_paciente_receta').show();
+    }
+
+    // Limpiar todas las filas de la tabla
+    $('#tablaReceta tbody').empty();
+
+    // Añadir una nueva fila llamando a la función agregarFila
+    agregarFila();
+
+    // Log para depuración
+    console.log("Paciente ID: " + (pacientes_id || "Seleccionar desde el select"));
+}
+
+function actualizarBreadcrumb(texto) {
+    $('#ancla_volver').text(texto.split(" / ")[0]); // Primera parte del breadcrumb
+    $('#label_acciones_factura').text(texto.split(" / ")[1] || ""); // Segunda parte opcional
+}
+
+function volver() {
+    $('#main_facturacion').show();
     $('#atencionMedica').hide();
+    $('.recetaMedica').hide();
     $('#label_acciones_factura').html("");
     $('#facturacion').hide();
     $('#acciones_atras').addClass("breadcrumb-item active");
     $('#acciones_factura').removeClass("active");
     $('.footer').show();
     $('.footer1').hide();
+
+    // Restablecer el breadcrumb al nivel inicial
+    actualizarBreadcrumb("Atenciones Médicas");
 }
 
 $('#acciones_atras').on('click', function(e) {
-    e.preventDefault();
 
-    // Comprobación de campos específicos en el formulario de facturación
-    if ($('#formulario_facturacion #cliente_nombre').val() !== "" ||
-        $('#formulario_facturacion #colaborador_nombre').val() !== "") {
+     // Comprobación de campos específicos en el formulario de facturación
+     if ($('#formulario_facturacion #pacientes_id').val() !== "" && 
+        $('#formulario_facturacion #colaborador_id').val() !== "") {
 
         let formData;
         let title;
@@ -1846,27 +1932,36 @@ $('#acciones_atras').on('click', function(e) {
             swal({
                 title: title,
                 text: message,
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonClass: "btn-warning",
-                confirmButtonText: "¡Sí, deseo volver!",
-                closeOnConfirm: false
-            }, function() {
-                $('#main_facturacion').show();
-                $('#atencionMedica').hide();
-                $('#label_acciones_factura').html("");
-                $('#facturacion').hide();
-                $('#acciones_atras').addClass("breadcrumb-item active");
-                $('#acciones_factura').removeClass("active");
-                $('#formulario_facturacion')[0].reset();
-                swal.close();
-                $('.footer').show();
-                $('.footer1').hide();
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "Cancelar",
+                        visible: true
+                    },
+                    confirm: {
+                        text: "¡Si, deseo volver!",
+                    }
+                },
+                closeOnClickOutside: false
+            }).then((willConfirm) => {
+                if (willConfirm === true) {
+                    $('#main_facturacion').show();
+                    $('#atencionMedica').hide();
+                    $('.recetaMedica').hide();
+                    $('#label_acciones_factura').html("");
+                    $('#facturacion').hide();
+                    $('#acciones_atras').addClass("breadcrumb-item active");
+                    $('#acciones_factura').removeClass("active");
+                    $('#formulario_facturacion')[0].reset();
+                    $('.footer').show();
+                    $('.footer1').hide();
+                }
             });
         } else {
             // Lógica para cuando no hay datos relevantes
             $('#main_facturacion').show();
             $('#atencionMedica').hide();
+            $('.recetaMedica').hide();
             $('#label_acciones_factura').html("");
             $('#facturacion').hide();
             $('#acciones_atras').addClass("breadcrumb-item active");
@@ -1880,6 +1975,8 @@ $('#acciones_atras').on('click', function(e) {
         $('#atencionMedica').show();
         $('#label_acciones_factura').html("");
         $('#facturacion').hide();
+        $('#atencionMedica').hide();
+        $('.recetaMedica').hide();
         $('#acciones_atras').addClass("breadcrumb-item active");
         $('#acciones_factura').removeClass("active");
         $('.footer').show();
@@ -1988,4 +2085,329 @@ function getFechaActual() {
     });
     return fecha_actual;
 }
+
+//INICIO PAGINACION DE REGISTROS
+function pagination(partida) {
+    var url = '<?php echo SERVERURL; ?>php/atencion_pacientes/paginar.php';
+    var fechai = $('#form_main #fecha_b').val();
+    var fechaf = $('#form_main #fecha_f').val();
+    var dato = $('#form_main #bs_regis').val() || '';
+    var estado = $('#form_main #estado').val() || 0;
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: {
+            partida: partida,
+            fechai: fechai,
+            fechaf: fechaf,
+            dato: dato,
+            estado: estado
+        },
+        dataType: 'json',
+        success: function(response) {
+            var registros = response.registros;
+            var pagination = response.pagination;
+            var total = response.total;
+
+            var tabla = '<table class="table table-striped table-condensed table-hover">' +
+                '<tr>' +
+                '<th>No.</th>' +
+                '<th>Identidad</th>' +
+                '<th>Nombre</th>' +
+                '<th>Fecha</th>' +
+                '<th>Hora</th>' +
+                '<th>Paciente</th>' +
+                '<th>Servicio</th>' +
+                '<th>Teléfono</th>' +
+                '<th>Observación</th>' +
+                '<th>Comentario</th>' +
+                '<th>Estado</th>' +
+                '<th>Receta</th>' +
+                '<th>Registrar</th>' +
+                '<th>Ausencia</th>' +
+                '</tr>';
+
+            if (registros.length > 0) {
+                registros.forEach(function(registro, index) {
+                    var telefonousuario = '<a style="text-decoration:none" title="Teléfono Usuario" href="tel:9' + registro.telefono + '">' + registro.telefono + '</a>';
+                    tabla += '<tr>' +
+                        '<td>' + (index + 1) + '</td>' +
+                        '<td>' + registro.identidad + '</td>' +
+                        '<td>' + registro.paciente + '</td>' +
+                        '<td>' + registro.fecha_cita + '</td>' +
+                        '<td>' + new Date('1970-01-01T' + registro.hora + 'Z').toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) + '</td>' +
+                        '<td>' + registro.tipo_paciente + '</td>' +
+                        '<td>' + registro.servicio + '</td>' +
+                        '<td>' + telefonousuario + '</td>' +
+                        '<td>' + registro.observacion + '</td>' +
+                        '<td>' + registro.comentario + '</td>' +
+                        '<td>' + registro.estatus + '</td>' +
+                        '<td><a class="btn btn-secondary ml-2" title="Receta Médica" href="javascript:mostrarRecetaMedica(' + registro.pacientes_id + ', ' + registro.colaborador_id + ', ' + registro.servicio_id + ', \'' + registro.colaborador + '\', \'' + registro.paciente + '\');"><i class="fas fa-prescription-bottle-alt fa-lg"></i> Receta</a></td>' +
+                        '<td><a class="btn btn-secondary ml-2" title="Agregar Atención a Paciente" href="javascript:editarRegistro(' + registro.pacientes_id + ',' + registro.agenda_id + ');"><i class="fas fa-book-medical fa-lg"></i> Atención</a></td>' +
+                        '<td><a class="btn btn-secondary ml-2" title="Marcar Ausencia" href="javascript:nosePresentoRegistro(' + registro.pacientes_id + ',' + registro.agenda_id + ',' + registro.fecha + ');"><i class="fas fa-times-circle fa-lg"></i> Ausencia</a></td>' +
+                        '</tr>';
+                });
+                tabla += '<tr><td colspan="14"><b><p align="center">Total de Registros Encontrados: ' + total + '</p></b></td></tr>';
+            } else {
+                tabla += '<tr><td colspan="14" style="color:#C7030D">No se encontraron resultados</td></tr>';
+            }
+
+            tabla += '</table>';
+
+            $('#agrega-registros').html(tabla);
+            $('#pagination').html(pagination);
+        },
+        error: function() {
+            swal({
+                title: "Error",
+                text: "Ocurrió un error al obtener los datos",
+                icon: "error",
+                button: "Aceptar",
+                type: "error",
+                dangerMode: true
+            });
+        }
+    });
+    return false;
+}
+//FIN PAGINACION DE REGISTROS
+
+//INICIO RECETA MEDICA
+// Función para agregar fila dinámicamente
+const agregarFila = () => {
+    const nuevaFila = $(`
+        <tr>
+            <td style="width: 40%;">
+                <select class="form-select selectpicker producto" name="producto[]" required data-size="7" data-width="100%" data-live-search="true" title="Seleccione un producto">
+                </select>
+            </td>
+            <td style="width: 15%;">
+                <input type="number" class="form-control cantidad" name="cantidad[]" placeholder="Cantidad" required step="0.01" min="0" />
+            </td>            
+            <td style="width: 35%;">
+                <input type="text" class="form-control" name="descripcion[]" placeholder="Descripción" required />
+            </td>
+            <td style="width: 10%;">
+                <button type="button" class="btn btn-danger eliminarFila">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </td>
+        </tr>`);
+
+    // Agregar la nueva fila a la tabla
+    $('#tablaReceta tbody').append(nuevaFila);
+
+    // Obtener productos para el nuevo select
+    obtenerProductos(nuevaFila.find('.selectpicker'));
+
+    // Validación para limitar a dos decimales
+    nuevaFila.find('.cantidad').on('input', function () {
+        let valor = $(this).val();
+        // Si hay más de dos decimales, recortamos el valor
+        if (/^\d+\.\d{3,}$/.test(valor)) {
+            $(this).val(valor.slice(0, valor.indexOf('.') + 3)); // Limita a 2 decimales
+        }
+    });
+};
+
+// Función para obtener productos y llenar el select
+const obtenerProductos = (selectElement) => {
+    $.ajax({
+        url: '<?php echo SERVERURL; ?>php/atencion_pacientes/obtener_productos.php', // Cambia la URL según tu servidor
+        type: 'GET',
+        dataType: 'json',
+        success: (productos) => {
+            selectElement.empty(); // Limpiar opciones anteriores
+            productos.forEach(producto => {
+                const option = `<option value="${producto.productos_id}">${producto.nombre}</option>`;
+                selectElement.append(option);
+            });
+            // Refrescar selectpicker
+            selectElement.selectpicker('refresh');
+        },
+        error: () => {
+            swal({
+                title: "Error",
+                text: "Ocurrió un error al obtener los productos",
+                icon: "error",
+                button: "Aceptar",
+                type: "error",
+                dangerMode: true
+            });
+        }
+    });
+};
+
+// Inicializar selectpicker de Bootstrap solo para los select de productos
+$('.selectpicker.producto').selectpicker();
+
+// Llenar el select de productos al cargar la página
+obtenerProductos($('.selectpicker.producto'));
+
+getPacientes();
+
+// Evento para agregar fila
+$('#agregarFila').on('click', () => {
+    agregarFila();
+});
+
+// Eliminar fila dinámica
+$(document).on('click', '.eliminarFila', function () {
+    $(this).closest('tr').remove();
+});
+
+// Agregar fila al presionar Enter en el campo de descripción
+$(document).on('keypress', 'input[name="descripcion[]"]', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        agregarFila();
+    }
+});
+
+function registarReceta() {
+    // Verificar si el select tiene un valor seleccionado
+    const selectPaciente = $('#form_receta #receta_select_pacientes_id').val();
+
+    if (selectPaciente) {
+        // Si el select tiene valor, actualizar el campo oculto con ese valor
+        $('#form_receta #receta_pacientes_id').val(selectPaciente);
+    }
+
+    let formularioValido = true;
+
+    // Validar que cada producto tenga un valor seleccionado
+    $('#tablaReceta tbody tr').each(function () {
+        const producto = $(this).find('select[name="producto[]"]').val();
+        const cantidad = $(this).find('input[name="cantidad[]"]').val();
+        const descripcion = $(this).find('input[name="descripcion[]"]').val();
+
+        // Verifica que los valores no sean vacíos o 'undefined'
+        if (!producto || producto === 'undefined' || !cantidad || !descripcion) {
+            formularioValido = false;
+            swal({
+                title: "Error",
+                text: "Por favor, complete todos los campos de los productos",
+                icon: "error",
+                button: "Aceptar",
+                type: "error",
+                dangerMode: true
+            });
+            return false;
+        }
+    });
+
+    if (!formularioValido) {
+        return;
+    }
+
+    // Serializar datos del formulario
+    const datosReceta = $('#form_receta').serialize();
+
+    // Enviar datos al servidor
+    $.ajax({
+        url: '<?php echo SERVERURL; ?>php/atencion_pacientes/guardar_receta.php',
+        type: 'POST',
+        data: datosReceta,
+        dataType: 'json',
+        success: (respuesta) => {
+            if (respuesta.status === "success") {
+                swal({
+                    title: "Éxito",
+                    text: respuesta.message,
+                    icon: "success",
+                    button: "Aceptar",
+                    type: "success",
+                    confirmButtonClass: 'btn-success'
+                });
+
+                volver();
+                getRecetaReporte(respuesta.receta_id);
+            } else {
+                swal({
+                    title: "Error",
+                    text: respuesta.message,
+                    icon: "error",
+                    button: "Aceptar",
+                    type: "error",
+                    dangerMode: true
+                });
+            }
+        },
+        error: () => {
+            swal({
+                title: "Error",
+                text: "Ocurrió un error al guardar la receta",
+                icon: "error",
+                button: "Aceptar",
+                type: "error",
+                dangerMode: true
+            });
+        }
+    });
+}
+
+// Guardar receta con AJAX
+$('#form_receta').on('submit', (e) => {
+    e.preventDefault();
+	swal({
+		title: "¿Estás seguro?",
+		text: "¿Desea registrar la receta para el paciente: " + $("#form_receta #receta_pacienteNombre").val() + "?",
+		icon: "info",
+		buttons: {
+			cancel: {
+				text: "Cancelar",
+				value: false,
+				visible: true,
+				className: "btn-danger",
+				closeModal: true,
+			},
+			confirm: {
+				text: "¡Sí, registrar la receta!",
+				value: true,
+				visible: true,
+				className: "btn-primary",
+				closeModal: false // Evita el cierre automático hasta completar la acción
+			}
+		}
+	}).then((willRegister) => {
+		if (willRegister) {
+			registarReceta();
+		}
+	});  
+});
+
+function getRecetaReporte(receta_id) {
+    var url = "http://localhost:58197/esmultiservicios.aspx";
+
+    // Crear un formulario dinámico
+    var form = document.createElement("form");
+    form.method = "POST";
+    form.action = url;
+
+    // Añadir los parámetros al formulario
+    var params = {
+        "id": receta_id,
+        "type": "Receta",
+        "db": "esmultiservicios_centrointegral_cami"
+    };
+
+    for (var key in params) {
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = params[key];
+        form.appendChild(input);
+    }
+
+    // Abrir una nueva ventana
+    var newWindow = window.open("", "_blank");
+
+    // Asegurarse de que la nueva ventana esté lista
+    newWindow.document.body.appendChild(form);
+    
+    // Enviar el formulario a la nueva ventana
+    form.submit();
+}
+//FIN RECETA MEDICA
 </script>
