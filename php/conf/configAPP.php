@@ -19,7 +19,6 @@ $port = ($_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443') ? 
 // Obtener la ruta base
 $basePath = $serverName == 'localhost' ? '/devcami/' : '/';
 
-
 // Definir la constante SERVERURL
 $baseURL = $protocol . $serverName . $port . $basePath;
 define('SERVERURL', $baseURL);
