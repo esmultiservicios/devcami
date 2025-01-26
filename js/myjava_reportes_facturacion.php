@@ -445,17 +445,11 @@ function getProfesionales(){
 }
 
 var listar_reporte_facturacion = function(){
-  var fechai = $('#form_main_facturacion_reportes #fecha_b').val();
-  var fechaf = $('#form_main_facturacion_reportes #fecha_f').val();  
-  var clientes = $('#form_main_facturacion_reportes #clientes').val();
-  var profesional = $('#form_main_facturacion_reportes #profesional').val();
-  var estado = '';
-
-  if($('#form_main_facturacion_reportes #estado').val() == ""){
-    estado = 1;
-  }else{
-    estado = $('#form_main_facturacion_reportes #estado').val();
-  }
+	var fechai = $('#form_main_facturacion_reportes #fecha_b').val();
+	var fechaf = $('#form_main_facturacion_reportes #fecha_f').val();  
+	var clientes = $('#form_main_facturacion_reportes #clientes').val() || '';
+	var profesional = $('#form_main_facturacion_reportes #profesional').val() || '';
+	var estado = $('#form_main_facturacion_reportes #estado').val() || 1;
 	
 	var table_reporte_facturacion  = $("#dataTableReporteFacturacionMain").DataTable({
 		"destroy":true,	
@@ -497,7 +491,7 @@ var listar_reporte_facturacion = function(){
 						'<div class="dropdown-menu">' +
 							'<a class="dropdown-item printBill" href="#"><i class="fas fa-print fa-lg"></i> Imprimir</a>' +
 							'<a class="dropdown-item closeBill" href="#"><i class="fas fa-calculator fa-lg"></i> Cierre</a>' +
-							'<a class="dropdown-item deleteBill" href="#"><i class="fas fa-download fa-lg"></i> Anular</a>' +
+							'<a class="dropdown-item deleteBill" href="#"><i class="fa-solid fa-ban fa-lg"></i> Anular</a>' +
 						'</div>' +
 					'</div>'
 			}
@@ -548,7 +542,7 @@ var listar_reporte_facturacion = function(){
 		"buttons":[		
 			{
 				text:      '<i class="fas fa-sync-alt fa-lg"></i> Actualizar',
-				titleAttr: 'Actualizar Pacientes',
+				titleAttr: 'Actualizar Facturación',
 				className: 'btn btn-info',
 				action: 	function(){
 					listar_reporte_facturacion();
