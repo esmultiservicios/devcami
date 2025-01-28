@@ -23,6 +23,9 @@ $basePath = $serverName == 'localhost' ? '/devcami/' : '/';
 $baseURL = $protocol . $serverName . $port . $basePath;
 define('SERVERURL', $baseURL);
 
+$urlLogo = "https://wi.fastsolutionhn.com/files/esmultiservicios_logo.png";
+define('SERVERURLLOGO', $urlLogo);
+
 $urlWindows = 'https://wi.fastsolutionhn.com/Rpt/esmultiservicios.aspx';
 //$urlWindows = 'http://localhost:58197/esmultiservicios.aspx';
 define('SERVERURLWINDOWS', $urlWindows);
