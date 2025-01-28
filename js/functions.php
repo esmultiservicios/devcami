@@ -110,20 +110,26 @@ function getSaludoSistema(){
 		async: false,
 		success:function(data){	
 		  if(data == "Error"){
-			swal({
-			  title: "Sesión Finalizada",
-			  text: "Lo sentimos su sesión ha vencido, por favor inicie su sesión nuevamente",
-			  icon: "info",
-			  showCancelButton: false,
-			  confirmButtonText: "¡Está bien, llévame al Inicio!",
-			  cancelButtonText: "Cancelar",
-			  closeOnConfirm: false,
-			  showLoaderOnConfirm: true
-			}, function () {
-			setTimeout(function () {
-				redireccionarsalida();
-			}, 2000);
-			});			  
+            swal({
+               title: "Sesión Finalizada",
+               text: "Lo sentimos, su sesión ha vencido. Por favor, inicie sesión nuevamente.",
+               icon: "info",
+               buttons: {
+                  confirm: {
+                        text: "¡Está bien, llévame al Inicio!",
+                        closeModal: false // Evita que el modal se cierre automáticamente
+                  }
+               },
+               closeOnEsc: false, // Desactiva el cierre con la tecla Esc
+               closeOnClickOutside: false // Desactiva el cierre al hacer clic fuera               
+            }).then((value) => {
+               if (value) {
+                  // Redirige después de 2 segundos
+                  setTimeout(function () {
+                        redireccionarsalida();
+                  }, 2000);
+               }
+            });		  
 		  }else{
 			 $('#saludo_sistema').html(data); 
 		  }	  
@@ -697,7 +703,9 @@ function confirmar(agenda_id, colaborador_id, servicio_id){
 			title: "Error", 
 			text: "Lo sentimos esta opción no esta disponible",
 			icon: "error",
-			dangerMode: true
+         dangerMode: true,
+         closeOnEsc: false, // Desactiva el cierre con la tecla Esc
+         closeOnClickOutside: false // Desactiva el cierre al hacer clic fuera
 		});		  
 	}
 }
@@ -709,6 +717,8 @@ function mostrarAlerta(tipo, titulo, mensaje) {
         text: mensaje,
         icon: tipo,  // "success", "error", "warning", "info"
         button: "Aceptar",
+        closeOnEsc: false, // Desactiva el cierre con la tecla Esc
+        closeOnClickOutside: false // Desactiva el cierre al hacer clic fuera
     });
 }
 

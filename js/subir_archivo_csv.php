@@ -43,6 +43,9 @@ $(function(){
 				title: "Success", 
 				text: "Importación de CSV correctamente",
 				icon: "success", 
+				dangerMode: true,
+				closeOnEsc: false, // Desactiva el cierre con la tecla Esc
+				closeOnClickOutside: false // Desactiva el cierre al hacer clic fuera 				
 			});			 
 			 return false;	 
 		  }else{
@@ -50,7 +53,9 @@ $(function(){
 				title: "Error", 
 				text: "Error en la importación del CSV",
 				icon: "error",
-				dangerMode: true
+				dangerMode: true,
+				closeOnEsc: false, // Desactiva el cierre con la tecla Esc
+				closeOnClickOutside: false // Desactiva el cierre al hacer clic fuera 		
 			});			 
 			return false;
           }
@@ -62,7 +67,9 @@ $(function(){
 			title: "Error", 
 			text: "Selecciona un archivo CSV para importar",
 			icon: "error",
-			dangerMode: true
+			dangerMode: true,
+			closeOnEsc: false, // Desactiva el cierre con la tecla Esc
+			closeOnClickOutside: false // Desactiva el cierre al hacer clic fuera 		
 		});			
 		return false;
 	}
