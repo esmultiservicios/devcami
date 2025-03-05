@@ -12,7 +12,7 @@
         <div class="col-4" style="border-right: 0.5mm ridge rgb(255, 255, 255);">
             <div class="row">
                 <div class="col-11 text-right">
-                    <center><small>Copyright &copy; 2017 - <?php echo date("Y");?> </small></center>
+                    <small>Copyright &copy; 2017 - <?php echo date("Y");?></small>
                 </div>
                 <div class="col-1 text-left">
                     <span></span>
@@ -22,10 +22,9 @@
         <div class="col-4" style="border-right: 0.5mm ridge rgb(255, 255, 255);">
             <div class="row">
                 <div class="col-11 text-left">
-                    <small>
-                        <center><img src="<?php echo SERVERURL; ?>img/logo_icono.png" width="35px"
-                                height="35px"></center>
-                    </small>
+                    <div style="text-align: center;">
+                        <img src="<?php echo SERVERURL; ?>img/logo_icono.png" width="35px" height="35px">
+                    </div>
                 </div>
                 <div class="col-1 text-right">
                     <small></small>

@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
     <a class="navbar-brand" href="#">
         <a href="#">
-            <img src="<?php echo SERVERURL; ?>img/logo.svg" class="logo" alt="" width="100%"/>
+            <img src="<?php echo SERVERURL; ?>img/cami_logo_menu.svg" class="logo" alt="" width="90%"/>
         </a>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"

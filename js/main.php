@@ -1,7 +1,5 @@
 <script>
-$(document).ready(function() {
-    getGithubVersion();
-});
+getGithubVersion();
 
 function reportePDF(agenda_id) {
     if (getUsuarioSistema() == 1 || getUsuarioSistema() == 3 || getUsuarioSistema() == 4 || getUsuarioSistema() == 5 ||
