@@ -421,193 +421,37 @@ function ejecutar($url)
 
 function getAgendatime($consultarJornadaJornada_id, $servicio, $consultar_colaborador_puesto_id, $consulta_agenda_id, $hora_h, $consulta_nuevos_devuelto, $consultarJornadaNuevos, $consultaJornadaTotal, $consulta_subsiguientes_devuelto)
 {
-	// USUARIO NUEVO
-	if ($consulta_agenda_id == '') {
-		$colores = '#008000';  // VERDE USUARIOS NUEVOS
-	} else {
-		$colores = '#0071c5';  // AZUL OSCURO USUARIOS SUBSIGUIENTES
-	}
+    // USUARIO NUEVO
+    if ($consulta_agenda_id == '') {
+        $colores = '#008000';  // VERDE USUARIOS NUEVOS
+    } else {
+        $colores = '#0071c5';  // AZUL OSCURO USUARIOS SUBSIGUIENTES
+    }
 
-	// INICIO EVALUACIÓN HORARIOS PARA LOS SERVICIOS SEGUN PROFESIONAL
-	$limite = $consultaJornadaTotal - $consulta_nuevos_devuelto;
-	$hora = '';
-	$hora_ = '';
+    // INICIO EVALUACIÓN HORARIOS PARA LOS SERVICIOS SEGUN PROFESIONAL
+    $limite = $consultaJornadaTotal - $consulta_nuevos_devuelto;
+    $hora = '';
 
-	if ($consultarJornadaJornada_id != '') {  // INICIO PARA EVALUAR QUE EXISTA REGISTRO DEL COLABORADOR EN LA ENTIDAD jornada_colaborador
-		if ($consultarJornadaJornada_id == 1) {  // INICIO JORNADA MATUTINA
-			// EVALUAMOS LA CANTIDAD DE USUARIOS DISPONIBLES PARA AGENDAR;
-			if ($consulta_nuevos_devuelto > $consultarJornadaNuevos) {  // EXCEDER EL LIMITE DE NUEVOS
-				$hora = 'NuevosExcede';
-			} else if ($consulta_subsiguientes_devuelto > $limite) {  // EXCEDER EL LIMITE DE SUBSIGUIENTES
-				$hora = 'SubsiguienteExcede';
-			} else {  // INICIO EVALUAR HORARIOS
-				if ($hora_h >= date('H:i', strtotime('8:00')) && $hora_h < date('H:i', strtotime('9:00'))) {
-					$hora = '08:00';
-				} else if ($hora_h >= date('H:i', strtotime('9:00')) && $hora_h < date('H:i', strtotime('10:00'))) {
-					$hora = '09:00';
-				} else if ($hora_h >= date('H:i', strtotime('10:00')) && $hora_h < date('H:i', strtotime('11:00'))) {
-					$hora = '10:00';
-				} else if ($hora_h >= date('H:i', strtotime('11:00')) && $hora_h < date('H:i', strtotime('12:00'))) {
-					$hora = '11:00';
-				} else if ($hora_h >= date('H:i', strtotime('12:00')) && $hora_h < date('H:i', strtotime('13:00'))) {
-					$hora = '12:00';
-				} else if ($hora_h >= date('H:i', strtotime('13:00')) && $hora_h < date('H:i', strtotime('14:00'))) {
-					$hora = '13:00';
-				} else if ($hora_h >= date('H:i', strtotime('14:00'))) {
-					$hora = 'NulaSError';
-				}
-			}  // FIN EVALUAR HORARIOS
-		}
+    if ($consultarJornadaJornada_id != '') {  // INICIO PARA EVALUAR QUE EXISTA REGISTRO DEL COLABORADOR EN LA ENTIDAD jornada_colaborador
+        if ($consulta_nuevos_devuelto > $consultarJornadaNuevos) {  // EXCEDER EL LIMITE DE NUEVOS
+            $hora = 'NuevosExcede';
+        } else if ($consulta_subsiguientes_devuelto > $limite) {  // EXCEDER EL LIMITE DE SUBSIGUIENTES
+            $hora = 'SubsiguienteExcede';
+        } else {
+            $hora = $hora_h;  // ASIGNAR LA HORA QUE VIENE EN $hora_h
+        }
+    } else {
+        $hora = 'Vacio';  // EL PROFESIONAL NO TIENE ASIGNADA UNA JORNADA LABORAL, O SIMPLEMENTE NO TIENE UN SERVICIO ASIGNADO, NO SE LE PUEDEN AGENDAR USUARIOS
+        $colores = '';
+    }
 
-		if ($consultarJornadaJornada_id == 2) {  // INICIO JORNADA TARDE
-			if ($consulta_nuevos_devuelto > $consultarJornadaNuevos) {  // EXCEDER EL LIMITE DE NUEVOS
-				$hora = 'NuevosExcede';
-			} else if ($consulta_subsiguientes_devuelto > $limite) {  // EXCEDER EL LIMITE DE SUBSIGUIENTES
-				$hora = 'NulaSError';
-			} else {  // INICIO EVALUAR HORARIOS
-				if ($hora_h >= date('H:i', strtotime('08:00')) && $hora_h < date('H:i', strtotime('14:00'))) {
-					$hora = 'NulaSError';
-				} else if ($hora_h >= date('H:i', strtotime('14:00')) && $hora_h < date('H:i', strtotime('15:00'))) {
-					$hora = '14:00';
-				} else if ($hora_h >= date('H:i', strtotime('15:00')) && $hora_h < date('H:i', strtotime('16:00'))) {
-					$hora = '15:00';
-				} else if ($hora_h >= date('H:i', strtotime('16:00')) && $hora_h < date('H:i', strtotime('17:00'))) {
-					$hora = '16:00';
-				} else if ($hora_h >= date('H:i', strtotime('17:00')) && $hora_h < date('H:i', strtotime('18:00'))) {
-					$hora = '17:00';
-				} else if ($hora_h >= date('H:i', strtotime('18:00')) && $hora_h < date('H:i', strtotime('19:00'))) {
-					$hora = '18:00';
-				} else if ($hora_h >= date('H:i', strtotime('19:00')) && $hora_h < date('H:i', strtotime('20:00'))) {
-					$hora = '19:00';
-				} else if ($hora_h >= date('H:i', strtotime('20:00')) && $hora_h < date('H:i', strtotime('21:00'))) {
-					$hora = '20:00';
-				} else if ($hora_h >= date('H:i', strtotime('21:00'))) {
-					$hora = 'NulaSError';
-				}
-			}  // FIN EVALUAR HORARIOS
-		}
+    $datos = array(
+        'hora' => $hora,
+        'colores' => $colores
+    );
 
-		if ($consultarJornadaJornada_id == 3) {  // INICIO JORNADA DIURNA
-			if ($consulta_nuevos_devuelto > $consultarJornadaNuevos) {  // EXCEDER EL LIMITE DE NUEVOS
-				$hora = 'NuevosExcede';
-			} else if ($consulta_subsiguientes_devuelto > $limite) {  // EXCEDER EL LIMITE DE SUBSIGUIENTES
-				$hora = 'SubsiguienteExcede';
-			} else {  // INICIO EVALUAR HORARIOS
-				if ($hora_h >= date('H:i', strtotime('08:00')) && $hora_h < date('H:i', strtotime('20:00'))) {
-					$hora = 'NulaSError';
-				} else if ($hora_h >= date('H:i', strtotime('20:00')) && $hora_h < date('H:i', strtotime('21:00'))) {
-					$hora = '20:00';
-				} else if ($hora_h >= date('H:i', strtotime('21:00')) && $hora_h < date('H:i', strtotime('22:00'))) {
-					$hora = '21:00';
-				} else if ($hora_h >= date('H:i', strtotime('22:00')) && $hora_h < date('H:i', strtotime('23:00'))) {
-					$hora = '22:00';
-				} else if ($hora_h >= date('H:i', strtotime('23:00')) && $hora_h < date('H:i', strtotime('00:00'))) {
-					$hora = '23:00';
-				} else if ($hora_h >= date('H:i', strtotime('00:00')) && $hora_h < date('H:i', strtotime('01:00'))) {
-					$hora = '00:00';
-				} else if ($hora_h >= date('H:i', strtotime('01:00')) && $hora_h < date('H:i', strtotime('02:00'))) {
-					$hora = '01:00';
-				} else if ($hora_h == date('H:i', strtotime('02:00'))) {  // 12VO USUARIO SUBSIGUIENTE
-					$hora = 'NulaSError';
-				}
-			}  // FIN EVALUAR HORARIOS
-		}
-
-		if ($consultarJornadaJornada_id == 4) {  // INICIO JORNADA NOCTURNA
-			if ($consulta_nuevos_devuelto > $consultarJornadaNuevos) {  // EXCEDER EL LIMITE DE NUEVOS
-				$hora = 'NuevosExcede';
-			} else if ($consulta_subsiguientes_devuelto > $limite) {  // EXCEDER EL LIMITE DE SUBSIGUIENTES
-				$hora = 'SubsiguienteExcede';
-			} else {  // INICIO EVALUAR HORARIOS
-				if ($hora_h >= date('H:i', strtotime('08:00')) && $hora_h < date('H:i', strtotime('02:00'))) {
-					$hora = 'NulaSError';
-				} else if ($hora_h >= date('H:i', strtotime('02:00')) && $hora_h < date('H:i', strtotime('03:00'))) {
-					$hora = '02:00';
-				} else if ($hora_h >= date('H:i', strtotime('03:00')) && $hora_h < date('H:i', strtotime('04:00'))) {
-					$hora = '03:00';
-				} else if ($hora_h >= date('H:i', strtotime('04:00')) && $hora_h < date('H:i', strtotime('05:00'))) {
-					$hora = '04:00';
-				} else if ($hora_h >= date('H:i', strtotime('05:00')) && $hora_h < date('H:i', strtotime('06:00'))) {
-					$hora = '05:00';
-				} else if ($hora_h >= date('H:i', strtotime('06:00')) && $hora_h < date('H:i', strtotime('07:00'))) {
-					$hora = '06:00';
-				} else if ($hora_h >= date('H:i', strtotime('07:00')) && $hora_h < date('H:i', strtotime('08:00'))) {
-					$hora = '07:00';
-				} else if ($hora_h == date('H:i', strtotime('08:00'))) {  // 12VO USUARIO SUBSIGUIENTE
-					$hora = 'NulaSError';
-				}
-			}  // FIN EVALUAR HORARIOS
-		}
-
-		if ($consultarJornadaJornada_id == 5) {  // INICIO JORNADA TODO EL DIA
-			if ($consulta_nuevos_devuelto > $consultarJornadaNuevos) {  // EXCEDER EL LIMITE DE NUEVOS
-				$hora = 'NuevosExcede';
-			} else if ($consulta_subsiguientes_devuelto > $limite) {  // EXCEDER EL LIMITE DE SUBSIGUIENTES
-				$hora = 'SubsiguienteExcede';
-			} else {  // INICIO EVALUAR HORARIOS
-				if ($hora_h >= date('H:i', strtotime('8:00')) && $hora_h < date('H:i', strtotime('9:00'))) {
-					$hora = '08:00';
-				} else if ($hora_h >= date('H:i', strtotime('9:00')) && $hora_h < date('H:i', strtotime('10:00'))) {
-					$hora = '09:00';
-				} else if ($hora_h >= date('H:i', strtotime('10:00')) && $hora_h < date('H:i', strtotime('11:00'))) {
-					$hora = '10:00';
-				} else if ($hora_h >= date('H:i', strtotime('11:00')) && $hora_h < date('H:i', strtotime('12:00'))) {
-					$hora = '11:00';
-				} else if ($hora_h >= date('H:i', strtotime('12:00')) && $hora_h < date('H:i', strtotime('13:00'))) {
-					$hora = '12:00';
-				} else if ($hora_h >= date('H:i', strtotime('13:00')) && $hora_h < date('H:i', strtotime('14:00'))) {
-					$hora = '13:00';
-				} else if ($hora_h >= date('H:i', strtotime('14:00')) && $hora_h < date('H:i', strtotime('15:00'))) {
-					$hora = '14:00';
-				} else if ($hora_h >= date('H:i', strtotime('15:00')) && $hora_h < date('H:i', strtotime('16:00'))) {
-					$hora = '15:00';
-				} else if ($hora_h >= date('H:i', strtotime('16:00')) && $hora_h < date('H:i', strtotime('17:00'))) {
-					$hora = '16:00';
-				} else if ($hora_h >= date('H:i', strtotime('17:00')) && $hora_h < date('H:i', strtotime('18:00'))) {
-					$hora = '17:00';
-				} else if ($hora_h >= date('H:i', strtotime('18:00')) && $hora_h < date('H:i', strtotime('19:00'))) {
-					$hora = '18:00';
-				} else if ($hora_h >= date('H:i', strtotime('19:00')) && $hora_h < date('H:i', strtotime('20:00'))) {
-					$hora = '19:00';
-				} else if ($hora_h >= date('H:i', strtotime('20:00')) && $hora_h < date('H:i', strtotime('21:00'))) {
-					$hora = '20:00';
-				} else if ($hora_h >= date('H:i', strtotime('21:00')) && $hora_h < date('H:i', strtotime('22:00'))) {
-					$hora = '21:00';
-				} else if ($hora_h >= date('H:i', strtotime('22:00')) && $hora_h < date('H:i', strtotime('23:00'))) {
-					$hora = '22:00';
-				} else if ($hora_h >= date('H:i', strtotime('23:00')) && $hora_h < date('H:i', strtotime('23:59'))) {
-					$hora = '23:00';
-				} else if ($hora_h >= date('H:i', strtotime('00:00')) && $hora_h < date('H:i', strtotime('01:00'))) {
-					$hora = '00:00';
-				} else if ($hora_h >= date('H:i', strtotime('01:00')) && $hora_h < date('H:i', strtotime('02:00'))) {
-					$hora = '01:00';
-				} else if ($hora_h >= date('H:i', strtotime('02:00')) && $hora_h < date('H:i', strtotime('03:00'))) {
-					$hora = '02:00';
-				} else if ($hora_h >= date('H:i', strtotime('03:00')) && $hora_h < date('H:i', strtotime('04:00'))) {
-					$hora = '03:00';
-				} else if ($hora_h >= date('H:i', strtotime('04:00')) && $hora_h < date('H:i', strtotime('05:00'))) {
-					$hora = '04:00';
-				} else if ($hora_h >= date('H:i', strtotime('05:00')) && $hora_h < date('H:i', strtotime('06:00'))) {
-					$hora = '05:00';
-				} else if ($hora_h >= date('H:i', strtotime('06:00')) && $hora_h < date('H:i', strtotime('07:00'))) {
-					$hora = '06:00';
-				} else if ($hora_h >= date('H:i', strtotime('07:00')) && $hora_h < date('H:i', strtotime('08:00'))) {
-					$hora = '07:00';
-				}
-			}  // FIN EVALUAR HORARIOS
-		}
-	} else {
-		$hora = 'Vacio';  // EL PROFESIONAL NO TIENE ASIGNADA UNA JORNADA LABORAL, O SIMPLEMENTE NO TIENE UN SERVICIO ASIGNADO, NO SE LE PUEDEN AGENDAR USUARIOS
-		$colores = '';
-	}
-
-	$datos = array(
-		'hora' => $hora,
-		'colores' => $colores
-	);
-
-	return $datos;
-	// FIN EVALUACIÓN HORARIOS PARA LOS SERVICIOS SEGUN PROFESIONAL
+    return $datos;
+    // FIN EVALUACIÓN HORARIOS PARA LOS SERVICIOS SEGUN PROFESIONAL
 }
 
 function getEdad($fecha_de_nacimiento)
